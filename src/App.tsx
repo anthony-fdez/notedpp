@@ -9,6 +9,8 @@ import RegisterScreen from "./pages/auth/register/register";
 import NotFound from "./pages/errors/notFound/notFound";
 import AppBroke from "./pages/errors/appBroke/appBroke";
 import LoginScreen from "./pages/auth/login/login";
+import { Backdrop } from "@mui/material";
+import BackdropSpinner from "./components/backdrop/backdrop";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="App">
+      <BackdropSpinner />
       <RouterProvider router={router} />
     </div>
   );

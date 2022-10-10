@@ -5,8 +5,8 @@ import React, { useEffect } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsChevronDown } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import LoginButton from "./auth/loginButton/loginButton";
-import LogoutButton from "./auth/logoutButton/logoutButton";
+import LoginButton from "../auth/loginButton/loginButton";
+import LogoutButton from "../auth/logoutButton/logoutButton";
 import styles from "./headerDesktop.module.css";
 
 const Header: React.FC = (): JSX.Element => {
