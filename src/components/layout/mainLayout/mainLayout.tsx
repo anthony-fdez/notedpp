@@ -1,7 +1,7 @@
-import React from 'react';
-import AnimateOnScreenLoad from '../../animateOnScreenLoad/animateOnScreenLoad';
-import Header from '../../header/header';
-import styles from './mainLayout.module.css';
+import React from "react";
+import AnimateOnScreenLoad from "../../animateOnScreenLoad/animateOnScreenLoad";
+import Header from "../../header/header";
+import styles from "./mainLayout.module.css";
 
 interface Props {
   children: JSX.Element;
@@ -10,7 +10,6 @@ interface Props {
 const MainLayout = ({ children }: Props) => (
   <>
     <Header />
-
     <div className={styles.children_container}>{children}</div>
   </>
 );

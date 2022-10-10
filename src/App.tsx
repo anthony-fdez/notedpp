@@ -3,28 +3,14 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import BackdropSpinner from "./components/backdrop/backdrop";
-import MainLayout from "./components/layout/mainLayout/mainLayout";
-import AppBroke from "./pages/errors/appBroke/appBroke";
-import NotFound from "./pages/errors/notFound/notFound";
-import Home from "./pages/home/home";
-
-const router = createBrowserRouter([
-  {
-    path: "*",
-    element: <NotFound />,
-  },
-  {
-    path: "/",
-    errorElement: <AppBroke />,
-    element: (
-      <MainLayout>
-        <Home />
-      </MainLayout>
-    ),
-  },
-]);
+import { routes } from "./routes";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
+  const { isAuthenticated } = useAuth0();
+
+  const router = routes({ isAuthenticated });
+
   return (
     <div className="App">
       <BackdropSpinner />
