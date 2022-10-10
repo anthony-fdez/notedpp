@@ -6,8 +6,6 @@ const Dashboard = (): JSX.Element | null => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!user) return;
-
     const getUserMetadata = async () => {
       const domain = "dev-bbn450zg.us.auth0.com";
 
@@ -24,7 +22,7 @@ const Dashboard = (): JSX.Element | null => {
     };
 
     getUserMetadata();
-  }, [getAccessTokenSilently, user?.sub]);
+  }, [getAccessTokenSilently, user]);
 
   if (!user) return null;
 
@@ -40,7 +38,7 @@ const Dashboard = (): JSX.Element | null => {
 
           <h1>JWT Token</h1>
           {accessToken ? (
-            <p style={{ maxWidth: "100vw", lineBreak: "anywhere" }}>
+            <p style={{ lineBreak: "anywhere" }}>
               {JSON.stringify(accessToken, null, 2)}
             </p>
           ) : (
@@ -53,3 +51,5 @@ const Dashboard = (): JSX.Element | null => {
 };
 
 export default Dashboard;
+
+//  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlhPdWg5b1owUklhdjN1SG96OHdHQiJ9.eyJpc3MiOiJodHRwczovL2Rldi1iYm40NTB6Zy51cy5hdXRoMC5jb20vIiwic3ViIjoiT3hmMWk4d3k1Y2FzcDVWTlBwS2hzZWQwcHJZZVBaUDVAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vbm90ZXNBcHBBcGkuY29tIiwiaWF0IjoxNjY1NDM2NTQwLCJleHAiOjE2NjU1MjI5NDAsImF6cCI6Ik94ZjFpOHd5NWNhc3A1Vk5QcEtoc2VkMHByWWVQWlA1IiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIn0.CniAwufkbwK929wHUDkkmlkBWQ8bAYFKEFHh0j3fbryTfqlsPbwNvpNO_JjlPSQZE1Jhr1-E5CU0mH3-BrBSo6VKrcoRMwz3GU_rSM6hUrIrvhlcb6NZm_FEip7Z-vE2Uqy8W77u5usndJ3-48gYFp2Cfeb_4bT1Bj1EZgPeGk_EKZq0KiHwuzCu5711WPcIveqvvWuEmcJ-hUlqY4GGEJLzAkhlEKhTESLpja7_Mm5x-mVNNDSTy2pJ2EMacn0dfeLWAJ3JJ1eL9Nb4fxxQCRzbLXqUfOyXQpk3Z58tNopfjHlYtP1Rc6VCXFPz2zL5ERnXVXCe4sjJ0Q-Yg_zG3g",
