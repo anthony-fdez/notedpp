@@ -1,0 +1,12 @@
+.container {
+  background-color: rgb(10, 10, 10);
+  padding: 20px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+}
+.content {
+  max-width: 1200px;
+  margin: auto;
+}
