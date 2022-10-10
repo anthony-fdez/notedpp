@@ -1,16 +1,12 @@
-import { useState } from "react";
 import "./App.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Home from "./pages/home/home";
-import MainLayout from "./components/layout/mainLayout/mainLayout";
-import RegisterScreen from "./pages/auth/register/register";
-import NotFound from "./pages/errors/notFound/notFound";
-import AppBroke from "./pages/errors/appBroke/appBroke";
-import LoginScreen from "./pages/auth/login/login";
-import { Backdrop } from "@mui/material";
 import BackdropSpinner from "./components/backdrop/backdrop";
+import MainLayout from "./components/layout/mainLayout/mainLayout";
+import AppBroke from "./pages/errors/appBroke/appBroke";
+import NotFound from "./pages/errors/notFound/notFound";
+import Home from "./pages/home/home";
 
 const router = createBrowserRouter([
   {
@@ -23,24 +19,6 @@ const router = createBrowserRouter([
     element: (
       <MainLayout>
         <Home />
-      </MainLayout>
-    ),
-  },
-  {
-    path: "/register",
-    errorElement: <AppBroke />,
-    element: (
-      <MainLayout>
-        <RegisterScreen />
-      </MainLayout>
-    ),
-  },
-  {
-    path: "/login",
-    errorElement: <AppBroke />,
-    element: (
-      <MainLayout>
-        <LoginScreen />
       </MainLayout>
     ),
   },
