@@ -19,6 +19,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       redirectUri={window.location.origin}
       useRefreshTokens={true}
       cacheLocation="localstorage"
+      audience="https://dev-bbn450zg.us.auth0.com/api/v2/"
+      scope="read:current_user update:current_user_metadata"
     >
       <ThemeProvider theme={darkTheme}>
         <App />
