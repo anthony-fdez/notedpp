@@ -17,6 +17,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       domain="dev-bbn450zg.us.auth0.com"
       clientId="fy3ISpMsphF9M9GuI4OnlptzVKCIxH11"
       redirectUri={window.location.origin}
+      useRefreshTokens={true}
+      cacheLocation="localstorage"
     >
       <ThemeProvider theme={darkTheme}>
         <App />
