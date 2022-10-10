@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^1.11.0",
     "@emotion/styled": "^11.10.4",
     "@mui/material": "^5.10.8",
     "react": "^18.2.0",
