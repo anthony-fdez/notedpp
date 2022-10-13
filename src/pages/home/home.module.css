@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  width: 600px;
+}
+
+.content h1 {
+  font-size: 2.5rem;
+  font-family: "Lobster", cursive;
+}
+
+.content h2 {
+  font-family: "Merriweather", serif;
+  font-size: 3.7rem;
+  margin-top: 45px;
+}
+
+.content p {
+  margin-bottom: 45px;
+  font-size: 1.1rem;
+  margin-top: 15px;
+}

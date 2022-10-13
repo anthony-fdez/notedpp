@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Button } from "@mui/material";
+import { Button } from "@mantine/core";
 import React, { useEffect } from "react";
 
 const LogoutButton: React.FC = (): JSX.Element | null => {
