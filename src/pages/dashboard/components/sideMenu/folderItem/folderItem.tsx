@@ -1,13 +1,18 @@
-import { Alert, Button, NavLink } from "@mantine/core";
+import { Alert, Button, Menu, NavLink } from "@mantine/core";
 import React, { useState } from "react";
+import {
+  AiOutlineDelete,
+  AiOutlineEdit,
+  AiOutlineInfoCircle,
+  AiOutlinePlus,
+} from "react-icons/ai";
+import { BiMenuAltRight } from "react-icons/bi";
 import { IFolder } from "../../../../../interfaces/IFolder";
 import { INote } from "../../../../../interfaces/INote";
-import NoteItem from "../noteItem/noteItem";
-import { AiOutlineInfoCircle } from "react-icons/ai";
-import styles from "./folderItem.module.css";
-import { AiOutlineDelete, AiOutlineEdit, AiOutlinePlus } from "react-icons/ai";
 import DeleteFolderModal from "../modals/deleteFolderModal/deleteFolderModal";
 import RenameFolderModal from "../modals/renameFolderModal/renameFolderModal";
+import NoteItem from "../noteItem/noteItem";
+import styles from "./folderItem.module.css";
 
 interface Props {
   folder: IFolder;
@@ -19,21 +24,9 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
 
   if (!folder) return null;
 
-  const addNewNoteButton = () => {
+  const actionsButton = () => {
     return (
-      <Button
-        leftIcon={<AiOutlinePlus />}
-        variant="light"
-        className={styles.new_note_button}
-      >
-        Create Note
-      </Button>
-    );
-  };
-
-  const editAndDeleteFolderContainer = () => {
-    return (
-      <div className={styles.folder_button_container}>
+      <>
         <DeleteFolderModal
           isOpen={isDeleteFolderModalOpen}
           handleClose={() => setIsDeleteFolderModalOpen(false)}
@@ -44,26 +37,50 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
           handleClose={() => setIsRenameFolderModalOpen(false)}
           folder={folder}
         />
+        <Menu position="bottom-end" shadow="md" width={200}>
+          <Menu.Target>
+            <Button
+              className={styles.actions_button}
+              leftIcon={<BiMenuAltRight />}
+            >
+              Actions
+            </Button>
+          </Menu.Target>
 
-        <Button
-          className={styles.delete_folder_button}
-          color="blue"
-          variant="light"
-          leftIcon={<AiOutlineEdit />}
-          onClick={() => setIsRenameFolderModalOpen(true)}
-        >
-          Rename
-        </Button>
-        <Button
-          className={styles.delete_folder_button}
-          color="red"
-          variant="light"
-          leftIcon={<AiOutlineDelete />}
-          onClick={() => setIsDeleteFolderModalOpen(true)}
-        >
-          Delete
-        </Button>
-      </div>
+          <Menu.Dropdown>
+            <Menu.Label>Application</Menu.Label>
+            <Button
+              leftIcon={<AiOutlinePlus />}
+              color="gray"
+              variant="default"
+              className={styles.new_note_button}
+            >
+              Create Note
+            </Button>
+            <Button
+              className={styles.delete_folder_button}
+              color="gray"
+              variant="default"
+              leftIcon={<AiOutlineEdit />}
+              onClick={() => setIsRenameFolderModalOpen(true)}
+            >
+              Rename
+            </Button>
+            <Menu.Divider />
+            <Menu.Label>Danger zone</Menu.Label>
+
+            <Button
+              className={styles.delete_folder_button}
+              color="red"
+              variant="filled"
+              leftIcon={<AiOutlineDelete />}
+              onClick={() => setIsDeleteFolderModalOpen(true)}
+            >
+              Delete
+            </Button>
+          </Menu.Dropdown>
+        </Menu>
+      </>
     );
   };
 
@@ -79,19 +96,17 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
         >
           This folder is empty, start adding some notes!
         </Alert>
-        {addNewNoteButton()}
-        {editAndDeleteFolderContainer()}
+        {actionsButton()}
       </NavLink>
     );
   }
 
   return (
     <NavLink label={folder.folder_name} childrenOffset={28}>
-      {addNewNoteButton()}
+      {actionsButton()}
       {folder.notes.map((note: INote) => {
         return <NoteItem key={note.id} note={note} />;
       })}
-      {editAndDeleteFolderContainer()}
     </NavLink>
   );
 };

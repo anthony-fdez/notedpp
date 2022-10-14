@@ -2,13 +2,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.folder_button_container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
+
 .delete_folder_button {
   width: 100%;
 }
@@ -16,4 +10,9 @@
   width: 100%;
   margin-bottom: 10px;
   margin-top: 5px;
+}
+.actions_button {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
