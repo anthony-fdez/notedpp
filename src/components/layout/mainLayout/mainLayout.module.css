@@ -1,4 +1,9 @@
 .children_container {
   margin-top: 70px;
-  margin-left: 340px;
+  margin-left: 0px;
+}
+@media only screen and (min-width: 900px) {
+  .children_container {
+    margin-left: 340px;
+  }
 }

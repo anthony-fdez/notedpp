@@ -1,13 +1,25 @@
-.container {
-  width: 300px;
-  height: calc(100vh - 110px);
-  padding: 20px;
-  position: fixed;
-  left: 0px;
-  border-right: 1px solid rgb(230, 230, 230);
-  overflow-y: auto;
+.desktop_menu {
+  display: none;
 }
 .new_folder_button {
   width: 100%;
   margin-bottom: 15px;
+}
+
+@media only screen and (min-width: 900px) {
+  .mobile_menu {
+    display: none;
+  }
+  .desktop_menu {
+    display: block;
+  }
+  .container {
+    width: 300px;
+    height: calc(100vh - 110px);
+    padding: 20px;
+    position: fixed;
+    left: 0px;
+    border-right: 1px solid rgb(230, 230, 230);
+    overflow-y: auto;
+  }
 }

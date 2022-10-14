@@ -6,8 +6,12 @@ import styles from "./header.module.css";
 
 import { TbUser } from "react-icons/tb";
 import ProfileDrawer from "../profileDrawer/profileDrawer";
+import { FiMenu } from "react-icons/fi";
+import { useGlobalStore } from "../../globalStore/globalStore";
 
 const Header: React.FC = (): JSX.Element => {
+  const globalStore = useGlobalStore();
+
   const [isUserDrawerOpen, setIsUserDrawerOpen] = useState(false);
 
   return (
@@ -17,6 +21,12 @@ const Header: React.FC = (): JSX.Element => {
         handleClose={() => setIsUserDrawerOpen(false)}
       />
       <div className={styles.content}>
+        <ActionIcon
+          onClick={() => globalStore.setIsMobileMenuOpen(true)}
+          className={styles.action_icon_mobile_menu}
+        >
+          {<FiMenu />}
+        </ActionIcon>
         <h3>Noted++</h3>
         <div className={styles.header_right_container}>
           <LoginButton />
