@@ -1,4 +1,3 @@
-import { Button } from "@mantine/core";
 import React from "react";
 import AnimateOnScreenLoad from "../../components/animateOnScreenLoad/animateOnScreenLoad";
 import LoginButton from "../../components/auth/loginButton/loginButtonHome";
