@@ -18,8 +18,7 @@ const Dashboard = (): JSX.Element | null => {
 
   return (
     <>
-      <SideMenu isLoadingNotes={globalStore.isLoadingFolders} />
-
+      <SideMenu />
       <div className={styles.dashboard_container}>
         <Note />
       </div>

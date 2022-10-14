@@ -48,6 +48,7 @@ export const useGlobalStore = create<IGlobalStore>()(
       },
       updateFolders: () => {
         Axios.get('http://localhost:3001/notes/get-all-folders', {
+        set({ isLoadingFolders: true });
           headers: {
             Authorization: `Bearer ${get().user?.token || ''}`,
           },
@@ -57,6 +58,11 @@ export const useGlobalStore = create<IGlobalStore>()(
           })
           .catch((error: unknown) => {
             set({ folders: null });
+          })
+          .finally(() => {
+            setTimeout(() => {
+              set({ isLoadingFolders: false });
+            }, 2000);
           });
       },
       setIsMobileMenuOpen: (isOpen: boolean) => {
