@@ -20,8 +20,11 @@ const DeleteFolderModal = ({
   const globalStore = useGlobalStore();
 
   const [isLoadingDeletingFolder, setIsLoadingDeletingFolder] = useState(false);
+  const [confirmFolderName, setConfirmFolderName] = useState("");
 
-  const handleDeleteFolder = () => {
+  const handleDeleteFolder = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     setIsLoadingDeletingFolder(true);
 
     Axios.post(
@@ -69,23 +72,32 @@ const DeleteFolderModal = ({
       onClose={handleClose}
       title="Delete Folder"
     >
-      <div>
+      <form onSubmit={(e) => handleDeleteFolder(e)}>
         <Alert variant="filled" title="Be careful" color="red">
           This action is irreversible, and all you notes inside this folder will
           be deleted as well.
         </Alert>
+        <Alert color="red" className={styles.confirm_alert}>
+          Type <strong>&apos;{folder.folder_name}&apos;</strong> to confirm
+          deleting the folder.
+        </Alert>
+        <Input
+          onChange={(e) => setConfirmFolderName(e.target.value)}
+          placeholder="Confirm folder name"
+        />
         <div className={styles.footer_container}>
           <Button
+            disabled={confirmFolderName !== folder.folder_name}
             loaderPosition="left"
             loading={isLoadingDeletingFolder}
             color="red"
             variant="outline"
-            onClick={handleDeleteFolder}
+            type="submit"
           >
             Delete Folder
           </Button>
         </div>
-      </div>
+      </form>
     </Modal>
   );
 };
