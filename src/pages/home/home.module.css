@@ -12,6 +12,7 @@
   flex-direction: column;
   height: 50vh;
   width: 600px;
+  margin-top: 50px;
 }
 
 .content h1 {
