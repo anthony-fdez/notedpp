@@ -1,7 +1,7 @@
 import { Alert, Button, Input, Modal } from "@mantine/core";
 import React, { useState } from "react";
 import { useGlobalStore } from "../../../../../../globalStore/globalStore";
-import styles from "./deleteFolderModal.module.css";
+import styles from "../modals.module.css";
 import Axios from "axios";
 import { showNotification } from "@mantine/notifications";
 import { IFolder } from "../../../../../../interfaces/IFolder";

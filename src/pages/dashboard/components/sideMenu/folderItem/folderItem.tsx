@@ -7,6 +7,7 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 import styles from "./folderItem.module.css";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlinePlus } from "react-icons/ai";
 import DeleteFolderModal from "../modals/deleteFolderModal/deleteFolderModal";
+import RenameFolderModal from "../modals/renameFolderModal/renameFolderModal";
 
 interface Props {
   folder: IFolder;
@@ -14,6 +15,7 @@ interface Props {
 
 const FolderItem = ({ folder }: Props): JSX.Element | null => {
   const [isDeleteFolderModalOpen, setIsDeleteFolderModalOpen] = useState(false);
+  const [isRenameFolderModalOpen, setIsRenameFolderModalOpen] = useState(false);
 
   if (!folder) return null;
 
@@ -37,11 +39,18 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
           handleClose={() => setIsDeleteFolderModalOpen(false)}
           folder={folder}
         />
+        <RenameFolderModal
+          isOpen={isRenameFolderModalOpen}
+          handleClose={() => setIsRenameFolderModalOpen(false)}
+          folder={folder}
+        />
+
         <Button
           className={styles.delete_folder_button}
           color="blue"
           variant="light"
           leftIcon={<AiOutlineEdit />}
+          onClick={() => setIsRenameFolderModalOpen(true)}
         >
           Rename
         </Button>
