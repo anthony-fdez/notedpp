@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { ActionIcon } from "@mantine/core";
 
 import LoginButton from "../auth/loginButton/loginButton";
-import LogoutButton from "../auth/logoutButton/logoutButton";
 import styles from "./header.module.css";
 
 import { TbUser } from "react-icons/tb";
@@ -26,7 +25,7 @@ const Header: React.FC = (): JSX.Element => {
         handleClose={() => setIsUserDrawerOpen(false)}
       />
       <div className={styles.content}>
-        <h3>Notes App</h3>
+        <h3>Noted++</h3>
         <div className={styles.header_right_container}>
           <LoginButton />
           <ActionIcon

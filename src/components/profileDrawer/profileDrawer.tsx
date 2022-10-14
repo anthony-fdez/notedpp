@@ -4,6 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import styles from "./profileDrawer.module.css";
 import LogoutButton from "../auth/logoutButton/logoutButton";
 import { MdVerified } from "react-icons/md";
+import { useGlobalStore } from "../../globalStore/globalStore";
 
 interface Props {
   isOpen: boolean;
@@ -11,6 +12,8 @@ interface Props {
 }
 
 const ProfileDrawer = ({ isOpen, handleClose }: Props): JSX.Element => {
+  const globalStore = useGlobalStore();
+
   const [accessToken, setAccessToken] = useState<string | null>(null);
 
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
@@ -26,6 +29,18 @@ const ProfileDrawer = ({ isOpen, handleClose }: Props): JSX.Element => {
         });
 
         setAccessToken(token);
+
+        if (user) {
+          globalStore.setUser({
+            name: user.name || "",
+            email: user.email || "",
+            email_verified: user.email_verified || "",
+            family_name: user.family_name || "",
+            given_name: user.given_name || "",
+            picture: user.picture || "",
+            token: token || "",
+          });
+        }
       } catch (e: any) {
         console.log(e.message);
       }

@@ -1,4 +1,4 @@
-import create from "zustand/react";
+import create from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { IUser } from "./interfaces/IUser";
 
@@ -9,7 +9,7 @@ export interface IGlobalStore {
 
 export const useGlobalStore = create<IGlobalStore>()(
   devtools(
-    persist((set, get) => ({
+    persist((set) => ({
       user: {
         email: null,
         email_verified: null,
@@ -17,6 +17,7 @@ export const useGlobalStore = create<IGlobalStore>()(
         given_name: null,
         name: null,
         picture: null,
+        token: null,
       },
       setUser: (data: IUser) => {
         set({ user: data });
