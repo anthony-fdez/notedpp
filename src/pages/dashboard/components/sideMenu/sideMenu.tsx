@@ -127,7 +127,7 @@ const SideMenu = (): JSX.Element | null => {
           onClose={() => globalStore.setIsMobileMenuOpen(false)}
           title='Noted++'
           padding='xl'
-          size='lg'
+          size='xlg'
         >
           {folderAndNotesButtons()}
           {renderFolderList()}

@@ -64,9 +64,7 @@ export const useGlobalStore = create<IGlobalStore>()(
             set({ folders: null });
           })
           .finally(() => {
-            setTimeout(() => {
-              set({ isLoadingFolders: false });
-            }, 2000);
+            set({ isLoadingFolders: false });
           });
       },
       setIsMobileMenuOpen: (isOpen: boolean) => {
