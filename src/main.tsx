@@ -1,10 +1,12 @@
 import { Auth0Provider } from "@auth0/auth0-react";
-import { MantineProvider, ThemeIcon } from "@mantine/core";
+import { MantineProvider } from "@mantine/core";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
+
+import { NotificationsProvider } from "@mantine/notifications";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -18,8 +20,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       scope="read:current_user update:current_user_metadata"
     >
       <MantineProvider
-        // withGlobalStyles
-        // withNormalizeCSS
         theme={{
           colorScheme: "light",
           white: "#fafafa",
@@ -27,7 +27,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           primaryColor: "blue",
         }}
       >
-        <App />
+        <NotificationsProvider>
+          <App />
+        </NotificationsProvider>
       </MantineProvider>
     </Auth0Provider>
   </React.StrictMode>
