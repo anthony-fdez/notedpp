@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.image_container {
+  border-radius: 50%;
+  overflow: hidden;
+  height: 150px;
+  margin-bottom: 30px;
+}
+.profile_image {
+  overflow: hidden;
+  height: 100%;
+}
+.personal_info {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.verified_container {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.verified_icon {
+  color: royalblue;
+  margin-right: 2px;
+}
