@@ -1,4 +1,4 @@
-import { ActionIcon } from "@mantine/core";
+import { ActionIcon, Alert, Loader } from "@mantine/core";
 import React, { useState } from "react";
 
 import LoginButton from "../auth/loginButton/loginButton";
@@ -14,6 +14,19 @@ const Header: React.FC = (): JSX.Element => {
 
   const [isUserDrawerOpen, setIsUserDrawerOpen] = useState(false);
 
+  const syncDataSpinner = () => {
+    if (globalStore.isLoadingFolders) {
+      return (
+        <div className={styles.sync_container}>
+          <Loader size="sm" />
+          <p>Syncing Notes</p>
+        </div>
+      );
+    }
+
+    return <h3>Noted++</h3>;
+  };
+
   return (
     <header className={styles.container}>
       <ProfileDrawer
@@ -27,7 +40,7 @@ const Header: React.FC = (): JSX.Element => {
         >
           {<FiMenu />}
         </ActionIcon>
-        <h3>Noted++</h3>
+        {syncDataSpinner()}
         <div className={styles.header_right_container}>
           <LoginButton />
           <ActionIcon
