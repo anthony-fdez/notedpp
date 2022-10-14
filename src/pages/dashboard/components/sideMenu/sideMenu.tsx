@@ -68,12 +68,28 @@ const SideMenu = ({ isLoadingNotes }: Props): JSX.Element | null => {
       });
   };
 
-  if (isLoadingNotes)
+  const folderAndNotesButtons = () => {
     return (
-      <div className={styles.container}>
-        <SideMenuSkeleton />
-      </div>
+      <>
+        <Button
+          leftIcon={<AiOutlinePlus />}
+          className={styles.new_folder_button}
+          onClick={handleAddQuickNote}
+          loading={isLoadingAddingQuickNote}
+        >
+          Add Quick Note
+        </Button>
+        <Button
+          leftIcon={<MdOutlineCreate />}
+          className={styles.new_folder_button}
+          onClick={() => setIsNewFolderModalOpen(true)}
+          variant="light"
+        >
+          Create new folder
+        </Button>
+      </>
     );
+  };
 
   const renderFolderList = () => {
     if (!globalStore.folders) {
@@ -97,30 +113,23 @@ const SideMenu = ({ isLoadingNotes }: Props): JSX.Element | null => {
     });
   };
 
+  if (isLoadingNotes)
+    return (
+      <div className={styles.container}>
+        {folderAndNotesButtons()}
+        <SideMenuSkeleton />
+      </div>
+    );
+
   return (
     <>
       <NewFolderModal
         isOpen={isNewFolderModalOpen}
         handleClose={() => setIsNewFolderModalOpen(false)}
       />
-      <div className={styles.container}>
-        <Button
-          leftIcon={<AiOutlinePlus />}
-          className={styles.new_folder_button}
-          onClick={handleAddQuickNote}
-          loading={isLoadingAddingQuickNote}
-        >
-          Add Quick Note
-        </Button>
-        <Button
-          leftIcon={<MdOutlineCreate />}
-          className={styles.new_folder_button}
-          onClick={() => setIsNewFolderModalOpen(true)}
-          variant="light"
-        >
-          Create new folder
-        </Button>
 
+      <div className={styles.container}>
+        {folderAndNotesButtons()}
         {renderFolderList()}
       </div>
     </>

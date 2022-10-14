@@ -42,6 +42,13 @@ const NoteItem = ({ note }: Props) => {
           color: "blue",
         });
 
+        if (
+          globalStore.selectedNote &&
+          globalStore.selectedNote.id === note.id
+        ) {
+          globalStore.setSelectedNote(null);
+        }
+
         globalStore.updateFolders();
 
         setIsMenuOpen(false);
@@ -78,11 +85,11 @@ const NoteItem = ({ note }: Props) => {
         closeOnItemClick={false}
       >
         <NavLink
-          onClick={() => globalStore.setSelectedNote(note.id)}
-          active={note.id === globalStore.selectedNote}
+          onClick={() => globalStore.setSelectedNote(note)}
+          active={note.id === globalStore.selectedNote?.id}
           label={note.note}
           rightSection={
-            note.id === globalStore.selectedNote && (
+            note.id === globalStore.selectedNote?.id && (
               <>
                 <Menu.Target>
                   <ActionIcon onClick={() => setIsMenuOpen(true)}>

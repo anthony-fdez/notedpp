@@ -1,3 +1,4 @@
+import { INote } from "./../interfaces/INote";
 import { IFolder } from "./../interfaces/IFolder";
 import create from "zustand";
 import { devtools, persist } from "zustand/middleware";
@@ -5,11 +6,11 @@ import { IUser } from "./interfaces/IUser";
 import Axios from "axios";
 export interface IGlobalStore {
   user: IUser;
-  selectedNote: string | null;
+  selectedNote: INote | null;
   folders: IFolder[] | null;
   isLoadingFolders: boolean;
   setUser: (data: IUser) => void;
-  setSelectedNote: (noteId: string) => void;
+  setSelectedNote: (note: INote | null) => void;
   setFolders: (data: IFolder[]) => void;
   setIsLoadingFolders: (isLoading: boolean) => void;
   updateFolders: () => void;
@@ -39,7 +40,7 @@ export const useGlobalStore = create<IGlobalStore>()(
       setIsLoadingFolders: (isLoading: boolean) => {
         set({ isLoadingFolders: isLoading });
       },
-      setSelectedNote: (noteId: string) => {
+      setSelectedNote: (noteId: INote | null) => {
         set({ selectedNote: noteId });
       },
       updateFolders: () => {

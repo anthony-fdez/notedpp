@@ -45,6 +45,13 @@ const DeleteFolderModal = ({
           color: "blue",
         });
 
+        if (
+          globalStore.selectedNote &&
+          globalStore.selectedNote.folderId === folder.id
+        ) {
+          globalStore.setSelectedNote(null);
+        }
+
         globalStore.updateFolders();
 
         handleClose();
