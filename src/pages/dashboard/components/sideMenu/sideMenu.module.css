@@ -1,0 +1,9 @@
+.container {
+  width: 300px;
+  height: calc(100vh - 110px);
+  padding: 20px;
+  position: fixed;
+  left: 0px;
+  border-right: 1px solid rgb(230, 230, 230);
+  overflow-y: auto;
+}

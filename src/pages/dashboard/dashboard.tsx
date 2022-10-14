@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { IFolder } from "../../interfaces/IFolder";
 import Axios from "axios";
 import { useGlobalStore } from "../../globalStore/globalStore";
+import styles from "./dashboard.module.css";
+import SideMenu from "./components/sideMenu/sideMenu";
 
 const Dashboard = (): JSX.Element | null => {
   const globalStore = useGlobalStore();
 
   const [isLoadingNotes, setIsLoadingNotes] = useState(false);
-  const [folders, setFolders] = useState<IFolder | null>(null);
+  const [folders, setFolders] = useState<IFolder[] | null>(null);
 
   useEffect(() => {
     setIsLoadingNotes(true);
@@ -19,15 +21,24 @@ const Dashboard = (): JSX.Element | null => {
     })
       .then((response) => {
         console.log(response.data);
+
+        setFolders(response.data.folders);
       })
       .catch((error: unknown) => {
         console.error(error);
+      })
+      .finally(() => {
+        setIsLoadingNotes(false);
       });
   }, []);
 
   return (
     <>
-      <h1>Dashboard</h1>
+      <SideMenu isLoadingNotes={isLoadingNotes} folders={folders} />
+
+      <div className={styles.dashboard_container}>
+        <h1>Dashboard</h1>
+      </div>
     </>
   );
 };
