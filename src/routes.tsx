@@ -19,13 +19,7 @@ export const routes = ({ isAuthenticated }: Props) => {
     {
       path: "/",
       errorElement: <AppBroke />,
-      element: !isAuthenticated ? (
-        <MainLayout>
-          <Home />
-        </MainLayout>
-      ) : (
-        <Navigate to="/dashboard" />
-      ),
+      element: !isAuthenticated ? <Home /> : <Navigate to="/dashboard" />,
     },
     {
       path: "/dashboard",
