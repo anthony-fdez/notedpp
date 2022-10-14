@@ -1,8 +1,8 @@
 import "./App.css";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import { useAuth0 } from "@auth0/auth0-react";
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BackdropSpinner from "./components/backdrop/backdrop";
 import { routes } from "./routes";
 
