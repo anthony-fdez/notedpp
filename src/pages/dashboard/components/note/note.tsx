@@ -1,9 +1,9 @@
-import { Alert } from "@mantine/core";
-import React, { useEffect, useState } from "react";
-import { useGlobalStore } from "../../../../globalStore/globalStore";
-import { INote } from "../../../../interfaces/INote";
-import { AiOutlineInfoCircle } from "react-icons/ai";
-import { useWindowScroll } from "@mantine/hooks";
+import { Alert } from '@mantine/core';
+import React, { useEffect, useState } from 'react';
+import { useGlobalStore } from '../../../../globalStore/globalStore';
+import { INote } from '../../../../interfaces/INote';
+import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { useWindowScroll } from '@mantine/hooks';
 
 const Note = (): JSX.Element | null => {
   const globalStore = useGlobalStore();
@@ -18,7 +18,7 @@ const Note = (): JSX.Element | null => {
 
   if (!note) {
     return (
-      <Alert icon={<AiOutlineInfoCircle />} title="No Note selected">
+      <Alert icon={<AiOutlineInfoCircle />} title='No Note selected'>
         Select a note within a folder on the left hand side menu.
       </Alert>
     );

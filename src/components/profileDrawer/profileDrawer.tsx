@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Drawer } from "@mantine/core";
-import { useAuth0 } from "@auth0/auth0-react";
-import styles from "./profileDrawer.module.css";
-import LogoutButton from "../auth/logoutButton/logoutButton";
-import { MdVerified } from "react-icons/md";
-import { useGlobalStore } from "../../globalStore/globalStore";
+import React, { useEffect, useState } from 'react';
+import { Drawer } from '@mantine/core';
+import { useAuth0 } from '@auth0/auth0-react';
+import styles from './profileDrawer.module.css';
+import LogoutButton from '../auth/logoutButton/logoutButton';
+import { MdVerified } from 'react-icons/md';
+import { useGlobalStore } from '../../globalStore/globalStore';
 
 interface Props {
   isOpen: boolean;
@@ -20,25 +20,25 @@ const ProfileDrawer = ({ isOpen, handleClose }: Props): JSX.Element => {
 
   useEffect(() => {
     const getUserMetadata = async () => {
-      const domain = "dev-bbn450zg.us.auth0.com";
+      const domain = 'dev-bbn450zg.us.auth0.com';
 
       try {
         const token = await getAccessTokenSilently({
           audience: `https://${domain}/api/v2/`,
-          scope: "read:current_user",
+          scope: 'read:current_user',
         });
 
         setAccessToken(token);
 
         if (user) {
           globalStore.setUser({
-            name: user.name || "",
-            email: user.email || "",
-            email_verified: user.email_verified || "",
-            family_name: user.family_name || "",
-            given_name: user.given_name || "",
-            picture: user.picture || "",
-            token: token || "",
+            name: user.name || '',
+            email: user.email || '',
+            email_verified: user.email_verified || '',
+            family_name: user.family_name || '',
+            given_name: user.given_name || '',
+            picture: user.picture || '',
+            token: token || '',
           });
         }
       } catch (e: any) {
@@ -76,11 +76,11 @@ const ProfileDrawer = ({ isOpen, handleClose }: Props): JSX.Element => {
 
         <h1>JWT Token (testing only)</h1>
         {accessToken ? (
-          <p style={{ lineBreak: "anywhere" }}>
+          <p style={{ lineBreak: 'anywhere' }}>
             {JSON.stringify(accessToken, null, 2)}
           </p>
         ) : (
-          "No user metadata defined"
+          'No user metadata defined'
         )}
       </div>
     );
@@ -90,12 +90,12 @@ const ProfileDrawer = ({ isOpen, handleClose }: Props): JSX.Element => {
     <>
       <Drawer
         opened={isOpen}
-        position="right"
+        position='right'
         overlayBlur={3}
         onClose={handleClose}
-        title="Profile"
-        padding="xl"
-        size="xl"
+        title='Profile'
+        padding='xl'
+        size='xl'
       >
         {renderUserData()}
       </Drawer>

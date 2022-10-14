@@ -1,13 +1,13 @@
-import { ActionIcon } from "@mantine/core";
-import React, { useState } from "react";
+import { ActionIcon } from '@mantine/core';
+import React, { useState } from 'react';
 
-import LoginButton from "../auth/loginButton/loginButton";
-import styles from "./header.module.css";
+import LoginButton from '../auth/loginButton/loginButton';
+import styles from './header.module.css';
 
-import { TbUser } from "react-icons/tb";
-import ProfileDrawer from "../profileDrawer/profileDrawer";
-import { FiMenu } from "react-icons/fi";
-import { useGlobalStore } from "../../globalStore/globalStore";
+import { TbUser } from 'react-icons/tb';
+import ProfileDrawer from '../profileDrawer/profileDrawer';
+import { FiMenu } from 'react-icons/fi';
+import { useGlobalStore } from '../../globalStore/globalStore';
 
 const Header: React.FC = (): JSX.Element => {
   const globalStore = useGlobalStore();
@@ -32,9 +32,9 @@ const Header: React.FC = (): JSX.Element => {
           <LoginButton />
           <ActionIcon
             className={styles.profile_button}
-            size="lg"
-            color="blue"
-            variant="light"
+            size='lg'
+            color='blue'
+            variant='light'
             onClick={() => setIsUserDrawerOpen(true)}
           >
             <TbUser size={18} />

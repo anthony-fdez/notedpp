@@ -1,9 +1,9 @@
-import { Button, Input, Modal } from "@mantine/core";
-import React, { useState } from "react";
-import { useGlobalStore } from "../../../../../../globalStore/globalStore";
-import styles from "../modals.module.css";
-import Axios from "axios";
-import { showNotification } from "@mantine/notifications";
+import { Button, Input, Modal } from '@mantine/core';
+import React, { useState } from 'react';
+import { useGlobalStore } from '../../../../../../globalStore/globalStore';
+import styles from '../modals.module.css';
+import Axios from 'axios';
+import { showNotification } from '@mantine/notifications';
 
 interface Props {
   isOpen: boolean;
@@ -14,7 +14,7 @@ const NewFolderModal = ({ isOpen, handleClose }: Props): JSX.Element => {
   const globalStore = useGlobalStore();
 
   const [isLoadingCreatingFolder, setIsLoadingCreatingFolder] = useState(false);
-  const [folderName, setFolderName] = useState("");
+  const [folderName, setFolderName] = useState('');
 
   const handleCreateFolder = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,21 +22,21 @@ const NewFolderModal = ({ isOpen, handleClose }: Props): JSX.Element => {
     setIsLoadingCreatingFolder(true);
 
     Axios.post(
-      "http://localhost:3001/notes/new-folder",
+      'http://localhost:3001/notes/new-folder',
       {
         folder_name: folderName,
       },
       {
         headers: {
-          Authorization: `Bearer ${globalStore.user.token}`,
+          Authorization: `Bearer ${globalStore.user?.token || ''}`,
         },
       }
     )
       .then(() => {
         showNotification({
-          title: "Folder Deleted",
-          message: "Your folder was deleted successfully",
-          color: "blue",
+          title: 'Folder Deleted',
+          message: 'Your folder was deleted successfully',
+          color: 'blue',
         });
 
         globalStore.updateFolders();
@@ -47,16 +47,16 @@ const NewFolderModal = ({ isOpen, handleClose }: Props): JSX.Element => {
         try {
           if (e.response.data.message) {
             showNotification({
-              title: "Error",
+              title: 'Error',
               message: e.response.data.message,
-              color: "red",
+              color: 'red',
             });
           }
         } catch (e) {
           showNotification({
-            title: "Error",
-            message: "Looks like our servers are down, try again later.",
-            color: "red",
+            title: 'Error',
+            message: 'Looks like our servers are down, try again later.',
+            color: 'red',
           });
         }
       })
@@ -70,21 +70,21 @@ const NewFolderModal = ({ isOpen, handleClose }: Props): JSX.Element => {
       overlayBlur={3}
       opened={isOpen}
       onClose={handleClose}
-      title="Create new folder"
+      title='Create new folder'
     >
       <form onSubmit={(e) => handleCreateFolder(e)}>
         <Input
           onChange={(e) => {
             setFolderName(e.target.value);
           }}
-          placeholder="Folder Name"
+          placeholder='Folder Name'
           required={true}
         />
         <div className={styles.footer_container}>
           <Button
-            loaderPosition="left"
+            loaderPosition='left'
             loading={isLoadingCreatingFolder}
-            type="submit"
+            type='submit'
           >
             Create Folder
           </Button>

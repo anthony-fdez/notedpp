@@ -1,13 +1,13 @@
-import { ActionIcon, Button, Menu, NavLink } from "@mantine/core";
-import { useClickOutside } from "@mantine/hooks";
-import { IconTrash } from "@tabler/icons";
-import React, { useState } from "react";
-import { FiMoreHorizontal } from "react-icons/fi";
-import { useGlobalStore } from "../../../../../globalStore/globalStore";
-import { INote } from "../../../../../interfaces/INote";
-import styles from "./noteItem.module.css";
-import Axios from "axios";
-import { showNotification } from "@mantine/notifications";
+import { ActionIcon, Button, Menu, NavLink } from '@mantine/core';
+import { useClickOutside } from '@mantine/hooks';
+import { IconTrash } from '@tabler/icons';
+import React, { useState } from 'react';
+import { FiMoreHorizontal } from 'react-icons/fi';
+import { useGlobalStore } from '../../../../../globalStore/globalStore';
+import { INote } from '../../../../../interfaces/INote';
+import styles from './noteItem.module.css';
+import Axios from 'axios';
+import { showNotification } from '@mantine/notifications';
 
 interface Props {
   note: INote;
@@ -25,7 +25,7 @@ const NoteItem = ({ note }: Props) => {
     setIsLoadingDeletingNote(true);
 
     Axios.post(
-      "http://localhost:3001/notes/delete-note",
+      'http://localhost:3001/notes/delete-note',
       {
         note_id: note.id,
       },
@@ -37,9 +37,9 @@ const NoteItem = ({ note }: Props) => {
     )
       .then(() => {
         showNotification({
-          title: "Note Deleted",
-          message: "Your note was deleted successfully",
-          color: "blue",
+          title: 'Note Deleted',
+          message: 'Your note was deleted successfully',
+          color: 'blue',
         });
 
         if (
@@ -57,16 +57,16 @@ const NoteItem = ({ note }: Props) => {
         try {
           if (e.response.data.message) {
             showNotification({
-              title: "Error",
+              title: 'Error',
               message: e.response.data.message,
-              color: "red",
+              color: 'red',
             });
           }
         } catch (e) {
           showNotification({
-            title: "Error",
-            message: "Looks like our servers are down, try again later.",
-            color: "red",
+            title: 'Error',
+            message: 'Looks like our servers are down, try again later.',
+            color: 'red',
           });
         }
       })
@@ -79,9 +79,9 @@ const NoteItem = ({ note }: Props) => {
     <div className={styles.note_item_container} ref={ref} key={note.id}>
       <Menu
         opened={isMenuOpen}
-        shadow="md"
+        shadow='md'
         width={200}
-        position="bottom-end"
+        position='bottom-end'
         closeOnItemClick={false}
       >
         <NavLink
@@ -108,7 +108,7 @@ const NoteItem = ({ note }: Props) => {
             <Button
               loading={isLoadingDeletingNote}
               className={styles.delete_note_button}
-              color="red"
+              color='red'
               leftIcon={<IconTrash size={14} />}
               onClick={handleDeleteNote}
             >
