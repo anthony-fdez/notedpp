@@ -7,7 +7,11 @@ const LogoutButton: React.FC = (): JSX.Element | null => {
 
   if (!isAuthenticated) return null;
 
-  return <Button onClick={() => logout()}>Logout</Button>;
+  return (
+    <Button color="red" onClick={() => logout()}>
+      Logout
+    </Button>
+  );
 };
 
 export default LogoutButton;

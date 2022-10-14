@@ -1,3 +1,4 @@
+import React from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import MainLayout from "./components/layout/mainLayout/mainLayout";
@@ -19,13 +20,7 @@ export const routes = ({ isAuthenticated }: Props) => {
     {
       path: "/",
       errorElement: <AppBroke />,
-      element: !isAuthenticated ? (
-        <MainLayout>
-          <Home />
-        </MainLayout>
-      ) : (
-        <Navigate to="/dashboard" />
-      ),
+      element: !isAuthenticated ? <Home /> : <Navigate to="/dashboard" />,
     },
     {
       path: "/dashboard",
