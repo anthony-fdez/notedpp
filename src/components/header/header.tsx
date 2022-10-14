@@ -1,6 +1,5 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import React, { useEffect, useState } from "react";
 import { ActionIcon } from "@mantine/core";
+import React, { useState } from "react";
 
 import LoginButton from "../auth/loginButton/loginButton";
 import styles from "./header.module.css";
@@ -9,14 +8,7 @@ import { TbUser } from "react-icons/tb";
 import ProfileDrawer from "../profileDrawer/profileDrawer";
 
 const Header: React.FC = (): JSX.Element => {
-  const { user, isAuthenticated } = useAuth0();
-
   const [isUserDrawerOpen, setIsUserDrawerOpen] = useState(false);
-
-  useEffect(() => {
-    console.log(user);
-    console.log(isAuthenticated);
-  }, [isAuthenticated, user]);
 
   return (
     <header className={styles.container}>

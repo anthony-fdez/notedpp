@@ -42,7 +42,7 @@ const ProfileDrawer = ({ isOpen, handleClose }: Props): JSX.Element => {
           });
         }
       } catch (e: any) {
-        console.log(e.message);
+        console.error(e.message);
       }
     };
 
