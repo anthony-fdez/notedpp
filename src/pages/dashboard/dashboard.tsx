@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { IFolder } from "../../interfaces/IFolder";
-import Axios from "axios";
+import React, { useEffect } from "react";
+
 import { useGlobalStore } from "../../globalStore/globalStore";
 import styles from "./dashboard.module.css";
 import SideMenu from "./components/sideMenu/sideMenu";
@@ -12,6 +11,10 @@ const Dashboard = (): JSX.Element | null => {
   useEffect(() => {
     globalStore.updateFolders();
   }, [globalStore.user]);
+
+  useEffect(() => {
+    globalStore.setIsMobileMenuOpen(false);
+  }, [globalStore.selectedNote]);
 
   return (
     <>

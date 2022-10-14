@@ -31,7 +31,7 @@ const NoteItem = ({ note }: Props) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${globalStore.user.token}`,
+          Authorization: `Bearer ${globalStore.user?.token}`,
         },
       }
     )
@@ -85,7 +85,9 @@ const NoteItem = ({ note }: Props) => {
         closeOnItemClick={false}
       >
         <NavLink
-          onClick={() => globalStore.setSelectedNote(note)}
+          onClick={() => {
+            globalStore.setSelectedNote(note);
+          }}
           active={note.id === globalStore.selectedNote?.id}
           label={note.note}
           rightSection={

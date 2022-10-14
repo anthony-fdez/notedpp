@@ -1,4 +1,4 @@
-import { Alert, Button } from "@mantine/core";
+import { Alert, Button, Drawer } from "@mantine/core";
 import React, { useState } from "react";
 import { IFolder } from "../../../../interfaces/IFolder";
 import SideMenuSkeleton from "../sideMenuSkeleton/sideMenuSkeleton";
@@ -37,7 +37,7 @@ const SideMenu = ({ isLoadingNotes }: Props): JSX.Element | null => {
         },
       }
     )
-      .then(() => {
+      .then((response) => {
         showNotification({
           title: "Quick note created",
           message: "Your quick note was added to the quick notes folder",
@@ -45,6 +45,7 @@ const SideMenu = ({ isLoadingNotes }: Props): JSX.Element | null => {
         });
 
         globalStore.updateFolders();
+        globalStore.setSelectedNote(response.data.note);
       })
       .catch((e) => {
         try {
@@ -82,7 +83,10 @@ const SideMenu = ({ isLoadingNotes }: Props): JSX.Element | null => {
         <Button
           leftIcon={<MdOutlineCreate />}
           className={styles.new_folder_button}
-          onClick={() => setIsNewFolderModalOpen(true)}
+          onClick={() => {
+            setIsNewFolderModalOpen(true);
+            globalStore.setIsMobileMenuOpen(false);
+          }}
           variant="light"
         >
           Create new folder
@@ -128,9 +132,23 @@ const SideMenu = ({ isLoadingNotes }: Props): JSX.Element | null => {
         handleClose={() => setIsNewFolderModalOpen(false)}
       />
 
-      <div className={styles.container}>
-        {folderAndNotesButtons()}
-        {renderFolderList()}
+      <div className={styles.mobile_menu}>
+        <Drawer
+          opened={globalStore.isMobileMenuOpen}
+          onClose={() => globalStore.setIsMobileMenuOpen(false)}
+          title="Noted++"
+          padding="xl"
+          size="lg"
+        >
+          {folderAndNotesButtons()}
+          {renderFolderList()}
+        </Drawer>
+      </div>
+      <div className={styles.desktop_menu}>
+        <div className={styles.container}>
+          {folderAndNotesButtons()}
+          {renderFolderList()}
+        </div>
       </div>
     </>
   );

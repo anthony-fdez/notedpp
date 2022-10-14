@@ -9,11 +9,13 @@ export interface IGlobalStore {
   selectedNote: INote | null;
   folders: IFolder[] | null;
   isLoadingFolders: boolean;
+  isMobileMenuOpen: boolean;
   setUser: (data: IUser) => void;
   setSelectedNote: (note: INote | null) => void;
   setFolders: (data: IFolder[] | null) => void;
   setIsLoadingFolders: (isLoading: boolean) => void;
   updateFolders: () => void;
+  setIsMobileMenuOpen: (isOpen: boolean) => void;
 }
 
 export const useGlobalStore = create<IGlobalStore>()(
@@ -31,6 +33,7 @@ export const useGlobalStore = create<IGlobalStore>()(
       folders: null,
       selectedNote: null,
       isLoadingFolders: true,
+      isMobileMenuOpen: false,
       setUser: (data: IUser | null) => {
         set({ user: data });
       },
@@ -55,6 +58,9 @@ export const useGlobalStore = create<IGlobalStore>()(
           .catch((error: unknown) => {
             set({ folders: null });
           });
+      },
+      setIsMobileMenuOpen: (isOpen: boolean) => {
+        set({ isMobileMenuOpen: isOpen });
       },
     })),
     {
