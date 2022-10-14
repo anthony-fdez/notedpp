@@ -5,8 +5,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(20, 20, 20);
-  color: white;
 }
 
 code {
@@ -25,4 +23,5 @@ li,
 a {
   margin: 0;
   padding: 0;
+  color: #303030;
 }
