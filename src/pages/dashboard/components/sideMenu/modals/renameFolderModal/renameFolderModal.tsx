@@ -39,14 +39,14 @@ const RenameFolderModal = ({
         },
       }
     )
-      .then((response) => {
-        console.log(response);
-
+      .then(() => {
         showNotification({
           title: "Folder Renamed",
           message: "Your folder was renamed successfully",
           color: "blue",
         });
+
+        globalStore.updateFolders();
 
         handleClose();
       })

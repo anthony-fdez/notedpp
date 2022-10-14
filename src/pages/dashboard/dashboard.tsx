@@ -8,33 +8,13 @@ import SideMenu from "./components/sideMenu/sideMenu";
 const Dashboard = (): JSX.Element | null => {
   const globalStore = useGlobalStore();
 
-  const [isLoadingNotes, setIsLoadingNotes] = useState(false);
-  const [folders, setFolders] = useState<IFolder[] | null>(null);
-
   useEffect(() => {
-    setIsLoadingNotes(true);
-
-    Axios.get("http://localhost:3001/notes/get-all-folders", {
-      headers: {
-        Authorization: `Bearer ${globalStore.user.token}`,
-      },
-    })
-      .then((response) => {
-        console.log(response.data);
-
-        setFolders(response.data.folders);
-      })
-      .catch((error: unknown) => {
-        console.error(error);
-      })
-      .finally(() => {
-        setIsLoadingNotes(false);
-      });
+    globalStore.updateFolders();
   }, []);
 
   return (
     <>
-      <SideMenu isLoadingNotes={isLoadingNotes} folders={folders} />
+      <SideMenu isLoadingNotes={globalStore.isLoadingFolders} />
 
       <div className={styles.dashboard_container}>
         <h1>Dashboard</h1>

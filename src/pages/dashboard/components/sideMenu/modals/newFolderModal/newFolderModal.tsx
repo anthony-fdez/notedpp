@@ -32,14 +32,14 @@ const NewFolderModal = ({ isOpen, handleClose }: Props): JSX.Element => {
         },
       }
     )
-      .then((response) => {
-        console.log(response);
-
+      .then(() => {
         showNotification({
           title: "Folder Deleted",
           message: "Your folder was deleted successfully",
           color: "blue",
         });
+
+        globalStore.updateFolders();
 
         handleClose();
       })

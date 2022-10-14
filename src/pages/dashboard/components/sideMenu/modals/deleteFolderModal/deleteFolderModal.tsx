@@ -35,14 +35,14 @@ const DeleteFolderModal = ({
         },
       }
     )
-      .then((response) => {
-        console.log(response);
-
+      .then(() => {
         showNotification({
           title: "Folder Created",
           message: "Your folder was created successfully",
           color: "blue",
         });
+
+        globalStore.updateFolders();
 
         handleClose();
       })
