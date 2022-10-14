@@ -85,21 +85,21 @@ const NoteItem = ({ note }: Props) => {
         closeOnItemClick={false}
       >
         <NavLink
+          variant='light'
+          noWrap={true}
           onClick={() => {
             globalStore.setSelectedNote(note);
           }}
           active={note.id === globalStore.selectedNote?.id}
           label={note.note}
           rightSection={
-            note.id === globalStore.selectedNote?.id && (
-              <>
-                <Menu.Target>
-                  <ActionIcon onClick={() => setIsMenuOpen(true)}>
-                    <FiMoreHorizontal />
-                  </ActionIcon>
-                </Menu.Target>
-              </>
-            )
+            <>
+              <Menu.Target>
+                <ActionIcon onClick={() => setIsMenuOpen(true)}>
+                  <FiMoreHorizontal />
+                </ActionIcon>
+              </Menu.Target>
+            </>
           }
         />
         <Menu.Dropdown>

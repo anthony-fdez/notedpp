@@ -5,16 +5,34 @@ import './App.css';
 import BackdropSpinner from './components/backdrop/backdrop';
 import { routes } from './routes';
 
+import { NotificationsProvider } from '@mantine/notifications';
+import { MantineProvider } from '@mantine/core';
+import { useGlobalStore } from './globalStore/globalStore';
+
 function App() {
+  const globalStore = useGlobalStore();
   const { isAuthenticated } = useAuth0();
 
   const router = routes({ isAuthenticated });
 
   return (
-    <div className='App'>
-      <BackdropSpinner />
-      <RouterProvider router={router} />
-    </div>
+    <MantineProvider
+      withCSSVariables
+      withGlobalStyles
+      theme={{
+        colorScheme: globalStore.theme,
+        white: '#fafafa',
+        black: '#1a1a1a',
+        primaryColor: 'blue',
+      }}
+    >
+      <NotificationsProvider>
+        <div className='App'>
+          <BackdropSpinner />
+          <RouterProvider router={router} />
+        </div>
+      </NotificationsProvider>
+    </MantineProvider>
   );
 }
 

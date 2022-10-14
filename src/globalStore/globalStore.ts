@@ -5,6 +5,7 @@ import { devtools, persist } from 'zustand/middleware';
 import { IUser } from './interfaces/IUser';
 import Axios from 'axios';
 export interface IGlobalStore {
+  theme: 'dark' | 'light';
   user: IUser | null;
   selectedNote: INote | null;
   folders: IFolder[] | null;
@@ -16,11 +17,13 @@ export interface IGlobalStore {
   setIsLoadingFolders: (isLoading: boolean) => void;
   updateFolders: () => void;
   setIsMobileMenuOpen: (isOpen: boolean) => void;
+  setTheme: (theme: 'dark' | 'light') => void;
 }
 
 export const useGlobalStore = create<IGlobalStore>()(
   devtools(
     persist((set, get) => ({
+      theme: 'light',
       user: {
         email: null,
         email_verified: null,
@@ -49,7 +52,6 @@ export const useGlobalStore = create<IGlobalStore>()(
       updateFolders: () => {
         set({ isLoadingFolders: true });
 
-
         Axios.get('http://localhost:3001/notes/get-all-folders', {
           headers: {
             Authorization: `Bearer ${get().user?.token || ''}`,
@@ -69,6 +71,9 @@ export const useGlobalStore = create<IGlobalStore>()(
       },
       setIsMobileMenuOpen: (isOpen: boolean) => {
         set({ isMobileMenuOpen: isOpen });
+      },
+      setTheme: (theme: 'dark' | 'light') => {
+        set({ theme });
       },
     })),
     {

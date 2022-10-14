@@ -1,7 +1,6 @@
-import { Alert, Button, Drawer } from '@mantine/core';
+import { Alert, Button, Drawer, ScrollArea } from '@mantine/core';
 import React, { useState } from 'react';
 import { IFolder } from '../../../../interfaces/IFolder';
-import SideMenuSkeleton from '../sideMenuSkeleton/sideMenuSkeleton';
 import FolderItem from './folderItem/folderItem';
 import styles from './sideMenu.module.css';
 import { MdOutlineCreate } from 'react-icons/md';
@@ -10,10 +9,6 @@ import { useGlobalStore } from '../../../../globalStore/globalStore';
 import NewFolderModal from './modals/newFolderModal/newFolderModal';
 import Axios from 'axios';
 import { showNotification } from '@mantine/notifications';
-
-interface Props {
-  isLoadingNotes: boolean;
-}
 
 const SideMenu = (): JSX.Element | null => {
   const globalStore = useGlobalStore();
@@ -125,6 +120,9 @@ const SideMenu = (): JSX.Element | null => {
 
       <div className={styles.mobile_menu}>
         <Drawer
+          className={styles.drawer}
+          overlayBlur={3}
+          lockScroll={false}
           opened={globalStore.isMobileMenuOpen}
           onClose={() => globalStore.setIsMobileMenuOpen(false)}
           title='Noted++'

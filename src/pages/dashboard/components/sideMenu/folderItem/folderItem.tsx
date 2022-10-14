@@ -16,12 +16,16 @@ import styles from './folderItem.module.css';
 import Axios from 'axios';
 import { showNotification } from '@mantine/notifications';
 import { useGlobalStore } from '../../../../../globalStore/globalStore';
+import { useClickOutside } from '@mantine/hooks';
 
 interface Props {
   folder: IFolder;
 }
 
 const FolderItem = ({ folder }: Props): JSX.Element | null => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const ref = useClickOutside(() => setIsMenuOpen(false));
+
   const globalStore = useGlobalStore();
 
   const [isDeleteFolderModalOpen, setIsDeleteFolderModalOpen] = useState(false);
@@ -51,6 +55,7 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
         });
 
         globalStore.updateFolders();
+        setIsMenuOpen(false);
 
         globalStore.setSelectedNote(response.data.note);
       })
@@ -91,9 +96,16 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
           handleClose={() => setIsRenameFolderModalOpen(false)}
           folder={folder}
         />
-        <Menu position='bottom-end' shadow='md' width={200}>
+        <Menu
+          closeOnItemClick={false}
+          opened={isMenuOpen}
+          position='bottom-end'
+          shadow='md'
+          width={200}
+        >
           <Menu.Target>
             <Button
+              onClick={() => setIsMenuOpen(true)}
               className={styles.actions_button}
               leftIcon={<BiMenuAltRight />}
             >
@@ -142,28 +154,42 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
 
   if (folder.notes.length === 0) {
     return (
-      <NavLink label={folder.folder_name} childrenOffset={28}>
-        <Alert
-          className={styles.alert}
-          title='Empty folder'
-          color='blue'
-          radius='md'
-          icon={<AiOutlineInfoCircle />}
+      <div ref={ref}>
+        <NavLink
+          description='Empty Folder'
+          label={folder.folder_name}
+          childrenOffset={28}
+          noWrap={true}
         >
-          This folder is empty, start adding some notes!
-        </Alert>
-        {actionsButton()}
-      </NavLink>
+          <Alert
+            className={styles.alert}
+            title='Empty folder'
+            color='blue'
+            radius='md'
+            icon={<AiOutlineInfoCircle />}
+          >
+            This folder is empty, start adding some notes!
+          </Alert>
+          {actionsButton()}
+        </NavLink>
+      </div>
     );
   }
 
   return (
-    <NavLink label={folder.folder_name} childrenOffset={28}>
-      {actionsButton()}
-      {folder.notes.map((note: INote) => {
-        return <NoteItem key={note.id} note={note} />;
-      })}
-    </NavLink>
+    <div ref={ref}>
+      <NavLink
+        description={`${folder.notes.length} notes.`}
+        label={folder.folder_name}
+        childrenOffset={28}
+        noWrap={true}
+      >
+        {actionsButton()}
+        {folder.notes.map((note: INote) => {
+          return <NoteItem key={note.id} note={note} />;
+        })}
+      </NavLink>
+    </div>
   );
 };
 

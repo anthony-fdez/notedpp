@@ -5,6 +5,9 @@
   width: 100%;
   margin-bottom: 15px;
 }
+.drawer {
+  overflow: auto;
+}
 
 @media only screen and (min-width: 900px) {
   .mobile_menu {
@@ -15,11 +18,11 @@
   }
   .container {
     width: 300px;
-    height: calc(100vh - 110px);
+    height: calc(100vh - 70px);
     padding: 20px;
     position: fixed;
     left: 0px;
     border-right: 1px solid rgb(230, 230, 230);
-    overflow-y: auto;
+    overflow: auto;
   }
 }
