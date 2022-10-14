@@ -8,7 +8,7 @@ import FolderItem from "./folderItem/folderItem";
 import styles from "./sideMenu.module.css";
 
 import { MdOutlineCreate } from "react-icons/md";
-import NewFolderModal from "./newFolderModal/newFolderModal";
+import NewFolderModal from "./modals/newFolderModal/newFolderModal";
 interface Props {
   folders: IFolder[] | null;
   isLoadingNotes: boolean;

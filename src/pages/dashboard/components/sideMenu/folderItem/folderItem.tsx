@@ -1,17 +1,20 @@
 import { Alert, Button, NavLink } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
 import { IFolder } from "../../../../../interfaces/IFolder";
 import { INote } from "../../../../../interfaces/INote";
 import NoteItem from "../noteItem/noteItem";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import styles from "./folderItem.module.css";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlinePlus } from "react-icons/ai";
+import DeleteFolderModal from "../modals/deleteFolderModal/deleteFolderModal";
 
 interface Props {
   folder: IFolder;
 }
 
 const FolderItem = ({ folder }: Props): JSX.Element | null => {
+  const [isDeleteFolderModalOpen, setIsDeleteFolderModalOpen] = useState(false);
+
   if (!folder) return null;
 
   const addNewNoteButton = () => {
@@ -23,6 +26,35 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
       >
         Create Note
       </Button>
+    );
+  };
+
+  const editAndDeleteFolderContainer = () => {
+    return (
+      <div className={styles.folder_button_container}>
+        <DeleteFolderModal
+          isOpen={isDeleteFolderModalOpen}
+          handleClose={() => setIsDeleteFolderModalOpen(false)}
+          folder={folder}
+        />
+        <Button
+          className={styles.delete_folder_button}
+          color="blue"
+          variant="light"
+          leftIcon={<AiOutlineEdit />}
+        >
+          Rename
+        </Button>
+        <Button
+          className={styles.delete_folder_button}
+          color="red"
+          variant="light"
+          leftIcon={<AiOutlineDelete />}
+          onClick={() => setIsDeleteFolderModalOpen(true)}
+        >
+          Delete
+        </Button>
+      </div>
     );
   };
 
@@ -39,6 +71,7 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
           This folder is empty, start adding some notes!
         </Alert>
         {addNewNoteButton()}
+        {editAndDeleteFolderContainer()}
       </NavLink>
     );
   }
@@ -49,24 +82,7 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
       {folder.notes.map((note: INote) => {
         return <NoteItem key={note.id} note={note} />;
       })}
-      <div className={styles.folder_button_container}>
-        <Button
-          className={styles.delete_folder_button}
-          color="blue"
-          variant="light"
-          leftIcon={<AiOutlineEdit />}
-        >
-          Rename
-        </Button>
-        <Button
-          className={styles.delete_folder_button}
-          color="red"
-          variant="light"
-          leftIcon={<AiOutlineDelete />}
-        >
-          Delete
-        </Button>
-      </div>
+      {editAndDeleteFolderContainer()}
     </NavLink>
   );
 };

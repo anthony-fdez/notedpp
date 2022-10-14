@@ -1,6 +1,6 @@
 import { Button, Input, Modal } from "@mantine/core";
 import React, { useState } from "react";
-import { useGlobalStore } from "../../../../../globalStore/globalStore";
+import { useGlobalStore } from "../../../../../../globalStore/globalStore";
 import styles from "./newFolderModal.module.css";
 import Axios from "axios";
 import { showNotification } from "@mantine/notifications";
@@ -36,23 +36,29 @@ const NewFolderModal = ({ isOpen, handleClose }: Props): JSX.Element => {
         console.log(response);
 
         showNotification({
-          title: "Folder Created",
-          message: "Your folder was created successfully",
+          title: "Folder Deleted",
+          message: "Your folder was deleted successfully",
           color: "blue",
         });
 
         handleClose();
       })
       .catch((e) => {
-        if (e.response.data.message) {
+        try {
+          if (e.response.data.message) {
+            showNotification({
+              title: "Error",
+              message: e.response.data.message,
+              color: "red",
+            });
+          }
+        } catch (e) {
           showNotification({
             title: "Error",
-            message: e.response.data.message,
+            message: "Looks like our servers are down, try again later.",
             color: "red",
           });
         }
-
-        console.log(e.response);
       })
       .finally(() => {
         setIsLoadingCreatingFolder(false);
