@@ -1,5 +1,5 @@
 import { Auth0Provider } from "@auth0/auth0-react";
-import { MantineProvider, ThemeIcon } from "@mantine/core";
+import { MantineProvider } from "@mantine/core";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -20,8 +20,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       scope="read:current_user update:current_user_metadata"
     >
       <MantineProvider
-        // withGlobalStyles
-        // withNormalizeCSS
         theme={{
           colorScheme: "light",
           white: "#fafafa",
