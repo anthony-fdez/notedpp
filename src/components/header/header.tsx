@@ -8,6 +8,7 @@ import { TbUser } from 'react-icons/tb';
 import ProfileDrawer from '../profileDrawer/profileDrawer';
 import { FiMenu } from 'react-icons/fi';
 import { useGlobalStore } from '../../globalStore/globalStore';
+import { Loader } from '@mantine/core';
 
 const Header: React.FC = (): JSX.Element => {
   const globalStore = useGlobalStore();
@@ -18,7 +19,7 @@ const Header: React.FC = (): JSX.Element => {
     if (globalStore.isLoadingFolders) {
       return (
         <div className={styles.sync_container}>
-          <Loader size="sm" />
+          <Loader size='sm' />
           <p>Syncing Notes</p>
         </div>
       );
