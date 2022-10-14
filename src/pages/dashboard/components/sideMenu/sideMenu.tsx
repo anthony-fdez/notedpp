@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Button, NavLink } from "@mantine/core";
+import { Alert, Button, NavLink } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import { IFolder } from "../../../../interfaces/IFolder";
 import { INote } from "../../../../interfaces/INote";
@@ -23,7 +23,28 @@ const SideMenu = ({ folders, isLoadingNotes }: Props): JSX.Element | null => {
         <SideMenuSkeleton />
       </div>
     );
-  if (!folders) return null;
+
+  const renderFolderList = () => {
+    if (!folders) {
+      return (
+        <Alert color="red" title="Hmm, something failed...">
+          There was an error getting your notes, try again later.
+        </Alert>
+      );
+    }
+
+    if (folders.length === 0) {
+      return (
+        <Alert color="blue" title="So empty...">
+          You don&apos;t have any notes yet. Start by creating a folder!
+        </Alert>
+      );
+    }
+
+    return folders.map((folder: IFolder) => {
+      return <FolderItem key={folder.id} folder={folder} />;
+    });
+  };
 
   return (
     <>
@@ -39,10 +60,7 @@ const SideMenu = ({ folders, isLoadingNotes }: Props): JSX.Element | null => {
         >
           Create new folder
         </Button>
-
-        {folders.map((folder: IFolder) => {
-          return <FolderItem key={folder.id} folder={folder} />;
-        })}
+        {renderFolderList()}
       </div>
     </>
   );
