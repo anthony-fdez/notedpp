@@ -47,6 +47,9 @@ export const useGlobalStore = create<IGlobalStore>()(
         set({ selectedNote: noteId });
       },
       updateFolders: () => {
+        set({ isLoadingFolders: true });
+
+
         Axios.get('http://localhost:3001/notes/get-all-folders', {
           headers: {
             Authorization: `Bearer ${get().user?.token || ''}`,
