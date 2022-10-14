@@ -1,8 +1,7 @@
-import { Alert, Loader } from "@mantine/core";
+import { Alert } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import { useGlobalStore } from "../../../../globalStore/globalStore";
 import { INote } from "../../../../interfaces/INote";
-import styles from "./note.module.css";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { useWindowScroll } from "@mantine/hooks";
 

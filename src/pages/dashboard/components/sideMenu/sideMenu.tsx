@@ -33,7 +33,7 @@ const SideMenu = ({ isLoadingNotes }: Props): JSX.Element | null => {
       },
       {
         headers: {
-          Authorization: `Bearer ${globalStore.user.token}`,
+          Authorization: `Bearer ${globalStore.user?.token}`,
         },
       }
     )
