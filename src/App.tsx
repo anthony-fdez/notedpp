@@ -1,5 +1,5 @@
 import "./App.css";
-
+import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { useAuth0 } from "@auth0/auth0-react";
