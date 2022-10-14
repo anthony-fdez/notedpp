@@ -11,7 +11,7 @@ const Dashboard = (): JSX.Element | null => {
 
   useEffect(() => {
     globalStore.updateFolders();
-  }, []);
+  }, [globalStore.user]);
 
   return (
     <>

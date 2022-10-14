@@ -5,13 +5,13 @@ import { devtools, persist } from "zustand/middleware";
 import { IUser } from "./interfaces/IUser";
 import Axios from "axios";
 export interface IGlobalStore {
-  user: IUser;
+  user: IUser | null;
   selectedNote: INote | null;
   folders: IFolder[] | null;
   isLoadingFolders: boolean;
   setUser: (data: IUser) => void;
   setSelectedNote: (note: INote | null) => void;
-  setFolders: (data: IFolder[]) => void;
+  setFolders: (data: IFolder[] | null) => void;
   setIsLoadingFolders: (isLoading: boolean) => void;
   updateFolders: () => void;
 }
@@ -31,10 +31,10 @@ export const useGlobalStore = create<IGlobalStore>()(
       folders: null,
       selectedNote: null,
       isLoadingFolders: true,
-      setUser: (data: IUser) => {
+      setUser: (data: IUser | null) => {
         set({ user: data });
       },
-      setFolders: (data: IFolder[]) => {
+      setFolders: (data: IFolder[] | null) => {
         set({ folders: data });
       },
       setIsLoadingFolders: (isLoading: boolean) => {
@@ -44,11 +44,9 @@ export const useGlobalStore = create<IGlobalStore>()(
         set({ selectedNote: noteId });
       },
       updateFolders: () => {
-        set({ isLoadingFolders: true });
-
         Axios.get("http://localhost:3001/notes/get-all-folders", {
           headers: {
-            Authorization: `Bearer ${get().user.token}`,
+            Authorization: `Bearer ${get().user?.token || ""}`,
           },
         })
           .then((response) => {
@@ -56,9 +54,6 @@ export const useGlobalStore = create<IGlobalStore>()(
           })
           .catch((error: unknown) => {
             set({ folders: null });
-          })
-          .finally(() => {
-            set({ isLoadingFolders: false });
           });
       },
     })),

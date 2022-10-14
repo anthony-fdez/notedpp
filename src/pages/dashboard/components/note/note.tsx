@@ -4,14 +4,17 @@ import { useGlobalStore } from "../../../../globalStore/globalStore";
 import { INote } from "../../../../interfaces/INote";
 import styles from "./note.module.css";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import { useWindowScroll } from "@mantine/hooks";
 
 const Note = (): JSX.Element | null => {
   const globalStore = useGlobalStore();
+  const [scroll, scrollTo] = useWindowScroll();
 
   const [note, setNote] = useState<INote | null>(null);
 
   useEffect(() => {
     setNote(globalStore.selectedNote);
+    scrollTo({ y: 0 });
   }, [globalStore.selectedNote]);
 
   if (!note) {

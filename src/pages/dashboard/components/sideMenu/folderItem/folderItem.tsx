@@ -13,14 +13,68 @@ import DeleteFolderModal from "../modals/deleteFolderModal/deleteFolderModal";
 import RenameFolderModal from "../modals/renameFolderModal/renameFolderModal";
 import NoteItem from "../noteItem/noteItem";
 import styles from "./folderItem.module.css";
+import Axios from "axios";
+import { showNotification } from "@mantine/notifications";
+import { useGlobalStore } from "../../../../../globalStore/globalStore";
 
 interface Props {
   folder: IFolder;
 }
 
 const FolderItem = ({ folder }: Props): JSX.Element | null => {
+  const globalStore = useGlobalStore();
+
   const [isDeleteFolderModalOpen, setIsDeleteFolderModalOpen] = useState(false);
   const [isRenameFolderModalOpen, setIsRenameFolderModalOpen] = useState(false);
+  const [isLoadingCreatingNote, setIsLoadingCreatingNote] = useState(false);
+
+  const handleCreateNote = () => {
+    setIsLoadingCreatingNote(true);
+
+    Axios.post(
+      "http://localhost:3001/notes/new-note",
+      {
+        note: "Delete this to start your note",
+        folder_name: folder.folder_name,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${globalStore.user.token}`,
+        },
+      }
+    )
+      .then((response) => {
+        showNotification({
+          title: "Quick note created",
+          message: "Your quick note was added to the quick notes folder",
+          color: "blue",
+        });
+
+        globalStore.updateFolders();
+
+        globalStore.setSelectedNote(response.data.note);
+      })
+      .catch((e) => {
+        try {
+          if (e.response.data.message) {
+            showNotification({
+              title: "Error",
+              message: e.response.data.message,
+              color: "red",
+            });
+          }
+        } catch (e) {
+          showNotification({
+            title: "Error",
+            message: "Looks like our servers are down, try again later.",
+            color: "red",
+          });
+        }
+      })
+      .finally(() => {
+        setIsLoadingCreatingNote(false);
+      });
+  };
 
   if (!folder) return null;
 
@@ -54,6 +108,8 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
               color="gray"
               variant="default"
               className={styles.new_note_button}
+              loading={isLoadingCreatingNote}
+              onClick={handleCreateNote}
             >
               Create Note
             </Button>
