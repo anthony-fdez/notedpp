@@ -1,9 +1,9 @@
-import { INote } from "./../interfaces/INote";
-import { IFolder } from "./../interfaces/IFolder";
-import create from "zustand";
-import { devtools, persist } from "zustand/middleware";
-import { IUser } from "./interfaces/IUser";
-import Axios from "axios";
+import { INote } from './../interfaces/INote';
+import { IFolder } from './../interfaces/IFolder';
+import create from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
+import { IUser } from './interfaces/IUser';
+import Axios from 'axios';
 export interface IGlobalStore {
   user: IUser | null;
   selectedNote: INote | null;
@@ -47,11 +47,10 @@ export const useGlobalStore = create<IGlobalStore>()(
         set({ selectedNote: noteId });
       },
       updateFolders: () => {
+        Axios.get('http://localhost:3001/notes/get-all-folders', {
         set({ isLoadingFolders: true });
-
-        Axios.get("http://localhost:3001/notes/get-all-folders", {
           headers: {
-            Authorization: `Bearer ${get().user?.token || ""}`,
+            Authorization: `Bearer ${get().user?.token || ''}`,
           },
         })
           .then((response) => {
@@ -71,7 +70,7 @@ export const useGlobalStore = create<IGlobalStore>()(
       },
     })),
     {
-      name: "global-store",
+      name: 'global-store',
     }
   )
 );

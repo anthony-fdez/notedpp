@@ -1,16 +1,19 @@
-import { Alert, Button, Drawer } from "@mantine/core";
-import React, { useState } from "react";
-import { IFolder } from "../../../../interfaces/IFolder";
-import FolderItem from "./folderItem/folderItem";
-import styles from "./sideMenu.module.css";
+import { Alert, Button, Drawer } from '@mantine/core';
+import React, { useState } from 'react';
+import { IFolder } from '../../../../interfaces/IFolder';
+import SideMenuSkeleton from '../sideMenuSkeleton/sideMenuSkeleton';
+import FolderItem from './folderItem/folderItem';
+import styles from './sideMenu.module.css';
+import { MdOutlineCreate } from 'react-icons/md';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { useGlobalStore } from '../../../../globalStore/globalStore';
+import NewFolderModal from './modals/newFolderModal/newFolderModal';
+import Axios from 'axios';
+import { showNotification } from '@mantine/notifications';
 
-import { MdOutlineCreate } from "react-icons/md";
-import { AiOutlinePlus } from "react-icons/ai";
-import { useGlobalStore } from "../../../../globalStore/globalStore";
-import NewFolderModal from "./modals/newFolderModal/newFolderModal";
-
-import Axios from "axios";
-import { showNotification } from "@mantine/notifications";
+interface Props {
+  isLoadingNotes: boolean;
+}
 
 const SideMenu = (): JSX.Element | null => {
   const globalStore = useGlobalStore();
@@ -23,9 +26,9 @@ const SideMenu = (): JSX.Element | null => {
     setIsLoadingAddingQuickNote(true);
 
     Axios.post(
-      "http://localhost:3001/notes/new-note",
+      'http://localhost:3001/notes/new-note',
       {
-        note: "Delete this to start your note",
+        note: 'Delete this to start your note',
       },
       {
         headers: {
@@ -35,9 +38,9 @@ const SideMenu = (): JSX.Element | null => {
     )
       .then((response) => {
         showNotification({
-          title: "Quick note created",
-          message: "Your quick note was added to the quick notes folder",
-          color: "blue",
+          title: 'Quick note created',
+          message: 'Your quick note was added to the quick notes folder',
+          color: 'blue',
         });
 
         globalStore.updateFolders();
@@ -47,16 +50,16 @@ const SideMenu = (): JSX.Element | null => {
         try {
           if (e.response.data.message) {
             showNotification({
-              title: "Error",
+              title: 'Error',
               message: e.response.data.message,
-              color: "red",
+              color: 'red',
             });
           }
         } catch (e) {
           showNotification({
-            title: "Error",
-            message: "Looks like our servers are down, try again later.",
-            color: "red",
+            title: 'Error',
+            message: 'Looks like our servers are down, try again later.',
+            color: 'red',
           });
         }
       })
@@ -83,7 +86,7 @@ const SideMenu = (): JSX.Element | null => {
             setIsNewFolderModalOpen(true);
             globalStore.setIsMobileMenuOpen(false);
           }}
-          variant="light"
+          variant='light'
         >
           Create new folder
         </Button>
@@ -94,7 +97,7 @@ const SideMenu = (): JSX.Element | null => {
   const renderFolderList = () => {
     if (!globalStore.folders) {
       return (
-        <Alert color="red" title="Hmm, something failed...">
+        <Alert color='red' title='Hmm, something failed...'>
           There was an error getting your notes, try again later.
         </Alert>
       );
@@ -102,7 +105,7 @@ const SideMenu = (): JSX.Element | null => {
 
     if (globalStore.folders.length === 0) {
       return (
-        <Alert color="blue" title="So empty...">
+        <Alert color='blue' title='So empty...'>
           You don&apos;t have any notes yet. Start by creating a folder!
         </Alert>
       );
@@ -124,9 +127,9 @@ const SideMenu = (): JSX.Element | null => {
         <Drawer
           opened={globalStore.isMobileMenuOpen}
           onClose={() => globalStore.setIsMobileMenuOpen(false)}
-          title="Noted++"
-          padding="xl"
-          size="lg"
+          title='Noted++'
+          padding='xl'
+          size='lg'
         >
           {folderAndNotesButtons()}
           {renderFolderList()}

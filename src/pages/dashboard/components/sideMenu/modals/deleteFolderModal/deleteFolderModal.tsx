@@ -1,10 +1,10 @@
-import { Alert, Button, Input, Modal } from "@mantine/core";
-import React, { useState } from "react";
-import { useGlobalStore } from "../../../../../../globalStore/globalStore";
-import styles from "../modals.module.css";
-import Axios from "axios";
-import { showNotification } from "@mantine/notifications";
-import { IFolder } from "../../../../../../interfaces/IFolder";
+import { Alert, Button, Input, Modal } from '@mantine/core';
+import React, { useState } from 'react';
+import { useGlobalStore } from '../../../../../../globalStore/globalStore';
+import styles from '../modals.module.css';
+import Axios from 'axios';
+import { showNotification } from '@mantine/notifications';
+import { IFolder } from '../../../../../../interfaces/IFolder';
 
 interface Props {
   folder: IFolder;
@@ -20,7 +20,7 @@ const DeleteFolderModal = ({
   const globalStore = useGlobalStore();
 
   const [isLoadingDeletingFolder, setIsLoadingDeletingFolder] = useState(false);
-  const [confirmFolderName, setConfirmFolderName] = useState("");
+  const [confirmFolderName, setConfirmFolderName] = useState('');
 
   const handleDeleteFolder = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,21 +28,21 @@ const DeleteFolderModal = ({
     setIsLoadingDeletingFolder(true);
 
     Axios.post(
-      "http://localhost:3001/notes/delete-folder",
+      'http://localhost:3001/notes/delete-folder',
       {
         folder_id: folder.id,
       },
       {
         headers: {
-          Authorization: `Bearer ${globalStore.user.token}`,
+          Authorization: `Bearer ${globalStore.user?.token || ''}`,
         },
       }
     )
       .then(() => {
         showNotification({
-          title: "Folder Created",
-          message: "Your folder was created successfully",
-          color: "blue",
+          title: 'Folder Created',
+          message: 'Your folder was created successfully',
+          color: 'blue',
         });
 
         if (
@@ -59,9 +59,9 @@ const DeleteFolderModal = ({
       .catch((e) => {
         if (e.response.data.message) {
           showNotification({
-            title: "Error",
+            title: 'Error',
             message: e.response.data.message,
-            color: "red",
+            color: 'red',
           });
         }
 
@@ -77,29 +77,29 @@ const DeleteFolderModal = ({
       overlayBlur={3}
       opened={isOpen}
       onClose={handleClose}
-      title="Delete Folder"
+      title='Delete Folder'
     >
       <form onSubmit={(e) => handleDeleteFolder(e)}>
-        <Alert variant="filled" title="Be careful" color="red">
+        <Alert variant='filled' title='Be careful' color='red'>
           This action is irreversible, and all you notes inside this folder will
           be deleted as well.
         </Alert>
-        <Alert color="red" className={styles.confirm_alert}>
+        <Alert color='red' className={styles.confirm_alert}>
           Type <strong>&apos;{folder.folder_name}&apos;</strong> to confirm
           deleting the folder.
         </Alert>
         <Input
           onChange={(e) => setConfirmFolderName(e.target.value)}
-          placeholder="Confirm folder name"
+          placeholder='Confirm folder name'
         />
         <div className={styles.footer_container}>
           <Button
             disabled={confirmFolderName !== folder.folder_name}
-            loaderPosition="left"
+            loaderPosition='left'
             loading={isLoadingDeletingFolder}
-            color="red"
-            variant="outline"
-            type="submit"
+            color='red'
+            variant='outline'
+            type='submit'
           >
             Delete Folder
           </Button>

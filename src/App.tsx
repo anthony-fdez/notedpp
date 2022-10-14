@@ -1,9 +1,9 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "./App.css";
-import BackdropSpinner from "./components/backdrop/backdrop";
-import { routes } from "./routes";
+import { useAuth0 } from '@auth0/auth0-react';
+import React from 'react';
+import { RouterProvider } from 'react-router-dom';
+import './App.css';
+import BackdropSpinner from './components/backdrop/backdrop';
+import { routes } from './routes';
 
 function App() {
   const { isAuthenticated } = useAuth0();
@@ -11,7 +11,7 @@ function App() {
   const router = routes({ isAuthenticated });
 
   return (
-    <div className="App">
+    <div className='App'>
       <BackdropSpinner />
       <RouterProvider router={router} />
     </div>

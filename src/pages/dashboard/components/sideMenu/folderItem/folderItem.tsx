@@ -1,21 +1,21 @@
-import { Alert, Button, Menu, NavLink } from "@mantine/core";
-import React, { useState } from "react";
+import { Alert, Button, Menu, NavLink } from '@mantine/core';
+import React, { useState } from 'react';
 import {
   AiOutlineDelete,
   AiOutlineEdit,
   AiOutlineInfoCircle,
   AiOutlinePlus,
-} from "react-icons/ai";
-import { BiMenuAltRight } from "react-icons/bi";
-import { IFolder } from "../../../../../interfaces/IFolder";
-import { INote } from "../../../../../interfaces/INote";
-import DeleteFolderModal from "../modals/deleteFolderModal/deleteFolderModal";
-import RenameFolderModal from "../modals/renameFolderModal/renameFolderModal";
-import NoteItem from "../noteItem/noteItem";
-import styles from "./folderItem.module.css";
-import Axios from "axios";
-import { showNotification } from "@mantine/notifications";
-import { useGlobalStore } from "../../../../../globalStore/globalStore";
+} from 'react-icons/ai';
+import { BiMenuAltRight } from 'react-icons/bi';
+import { IFolder } from '../../../../../interfaces/IFolder';
+import { INote } from '../../../../../interfaces/INote';
+import DeleteFolderModal from '../modals/deleteFolderModal/deleteFolderModal';
+import RenameFolderModal from '../modals/renameFolderModal/renameFolderModal';
+import NoteItem from '../noteItem/noteItem';
+import styles from './folderItem.module.css';
+import Axios from 'axios';
+import { showNotification } from '@mantine/notifications';
+import { useGlobalStore } from '../../../../../globalStore/globalStore';
 
 interface Props {
   folder: IFolder;
@@ -32,22 +32,22 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
     setIsLoadingCreatingNote(true);
 
     Axios.post(
-      "http://localhost:3001/notes/new-note",
+      'http://localhost:3001/notes/new-note',
       {
-        note: "Delete this to start your note",
+        note: 'Delete this to start your note',
         folder_name: folder.folder_name,
       },
       {
         headers: {
-          Authorization: `Bearer ${globalStore.user.token}`,
+          Authorization: `Bearer ${globalStore.user?.token || ''}`,
         },
       }
     )
       .then((response) => {
         showNotification({
-          title: "Quick note created",
-          message: "Your quick note was added to the quick notes folder",
-          color: "blue",
+          title: 'Quick note created',
+          message: 'Your quick note was added to the quick notes folder',
+          color: 'blue',
         });
 
         globalStore.updateFolders();
@@ -58,16 +58,16 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
         try {
           if (e.response.data.message) {
             showNotification({
-              title: "Error",
+              title: 'Error',
               message: e.response.data.message,
-              color: "red",
+              color: 'red',
             });
           }
         } catch (e) {
           showNotification({
-            title: "Error",
-            message: "Looks like our servers are down, try again later.",
-            color: "red",
+            title: 'Error',
+            message: 'Looks like our servers are down, try again later.',
+            color: 'red',
           });
         }
       })
@@ -91,7 +91,7 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
           handleClose={() => setIsRenameFolderModalOpen(false)}
           folder={folder}
         />
-        <Menu position="bottom-end" shadow="md" width={200}>
+        <Menu position='bottom-end' shadow='md' width={200}>
           <Menu.Target>
             <Button
               className={styles.actions_button}
@@ -105,8 +105,8 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
             <Menu.Label>Application</Menu.Label>
             <Button
               leftIcon={<AiOutlinePlus />}
-              color="gray"
-              variant="default"
+              color='gray'
+              variant='default'
               className={styles.new_note_button}
               loading={isLoadingCreatingNote}
               onClick={handleCreateNote}
@@ -115,8 +115,8 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
             </Button>
             <Button
               className={styles.delete_folder_button}
-              color="gray"
-              variant="default"
+              color='gray'
+              variant='default'
               leftIcon={<AiOutlineEdit />}
               onClick={() => setIsRenameFolderModalOpen(true)}
             >
@@ -127,8 +127,8 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
 
             <Button
               className={styles.delete_folder_button}
-              color="red"
-              variant="filled"
+              color='red'
+              variant='filled'
               leftIcon={<AiOutlineDelete />}
               onClick={() => setIsDeleteFolderModalOpen(true)}
             >
@@ -145,9 +145,9 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
       <NavLink label={folder.folder_name} childrenOffset={28}>
         <Alert
           className={styles.alert}
-          title="Empty folder"
-          color="blue"
-          radius="md"
+          title='Empty folder'
+          color='blue'
+          radius='md'
           icon={<AiOutlineInfoCircle />}
         >
           This folder is empty, start adding some notes!
