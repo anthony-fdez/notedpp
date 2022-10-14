@@ -5,9 +5,11 @@ import { IUser } from "./interfaces/IUser";
 import Axios from "axios";
 export interface IGlobalStore {
   user: IUser;
+  selectedNote: string | null;
   folders: IFolder[] | null;
   isLoadingFolders: boolean;
   setUser: (data: IUser) => void;
+  setSelectedNote: (noteId: string) => void;
   setFolders: (data: IFolder[]) => void;
   setIsLoadingFolders: (isLoading: boolean) => void;
   updateFolders: () => void;
@@ -26,6 +28,7 @@ export const useGlobalStore = create<IGlobalStore>()(
         token: null,
       },
       folders: null,
+      selectedNote: null,
       isLoadingFolders: true,
       setUser: (data: IUser) => {
         set({ user: data });
@@ -35,6 +38,9 @@ export const useGlobalStore = create<IGlobalStore>()(
       },
       setIsLoadingFolders: (isLoading: boolean) => {
         set({ isLoadingFolders: isLoading });
+      },
+      setSelectedNote: (noteId: string) => {
+        set({ selectedNote: noteId });
       },
       updateFolders: () => {
         set({ isLoadingFolders: true });
