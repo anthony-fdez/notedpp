@@ -7,6 +7,7 @@ import { useWindowScroll } from '@mantine/hooks';
 
 const Note = (): JSX.Element | null => {
   const globalStore = useGlobalStore();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [scroll, scrollTo] = useWindowScroll();
 
   const [note, setNote] = useState<INote | null>(null);
