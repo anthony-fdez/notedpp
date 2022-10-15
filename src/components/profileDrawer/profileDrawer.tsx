@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Drawer } from '@mantine/core';
+import { Drawer, Switch } from '@mantine/core';
 import { useAuth0 } from '@auth0/auth0-react';
 import styles from './profileDrawer.module.css';
 import LogoutButton from '../auth/logoutButton/logoutButton';
 import { MdVerified } from 'react-icons/md';
 import { useGlobalStore } from '../../globalStore/globalStore';
+import Settings from './settings/settings';
 
 interface Props {
   isOpen: boolean;
@@ -73,7 +74,7 @@ const ProfileDrawer = ({ isOpen, handleClose }: Props): JSX.Element => {
           )}
         </div>
         <LogoutButton />
-
+        <Settings />
         <h1>JWT Token (testing only)</h1>
         {accessToken ? (
           <p style={{ lineBreak: 'anywhere' }}>
@@ -89,6 +90,7 @@ const ProfileDrawer = ({ isOpen, handleClose }: Props): JSX.Element => {
   return (
     <>
       <Drawer
+        lockScroll={false}
         opened={isOpen}
         position='right'
         overlayBlur={3}
