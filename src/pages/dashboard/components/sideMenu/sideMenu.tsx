@@ -1,4 +1,4 @@
-import { Alert, Button, Drawer, ScrollArea } from '@mantine/core';
+import { Alert, Button, Drawer} from '@mantine/core';
 import React, { useState } from 'react';
 import { IFolder } from '../../../../interfaces/IFolder';
 import FolderItem from './folderItem/folderItem';
