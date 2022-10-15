@@ -45,8 +45,8 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
     )
       .then((response) => {
         showNotification({
-          title: 'Quick note created',
-          message: 'Your quick note was added to the quick notes folder',
+          title: 'Note created',
+          message: `Your quick note was added to folder '${folder.folder_name}'`,
           color: 'blue',
         });
 
