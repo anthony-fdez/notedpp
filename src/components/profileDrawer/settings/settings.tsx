@@ -27,6 +27,7 @@ const Settings = (): JSX.Element => {
         onLabel={
           <IconSun size={16} stroke={2.5} color={theme.colors.yellow[4]} />
         }
+        defaultChecked={globalStore.theme === 'dark'}
         onChange={(e) => handleThemeChange(e)}
         offLabel={
           <IconMoonStars size={16} stroke={2.5} color={theme.colors.blue[6]} />

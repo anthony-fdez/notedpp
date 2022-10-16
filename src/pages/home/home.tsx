@@ -1,4 +1,4 @@
-import { Group, Switch, useMantineTheme } from '@mantine/core';
+import { Switch, useMantineTheme } from '@mantine/core';
 import { IconMoonStars, IconSun } from '@tabler/icons';
 import React from 'react';
 import AnimateOnScreenLoad from '../../components/animateOnScreenLoad/animateOnScreenLoad';
@@ -6,10 +6,12 @@ import LoginButton from '../../components/auth/loginButton/loginButtonHome';
 import { useGlobalStore } from '../../globalStore/globalStore';
 import styles from './home.module.css';
 import Wave from './Wave.svg';
+
 const Home: React.FC = (): JSX.Element => {
   const globalStore = useGlobalStore();
   console.log(globalStore.theme);
   const theme = useMantineTheme();
+
   const handleThemeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked === true) {
       return globalStore.setTheme('dark');
@@ -17,11 +19,13 @@ const Home: React.FC = (): JSX.Element => {
 
     globalStore.setTheme('light');
   };
+
   return (
     <AnimateOnScreenLoad>
       <div className={styles.container}>
         <div className={styles.content}>
           <Switch
+            defaultChecked={globalStore.theme === 'dark'}
             className={styles.switch}
             size='md'
             color={theme.colorScheme === 'dark' ? 'gray' : 'dark'}
