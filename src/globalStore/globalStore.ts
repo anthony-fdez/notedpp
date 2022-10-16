@@ -61,7 +61,7 @@ export const useGlobalStore = create<IGlobalStore>()(
             set({ folders: response.data.folders });
           })
           .catch((error: unknown) => {
-            if(error) set({ folders: null });
+            if (error) set({ folders: null });
           })
           .finally(() => {
             set({ isLoadingFolders: false });
