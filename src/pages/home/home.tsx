@@ -5,7 +5,7 @@ import AnimateOnScreenLoad from '../../components/animateOnScreenLoad/animateOnS
 import LoginButton from '../../components/auth/loginButton/loginButtonHome';
 import { useGlobalStore } from '../../globalStore/globalStore';
 import styles from './home.module.css';
-import Wave from './Wave.svg';
+import notedBackground from './notedbackground.jpg';
 const Home: React.FC = (): JSX.Element => {
   const globalStore = useGlobalStore();
   console.log(globalStore.theme);
@@ -37,6 +37,7 @@ const Home: React.FC = (): JSX.Element => {
               />
             }
           />
+          <img src={notedBackground} alt='' />
           <h1
             className={
               globalStore.theme === 'dark' ? styles.dark : styles.light
@@ -62,7 +63,7 @@ const Home: React.FC = (): JSX.Element => {
             <LoginButton />
           </div>
         </div>
-        <img src={Wave} alt='' className={styles.wave} />
+
         <div></div>
       </div>
     </AnimateOnScreenLoad>
