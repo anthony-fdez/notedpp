@@ -1,15 +1,11 @@
 .editor {
-    padding: 15px;
-    margin-top: 20px;
-    border-radius: 5px;
-    border: 1px solid rgb(30, 30, 30);
-  }
-  .editor > div:focus {
-    outline: none;
-  }
-  
-  @media only screen and (min-width: 900px) {
-    .editor {
-      padding: 30px;
-    }
-  }
+  padding: 0px;
+  margin-top: 20px;
+  border-radius: 5px;
+  z-index: 0;
+  padding: 20px;
+}
+.editor > div:focus {
+  outline: none;
+  z-index: 0;
+}

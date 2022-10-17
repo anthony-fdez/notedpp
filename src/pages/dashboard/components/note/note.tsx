@@ -13,6 +13,8 @@ import Text from '@tiptap/extension-text';
 import Link from '@tiptap/extension-link';
 import Menu from '../editor/menu/menu';
 import { Button } from '@mantine/core';
+import styles from './note.module.css';
+
 const Note: React.JSXElementConstructor<unknown> = (): JSX.Element => {
   const globalStore = useGlobalStore();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -50,16 +52,13 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element => {
   }
 
   return (
-    <div>
-      <h1>Notes</h1>
-      <div>
+    <div className={styles.container}>
+      <div className={styles.menu}>
         <Menu editor={editor} />
       </div>
+
       <div>
         <TextEditor editor={editor} />
-      </div>
-      <div>
-        <Button >Create Note</Button>
       </div>
     </div>
   );

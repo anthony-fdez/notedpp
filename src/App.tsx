@@ -8,6 +8,7 @@ import { routes } from './routes';
 import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { useGlobalStore } from './globalStore/globalStore';
+import './editor.scss';
 
 function App() {
   const globalStore = useGlobalStore();

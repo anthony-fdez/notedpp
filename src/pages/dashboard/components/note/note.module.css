@@ -1,8 +1,6 @@
-.loader_container {
-  background-color: whitesmoke;
-  height: calc(100vh - 100px);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.menu {
+  position: sticky;
+  top: 70px;
+  background-color: transparent;
+  backdrop-filter: blur(5px);
 }
