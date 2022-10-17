@@ -5,7 +5,7 @@ import { INote } from '../../../../interfaces/INote';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { useWindowScroll } from '@mantine/hooks';
 import TextEditor from '../editor/editor';
-import { useEditor, Editor } from '@tiptap/react'
+import { useEditor, Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Document from '@tiptap/extension-document';
 import Paragraph from '@tiptap/extension-paragraph';
@@ -34,12 +34,12 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element => {
       Link.configure({
         openOnClick: true,
       }),
-    ]
+    ],
   }) as Editor;
 
   useEffect(() => {
-    if(!note) return;
-  }, [editor])
+    if (!note) return;
+  }, [editor]);
 
   if (!note) {
     return (
@@ -51,12 +51,12 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element => {
 
   return (
     <div>
-       <h1>Notes</h1>
-       <div>
-       <Menu editor= { editor } />
-       </div>
+      <h1>Notes</h1>
       <div>
-        <TextEditor editor ={ editor } />
+        <Menu editor={editor} />
+      </div>
+      <div>
+        <TextEditor editor={editor} />
       </div>
     </div>
   );
