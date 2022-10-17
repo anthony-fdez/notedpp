@@ -12,7 +12,7 @@ import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 import Link from '@tiptap/extension-link';
 import Menu from '../editor/menu/menu';
-
+import { Button } from '@mantine/core';
 const Note: React.JSXElementConstructor<unknown> = (): JSX.Element => {
   const globalStore = useGlobalStore();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -57,6 +57,9 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element => {
       </div>
       <div>
         <TextEditor editor={editor} />
+      </div>
+      <div>
+        <Button >Create Note</Button>
       </div>
     </div>
   );
