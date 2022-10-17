@@ -1,6 +1,6 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { Button } from "@mantine/core";
-import React from "react";
+import { useAuth0 } from '@auth0/auth0-react';
+import { Button } from '@mantine/core';
+import React from 'react';
 const LoginButtonHome: React.FC = (): JSX.Element | null => {
   const { isAuthenticated, loginWithRedirect } = useAuth0();
 
@@ -9,11 +9,11 @@ const LoginButtonHome: React.FC = (): JSX.Element | null => {
   return (
     <Button
       onClick={() => loginWithRedirect()}
-      size="lg"
-      variant="gradient"
-      gradient={{ from: "indigo", to: "cyan" }}
+      size='lg'
+      variant='gradient'
+      gradient={{ from: 'indigo', to: 'cyan' }}
     >
-      LOGIN
+      LOGIN OR Register
     </Button>
   );
 };

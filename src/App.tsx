@@ -5,8 +5,8 @@ import './App.css';
 import BackdropSpinner from './components/backdrop/backdrop';
 import { routes } from './routes';
 
-import { NotificationsProvider } from '@mantine/notifications';
 import { MantineProvider } from '@mantine/core';
+import { NotificationsProvider } from '@mantine/notifications';
 import { useGlobalStore } from './globalStore/globalStore';
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
       withGlobalStyles
       theme={{
         colorScheme: globalStore.theme,
-        white: '#fafafa',
+        white: '#f1f1f1',
         black: '#1a1a1a',
         primaryColor: 'blue',
       }}
