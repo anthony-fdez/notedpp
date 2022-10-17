@@ -1,4 +1,4 @@
-import { Group, Switch, useMantineTheme } from '@mantine/core';
+import { Switch, useMantineTheme } from '@mantine/core';
 import { IconMoonStars, IconSun } from '@tabler/icons';
 import React from 'react';
 import Logo from '../../../favN.png';

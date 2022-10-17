@@ -43,7 +43,7 @@ const NewFolderModal = ({ isOpen, handleClose }: Props): JSX.Element => {
 
         handleClose();
       })
-      .catch((e) => {
+      .catch((e): void => {
         try {
           if (e.response.data.message) {
             showNotification({
@@ -72,9 +72,9 @@ const NewFolderModal = ({ isOpen, handleClose }: Props): JSX.Element => {
       onClose={handleClose}
       title='Create new folder'
     >
-      <form onSubmit={(e) => handleCreateFolder(e)}>
+      <form onSubmit={(e): void => handleCreateFolder(e)}>
         <Input
-          onChange={(e) => {
+          onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => {
             setFolderName(e.target.value);
           }}
           placeholder='Folder Name'
