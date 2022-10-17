@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
 .container {
   display: flex;
   flex-direction: column;
@@ -8,36 +6,61 @@
 }
 
 .content {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+}
+.bothImages,
+.rightContainer {
+  grid-row: 1/2;
+}
+
+.bothImages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.imageLogo {
+  max-width: 450px;
+  width: 50vw;
+}
+.image {
+  object-fit: contain;
+}
+
+.rightContainer {
   display: flex;
   flex-direction: column;
-  height: 50vh;
-  width: 600px;
-  margin-top: 50px;
+  align-items: flex-start;
+  background-color: #1a1a1a;
+  padding: 100px 50px;
+  z-index: 99;
 }
-
+.logo {
+  width: 50px;
+}
 .content h1 {
-  font-size: 2.5rem;
-  font-family: 'Lobster', cursive;
+  font-size: 4rem;
+  margin: 45px 0;
 }
 
-.content h2 {
-  font-family: 'Merriweather', serif;
-  font-size: 3.7rem;
-  margin-top: 45px;
+.content h3 {
+  font-size: 2rem;
+  text-align: start;
 }
 
-.content p {
-  margin-bottom: 45px;
-  font-size: 1.1rem;
-  margin-top: 15px;
+.lightContainer {
+  background-color: white;
 }
-
-.wave {
-  position: absolute;
-  top: 0;
-  z-index: -1;
+.darkContainer {
+  background-color: #1a1a1a;
 }
 .dark {
+  color: #f1f1f1;
+}
+.light {
   color: black;
 }
 
@@ -45,4 +68,38 @@
   position: absolute;
   top: 15px;
   right: 50px;
+}
+
+.button {
+  margin-top: 45px;
+}
+
+.imageLogo {
+  position: absolute;
+}
+.overall {
+  overflow: hidden;
+}
+@media (max-width: 770px) {
+  .content {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    overflow-x: hidden;
+  }
+  .rightContainer {
+    width: 100vw;
+  }
+  .bothImages {
+    height: 400px;
+  }
+  .rightContainer {
+    padding: 50px 20px;
+  }
+}
+
+@media (max-width: 310px) {
+  .content h1 {
+    font-size: 3rem;
+  }
 }
