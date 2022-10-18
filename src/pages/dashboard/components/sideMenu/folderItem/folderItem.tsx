@@ -188,6 +188,7 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
         {folder.notes.map((note: INote) => {
           return <NoteItem key={note.id} note={note} />;
         })}
+        <br></br>
       </NavLink>
     </div>
   );
