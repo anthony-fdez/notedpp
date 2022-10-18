@@ -19,6 +19,7 @@ const Home: React.FC = (): JSX.Element => {
 
     globalStore.setTheme('light');
   };
+  //Hey
   return (
     <AnimateOnScreenLoad>
       <div className={styles.overall}>
