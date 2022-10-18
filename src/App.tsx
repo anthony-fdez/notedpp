@@ -22,7 +22,7 @@ function App() {
       withGlobalStyles
       theme={{
         colorScheme: globalStore.theme,
-        white: '#f1f1f1',
+        white: '#FFFFFF',
         black: '#1a1a1a',
         primaryColor: 'blue',
       }}
