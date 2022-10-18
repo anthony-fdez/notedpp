@@ -8,6 +8,7 @@ import { useGlobalStore } from '../../globalStore/globalStore';
 import notedBackground from './Back.png';
 import styles from './home.module.css';
 import transparentLogo from './transparentFav.png';
+
 const Home: React.FC = (): JSX.Element => {
   const globalStore = useGlobalStore();
   console.log(globalStore.theme);
@@ -19,37 +20,33 @@ const Home: React.FC = (): JSX.Element => {
 
     globalStore.setTheme('light');
   };
-  //Hey
-  return (
-    <AnimateOnScreenLoad>
-      <div className={styles.overall}>
-        <div className={styles.container}>
-          <div className={styles.content}>
-            <Switch
-              className={styles.switch}
-              size='md'
-              color={theme.colorScheme === 'dark' ? 'gray' : 'dark'}
-              onLabel={
-                <IconSun
-                  size={16}
-                  stroke={2.5}
-                  color={theme.colors.yellow[4]}
-                />
-              }
-              onChange={(e) => handleThemeChange(e)}
-              offLabel={
-                <IconMoonStars
-                  size={16}
-                  stroke={2.5}
-                  color={theme.colors.blue[6]}
-                />
-              }
-            />
-            <div className={styles.bothImages}>
-              <img src={notedBackground} alt='' className={styles.image} />
-              <img src={transparentLogo} alt='' className={styles.imageLogo} />
-            </div>
 
+  return (
+    <div className={styles.overall}>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <Switch
+            className={styles.switch}
+            size='md'
+            color={theme.colorScheme === 'dark' ? 'gray' : 'dark'}
+            defaultChecked={globalStore.theme === 'dark'}
+            onLabel={
+              <IconSun size={16} stroke={2.5} color={theme.colors.yellow[4]} />
+            }
+            onChange={(e) => handleThemeChange(e)}
+            offLabel={
+              <IconMoonStars
+                size={16}
+                stroke={2.5}
+                color={theme.colors.blue[6]}
+              />
+            }
+          />
+          <div className={styles.bothImages}>
+            <img src={notedBackground} alt='' className={styles.image} />
+            <img src={transparentLogo} alt='' className={styles.imageLogo} />
+          </div>
+          <AnimateOnScreenLoad>
             <div
               className={`${styles.rightContainer} ${
                 globalStore.theme === 'dark'
@@ -77,11 +74,10 @@ const Home: React.FC = (): JSX.Element => {
                 <LoginButton />
               </div>
             </div>
-          </div>
+          </AnimateOnScreenLoad>
         </div>
-        <div></div>
       </div>
-    </AnimateOnScreenLoad>
+    </div>
   );
 };
 
