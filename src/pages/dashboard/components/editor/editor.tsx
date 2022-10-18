@@ -9,7 +9,7 @@ interface Props {
 
 const TextEditor: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
   return (
-    <div>
+    <div className={styles.container}>
       <BubbleMenuComponent editor={editor} />
       <EditorContent className={styles.editor} editor={editor} />
     </div>

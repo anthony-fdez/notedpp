@@ -3,6 +3,8 @@
   top: 70px;
   background-color: transparent;
   backdrop-filter: blur(5px);
+  z-index: 100;
+  padding-top: 20px;
 }
 .character_count_container {
   display: flex;

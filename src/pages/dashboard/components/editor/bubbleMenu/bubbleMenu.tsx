@@ -7,18 +7,20 @@ import { AiOutlineItalic } from 'react-icons/ai';
 import { MdFormatStrikethrough } from 'react-icons/md';
 import { BsCodeSlash } from 'react-icons/bs';
 import { Box, Button, Group } from '@mantine/core';
+import { useGlobalStore } from '../../../../../globalStore/globalStore';
 
 interface Props {
   editor: Editor;
 }
 
 const BubbleMenuComponent = ({ editor }: Props) => {
+  const globalStore = useGlobalStore();
   if (!editor) return null;
 
   return (
     <>
       <BubbleMenu
-        // className={styles.bubble_menu}
+        className={globalStore.theme === 'dark' ? styles.dark : styles.light}
         editor={editor}
         tippyOptions={{ duration: 100 }}
       >

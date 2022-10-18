@@ -1,6 +1,7 @@
 import { Blockquote, Box, Transition } from '@mantine/core';
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+import styles from './randomQuote.module.css';
 
 interface IQuote {
   author: string;
@@ -24,18 +25,20 @@ const RandomQuote = () => {
   }, []);
 
   return (
-    <Transition
-      duration={200}
-      timingFunction='ease'
-      mounted={!!quote}
-      transition='fade'
-    >
-      {(styles) => (
-        <Box style={styles}>
-          <Blockquote cite={`- ${quote?.author}`}>{quote?.quote}</Blockquote>
-        </Box>
-      )}
-    </Transition>
+    <div className={styles.container}>
+      <Transition
+        duration={200}
+        timingFunction='ease'
+        mounted={!!quote}
+        transition='fade'
+      >
+        {(styles) => (
+          <Box style={styles}>
+            <Blockquote cite={`- ${quote?.author}`}>{quote?.quote}</Blockquote>
+          </Box>
+        )}
+      </Transition>
+    </div>
   );
 };
 
