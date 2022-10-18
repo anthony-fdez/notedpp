@@ -9,6 +9,7 @@ import styles from './noteItem.module.css';
 import Axios from 'axios';
 import { showNotification } from '@mantine/notifications';
 import { BsFolderSymlink } from 'react-icons/bs';
+import MoveNoteModal from '../modals/moveNote/moveNoteModal';
 
 interface Props {
   note: INote;
@@ -19,6 +20,8 @@ const NoteItem = ({ note }: Props) => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoadingDeletingNote, setIsLoadingDeletingNote] = useState(false);
+
+  const [isMoveNoteModalOpen, setIsMoveNoteModalOpen] = useState(false);
 
   const ref = useClickOutside(() => setIsMenuOpen(false));
 
@@ -78,6 +81,11 @@ const NoteItem = ({ note }: Props) => {
 
   return (
     <div className={styles.note_item_container} ref={ref} key={note.id}>
+      <MoveNoteModal
+        note={note}
+        isOpen={isMoveNoteModalOpen}
+        handleClose={() => setIsMoveNoteModalOpen(false)}
+      />
       <Menu
         opened={isMenuOpen}
         shadow='md'
@@ -110,6 +118,7 @@ const NoteItem = ({ note }: Props) => {
             color='gray'
             variant='default'
             className={styles.note_button}
+            onClick={() => setIsMoveNoteModalOpen(true)}
           >
             Move Note
           </Button>
