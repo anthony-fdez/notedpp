@@ -10,3 +10,9 @@
   align-items: flex-end;
   justify-content: flex-end;
 }
+.container {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

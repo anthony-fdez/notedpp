@@ -17,6 +17,7 @@ import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import CodeBlock from '../editor/codeBlock/codeBlock';
 import { lowlight } from 'lowlight';
 import CharacterCount from '@tiptap/extension-character-count';
+import RandomQuote from '../../../../components/randomQuote/randomQuote';
 
 const CustomDocument = Document.extend({
   content: 'heading block*',
@@ -71,11 +72,11 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.menu}>
-        <Menu editor={editor} />
-      </div>
-
       <div>
+        <div className={styles.menu}>
+          <Menu editor={editor} />
+        </div>
+
         <TextEditor editor={editor} />
         <div className={styles.character_count_container}>
           {editor.storage.characterCount.words()} words
@@ -83,6 +84,8 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
           {editor.storage.characterCount.characters()} characters
         </div>
       </div>
+
+      <RandomQuote />
     </div>
   );
 };
