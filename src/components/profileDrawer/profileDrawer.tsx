@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Drawer} from '@mantine/core';
+import { Blockquote, Drawer } from '@mantine/core';
 import { useAuth0 } from '@auth0/auth0-react';
 import styles from './profileDrawer.module.css';
 import LogoutButton from '../auth/logoutButton/logoutButton';
@@ -42,7 +42,7 @@ const ProfileDrawer = ({ isOpen, handleClose }: Props): JSX.Element => {
             token: token || '',
           });
         }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (e: any) {
         console.error(e.message);
       }
@@ -76,14 +76,7 @@ const ProfileDrawer = ({ isOpen, handleClose }: Props): JSX.Element => {
         </div>
         <LogoutButton />
         <Settings />
-        <h1>JWT Token (testing only)</h1>
-        {accessToken ? (
-          <p style={{ lineBreak: 'anywhere' }}>
-            {JSON.stringify(accessToken, null, 2)}
-          </p>
-        ) : (
-          'No user metadata defined'
-        )}
+        <Blockquote></Blockquote>
       </div>
     );
   };
