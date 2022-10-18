@@ -68,6 +68,7 @@
   position: absolute;
   top: 15px;
   right: 50px;
+  z-index: 100;
 }
 
 .button {
