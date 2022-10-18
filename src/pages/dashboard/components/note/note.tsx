@@ -18,6 +18,10 @@ import CodeBlock from '../editor/codeBlock/codeBlock';
 import { lowlight } from 'lowlight';
 import CharacterCount from '@tiptap/extension-character-count';
 
+const CustomDocument = Document.extend({
+  content: 'heading block*',
+});
+
 const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
   const globalStore = useGlobalStore();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -29,8 +33,9 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
 
   const editor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({ document: false }),
       Document,
+      CustomDocument,
       Paragraph,
       Text,
       CharacterCount,
@@ -38,7 +43,13 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
         openOnClick: true,
       }),
       Placeholder.configure({
-        placeholder: 'Start writing your note here...',
+        placeholder: ({ node }) => {
+          if (node.type.name === 'heading') {
+            return 'What’s the title?';
+          }
+
+          return 'Can you add some further context?';
+        },
       }),
       CodeBlockLowlight.extend({
         addNodeView() {
