@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Blockquote, Drawer } from '@mantine/core';
+import { Drawer } from '@mantine/core';
 import { useAuth0 } from '@auth0/auth0-react';
 import styles from './profileDrawer.module.css';
 import LogoutButton from '../auth/logoutButton/logoutButton';
@@ -76,7 +76,6 @@ const ProfileDrawer = ({ isOpen, handleClose }: Props): JSX.Element => {
         </div>
         <LogoutButton />
         <Settings />
-        <Blockquote></Blockquote>
       </div>
     );
   };
