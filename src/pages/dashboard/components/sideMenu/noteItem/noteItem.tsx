@@ -8,6 +8,7 @@ import { INote } from '../../../../../interfaces/INote';
 import styles from './noteItem.module.css';
 import Axios from 'axios';
 import { showNotification } from '@mantine/notifications';
+import { BsFolderSymlink } from 'react-icons/bs';
 
 interface Props {
   note: INote;
@@ -104,17 +105,26 @@ const NoteItem = ({ note }: Props) => {
         />
         <Menu.Dropdown>
           <Menu.Label>Note</Menu.Label>
-          <Menu.Item>
-            <Button
-              loading={isLoadingDeletingNote}
-              className={styles.delete_note_button}
-              color='red'
-              leftIcon={<IconTrash size={14} />}
-              onClick={handleDeleteNote}
-            >
-              Delete Note
-            </Button>
-          </Menu.Item>
+          <Button
+            leftIcon={<BsFolderSymlink />}
+            color='gray'
+            variant='default'
+            className={styles.note_button}
+          >
+            Move Note
+          </Button>
+
+          <Menu.Label>Danger zone</Menu.Label>
+
+          <Button
+            loading={isLoadingDeletingNote}
+            className={styles.note_button}
+            color='red'
+            leftIcon={<IconTrash size={14} />}
+            onClick={handleDeleteNote}
+          >
+            Delete Note
+          </Button>
         </Menu.Dropdown>
       </Menu>
     </div>
