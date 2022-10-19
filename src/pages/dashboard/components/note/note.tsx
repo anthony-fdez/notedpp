@@ -71,6 +71,7 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
     const note = editor.getHTML();
 
     if (note === globalStore.selectedNote?.note) return;
+    if (!globalStore.selectedNote) return;
 
     updateNote({
       new_note: note,
@@ -99,6 +100,7 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
 
   useEffect(() => {
     if (!editor) return;
+    if (!globalStore.selectedNote) return;
 
     showNotification({
       id: 'loading-note',
@@ -136,10 +138,12 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
       })
       .catch((e) => {
         if (e.response.data.message) {
-          showNotification({
+          updateNotification({
+            id: 'loading-note',
+            color: 'red',
             title: 'Error',
             message: e.response.data.message,
-            color: 'red',
+            autoClose: 1000,
           });
         }
 
