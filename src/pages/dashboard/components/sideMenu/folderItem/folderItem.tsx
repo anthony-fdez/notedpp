@@ -13,10 +13,9 @@ import DeleteFolderModal from '../modals/deleteFolderModal/deleteFolderModal';
 import RenameFolderModal from '../modals/renameFolderModal/renameFolderModal';
 import NoteItem from '../noteItem/noteItem';
 import styles from './folderItem.module.css';
-import Axios from 'axios';
-import { showNotification } from '@mantine/notifications';
 import { useGlobalStore } from '../../../../../globalStore/globalStore';
 import { useClickOutside } from '@mantine/hooks';
+import { createNote } from '../../../../../api/notes/create/createNote';
 
 interface Props {
   folder: IFolder;
@@ -32,53 +31,17 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
   const [isRenameFolderModalOpen, setIsRenameFolderModalOpen] = useState(false);
   const [isLoadingCreatingNote, setIsLoadingCreatingNote] = useState(false);
 
-  const handleCreateNote = () => {
+  const handleCreateNote = async () => {
     setIsLoadingCreatingNote(true);
 
-    Axios.post(
-      'http://localhost:3001/notes/new-note',
-      {
-        note: 'Delete this to start your note',
-        folder_name: folder.folder_name,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${globalStore.user?.token || ''}`,
-        },
-      }
-    )
-      .then((response) => {
-        showNotification({
-          title: 'Note created',
-          message: `Your quick note was added to folder '${folder.folder_name}'`,
-          color: 'blue',
-        });
+    await createNote({
+      globalStore,
+      note: 'Delete this to start your note',
+      folder_name: folder.folder_name,
+    });
 
-        globalStore.updateFolders();
-        setIsMenuOpen(false);
-
-        globalStore.setSelectedNote(response.data.note);
-      })
-      .catch((e) => {
-        try {
-          if (e.response.data.message) {
-            showNotification({
-              title: 'Error',
-              message: e.response.data.message,
-              color: 'red',
-            });
-          }
-        } catch (e) {
-          showNotification({
-            title: 'Error',
-            message: 'Looks like our servers are down, try again later.',
-            color: 'red',
-          });
-        }
-      })
-      .finally(() => {
-        setIsLoadingCreatingNote(false);
-      });
+    setIsMenuOpen(false);
+    setIsLoadingCreatingNote(false);
   };
 
   if (!folder) return null;
