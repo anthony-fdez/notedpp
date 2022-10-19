@@ -7,5 +7,5 @@
 }
 .editor > div:focus {
   outline: none;
-  z-index: 0;
+  z-index: 1;
 }

@@ -1,0 +1,11 @@
+.dark {
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgb(50, 50, 50);
+}
+.light {
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(220, 220, 220);
+}
