@@ -1,5 +1,5 @@
 import { Alert } from '@mantine/core';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useGlobalStore } from '../../../../globalStore/globalStore';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { useWindowScroll } from '@mantine/hooks';
@@ -18,6 +18,11 @@ import CodeBlock from '../editor/codeBlock/codeBlock';
 import { lowlight } from 'lowlight';
 import CharacterCount from '@tiptap/extension-character-count';
 import RandomQuote from '../../../../components/randomQuote/randomQuote';
+import Typography from '@tiptap/extension-typography';
+import { updateNote } from '../../../../api/notes/update/updateNote';
+import Axios from 'axios';
+import { showNotification, updateNotification } from '@mantine/notifications';
+import { IconCheck } from '@tabler/icons';
 
 const CustomDocument = Document.extend({
   content: 'heading block*',
@@ -38,6 +43,7 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
       Document,
       CustomDocument,
       Paragraph,
+      Typography,
       Text,
       CharacterCount,
       Link.configure({
@@ -58,7 +64,88 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
         },
       }).configure({ lowlight }),
     ],
+    content: globalStore.selectedNote?.note,
   }) as Editor;
+
+  const updateNoteRequest = () => {
+    const note = editor.getHTML();
+
+    if (note === globalStore.selectedNote?.note) return;
+
+    updateNote({
+      new_note: note,
+      globalStore,
+      note_id: globalStore.selectedNote?.id ?? '',
+    });
+  };
+
+  useEffect(() => {
+    if (!editor) return;
+    if (!globalStore.selectedNote) return;
+
+    if (editor && globalStore.selectedNote) {
+      editor.commands.setContent(globalStore.selectedNote.note);
+    }
+
+    const interval = setInterval(async () => {
+      updateNoteRequest();
+    }, 120000);
+
+    return () => {
+      clearInterval(interval);
+      updateNoteRequest();
+    };
+  }, [editor, globalStore.selectedNote]);
+
+  useEffect(() => {
+    if (!editor) return;
+
+    showNotification({
+      id: 'loading-note',
+      title: 'Loading updates...',
+      message: 'Please wait while the note is being loaded.',
+      autoClose: false,
+      color: 'blue',
+      loading: true,
+    });
+
+    Axios.post(
+      'http://localhost:3001/notes/get-note',
+      {
+        note_id: globalStore.selectedNote?.id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${globalStore.user?.token || ''}`,
+        },
+      }
+    )
+      .then((response) => {
+        console.log(response);
+        globalStore.setSelectedNote(response.data.note);
+        updateNotification({
+          id: 'loading-note',
+          color: 'blue',
+          title: 'Loaded',
+          message: 'Note contents loaded. Yay',
+          icon: <IconCheck size={16} />,
+          autoClose: 1000,
+        });
+
+        globalStore.updateFolders();
+      })
+      .catch((e) => {
+        if (e.response.data.message) {
+          showNotification({
+            title: 'Error',
+            message: e.response.data.message,
+            color: 'red',
+          });
+        }
+
+        console.log(e.response);
+      });
+  }, [editor, globalStore.selectedNote?.id]);
 
   if (!globalStore.selectedNote) {
     return (

@@ -4,6 +4,7 @@ import create from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { IUser } from './interfaces/IUser';
 import Axios from 'axios';
+import { showNotification } from '@mantine/notifications';
 export interface IGlobalStore {
   theme: 'dark' | 'light';
   user: IUser | null;
@@ -67,6 +68,7 @@ export const useGlobalStore = create<IGlobalStore>()(
             set({ isLoadingFolders: false });
           });
       },
+
       setIsMobileMenuOpen: (isOpen: boolean) => {
         set({ isMobileMenuOpen: isOpen });
       },
