@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { BsFolderSymlink } from 'react-icons/bs';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import { deleteNote } from '../../../../../api/notes/delete/deleteNote';
+import { getNoteTitle } from '../../../../../functions/getNoteTitle';
 import { useGlobalStore } from '../../../../../globalStore/globalStore';
 import { INote } from '../../../../../interfaces/INote';
 import MoveNoteModal from '../modals/moveNote/moveNoteModal';
@@ -54,7 +55,7 @@ const NoteItem = ({ note }: Props) => {
             globalStore.setSelectedNote(note);
           }}
           active={note.id === globalStore.selectedNote?.id}
-          label={note.note}
+          label={getNoteTitle({ note: note.note })}
           rightSection={
             <>
               <Menu.Target>

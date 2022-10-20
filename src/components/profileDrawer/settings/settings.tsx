@@ -14,9 +14,6 @@ const Settings = (): JSX.Element => {
     globalStore.setTheme('light');
   };
 
-  useEffect(() => {
-    console.log(globalStore.theme);
-  }, [globalStore]);
   const theme = useMantineTheme();
   return (
     <div className={styles.container}>

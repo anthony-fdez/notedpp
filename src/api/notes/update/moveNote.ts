@@ -42,7 +42,5 @@ export const moveNote = async ({
           color: 'red',
         });
       }
-
-      console.log(e.response);
     });
 };

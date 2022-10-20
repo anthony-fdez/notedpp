@@ -32,7 +32,5 @@ export const updateNote = async ({ globalStore, note_id, new_note }: Props) => {
           color: 'red',
         });
       }
-
-      console.log(e.response);
     });
 };

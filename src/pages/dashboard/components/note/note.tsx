@@ -42,8 +42,6 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
     scrollTo({ y: 0 });
   }, [globalStore.selectedNote]);
 
-  console.log(lastSynced);
-
   const editor = useEditor({
     extensions: [
       StarterKit.configure({ document: false }),
@@ -147,7 +145,6 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
       }
     )
       .then((response) => {
-        console.log(response);
         globalStore.setSelectedNote(response.data.note);
         updateNotification({
           id: 'loading-note',
@@ -170,8 +167,6 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
             autoClose: 1000,
           });
         }
-
-        console.log(e.response);
       });
   }, [editor, globalStore.selectedNote?.id]);
 

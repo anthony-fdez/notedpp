@@ -43,7 +43,5 @@ export const deleteFolder = async ({ globalStore, folder_id }: Props) => {
           color: 'red',
         });
       }
-
-      console.log(e.response);
     });
 };
