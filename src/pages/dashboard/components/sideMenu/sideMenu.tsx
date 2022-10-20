@@ -98,7 +98,16 @@ const SideMenu = (): JSX.Element | null => {
         </Drawer>
       </div>
       <div className={styles.desktop_menu}>
-        <div className={styles.container}>
+        <div
+          style={{
+            borderRight: `1px solid ${
+              globalStore.theme === 'dark'
+                ? 'rgb(80,80,80)'
+                : 'rgb(230,230,230)'
+            }`,
+          }}
+          className={styles.container}
+        >
           {folderAndNotesButtons()}
           {renderFolderList()}
         </div>

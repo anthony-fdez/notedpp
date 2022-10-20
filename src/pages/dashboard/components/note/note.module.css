@@ -1,10 +1,16 @@
 .menu {
   position: sticky;
-  top: 70px;
-  background-color: transparent;
-  backdrop-filter: blur(5px);
+  top: 60px;
   z-index: 100;
-  padding-top: 20px;
+  padding-bottom: 10px;
+}
+.last_synced_container {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+}
+.save_button {
+  margin-right: 5px;
 }
 .character_count_container {
   display: flex;

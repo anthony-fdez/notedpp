@@ -1,5 +1,5 @@
-import { Alert } from '@mantine/core';
-import React, { useEffect, useMemo } from 'react';
+import { Alert, Button, useMantineTheme } from '@mantine/core';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useGlobalStore } from '../../../../globalStore/globalStore';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { useWindowScroll } from '@mantine/hooks';
@@ -23,19 +23,26 @@ import { updateNote } from '../../../../api/notes/update/updateNote';
 import Axios from 'axios';
 import { showNotification, updateNotification } from '@mantine/notifications';
 import { IconCheck } from '@tabler/icons';
+import moment from 'moment';
 
 const CustomDocument = Document.extend({
   content: 'heading block*',
 });
 
 const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
+  const theme = useMantineTheme();
   const globalStore = useGlobalStore();
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [scroll, scrollTo] = useWindowScroll();
+  const [lastSynced, setLastSynced] = useState(moment());
+  const [isLoadingSavingNote, setIsLoadingSavingNote] = useState(false);
 
   useEffect(() => {
     scrollTo({ y: 0 });
   }, [globalStore.selectedNote]);
+
+  console.log(lastSynced);
 
   const editor = useEditor({
     extensions: [
@@ -67,6 +74,21 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
     content: globalStore.selectedNote?.note,
   }) as Editor;
 
+  const handleSaveNote = async () => {
+    setIsLoadingSavingNote(true);
+
+    const note = editor.getHTML();
+
+    await updateNote({
+      new_note: note,
+      globalStore,
+      note_id: globalStore.selectedNote?.id ?? '',
+    });
+
+    setIsLoadingSavingNote(false);
+    setLastSynced(moment());
+  };
+
   const updateNoteRequest = () => {
     const note = editor.getHTML();
 
@@ -78,6 +100,8 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
       globalStore,
       note_id: globalStore.selectedNote?.id ?? '',
     });
+
+    setLastSynced(moment());
   };
 
   useEffect(() => {
@@ -164,8 +188,30 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
   return (
     <div className={styles.container}>
       <div>
-        <div className={styles.menu}>
+        <div
+          style={{
+            borderBottom: `1px solid ${
+              globalStore.theme === 'dark'
+                ? 'rgb(80,80,80)'
+                : 'rgb(230,230,230)'
+            }`,
+            backgroundColor:
+              globalStore.theme === 'dark' ? theme.black : theme.white,
+          }}
+          className={styles.menu}
+        >
           <Menu editor={editor} />
+          <div className={styles.last_synced_container}>
+            <Button
+              onClick={handleSaveNote}
+              loading={isLoadingSavingNote}
+              className={styles.save_button}
+              variant='light'
+            >
+              Save
+            </Button>
+            <p>Last saved {moment(lastSynced).fromNow()}</p>
+          </div>
         </div>
 
         <TextEditor editor={editor} />
