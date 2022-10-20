@@ -30,7 +30,6 @@ const NewFolderModal = ({ isOpen, handleClose }: Props): JSX.Element => {
 
   return (
     <Modal
-      overlayBlur={3}
       opened={isOpen}
       onClose={handleClose}
       title='Create new folder'

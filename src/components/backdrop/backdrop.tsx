@@ -10,7 +10,7 @@ export default function BackdropSpinner() {
   return (
     <div>
       <div style={{ width: 500, position: 'relative' }}>
-        <LoadingOverlay visible={isLoading} overlayBlur={2} />
+        <LoadingOverlay visible={isLoading} />
       </div>
     </div>
   );

@@ -38,7 +38,6 @@ const RenameFolderModal = ({
 
   return (
     <Modal
-      overlayBlur={3}
       opened={isOpen}
       onClose={handleClose}
       title='Rename Folder'

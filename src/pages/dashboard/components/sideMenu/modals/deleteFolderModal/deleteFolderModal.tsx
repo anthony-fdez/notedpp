@@ -39,7 +39,6 @@ const DeleteFolderModal = ({
 
   return (
     <Modal
-      overlayBlur={3}
       opened={isOpen}
       onClose={handleClose}
       title='Delete Folder'

@@ -86,7 +86,6 @@ const ProfileDrawer = ({ isOpen, handleClose }: Props): JSX.Element => {
         lockScroll={false}
         opened={isOpen}
         position='right'
-        overlayBlur={3}
         onClose={handleClose}
         title='Profile'
         padding='xl'

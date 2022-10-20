@@ -61,7 +61,6 @@ const MoveNoteModal = ({ isOpen, handleClose, note }: Props): JSX.Element => {
 
   return (
     <Modal
-      overlayBlur={3}
       opened={isOpen}
       onClose={handleClose}
       title='Move note to another folder'
