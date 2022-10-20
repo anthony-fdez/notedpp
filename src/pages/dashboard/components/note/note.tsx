@@ -31,6 +31,7 @@ import TableRow from '@tiptap/extension-table-row';
 import TableHeader from '@tiptap/extension-table-header';
 import TableCell from '@tiptap/extension-table-cell';
 import EditorMenu from '../editor/menu/menu';
+import NoteHistory from '../noteHistory/noteHistory';
 
 const CustomDocument = Document.extend({
   content: 'heading block*',
@@ -44,6 +45,7 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
   const [scroll, scrollTo] = useWindowScroll();
   const [lastSynced, setLastSynced] = useState(moment());
   const [isLoadingSavingNote, setIsLoadingSavingNote] = useState(false);
+  const [isNoteHistoryOpen, setIsNoteHistoryOpen] = useState(false);
 
   useEffect(() => {
     scrollTo({ y: 0 });
@@ -92,15 +94,30 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
   }) as Editor;
 
   const handleSaveNote = async () => {
-    setIsLoadingSavingNote(true);
-
     const note = editor.getHTML();
+
+    if (note === globalStore.selectedNote?.note) {
+      return showNotification({
+        title: 'No need to save the note!',
+        message: 'Your note is already synced and saved!',
+        color: 'blue',
+      });
+    }
+
+    setIsLoadingSavingNote(true);
 
     await updateNote({
       new_note: note,
       globalStore,
       note_id: globalStore.selectedNote?.id ?? '',
     });
+
+    const newNote = globalStore.selectedNote;
+
+    if (newNote) {
+      newNote.note = note;
+      globalStore.setSelectedNote(newNote);
+    }
 
     setIsLoadingSavingNote(false);
     setLastSynced(moment());
@@ -201,6 +218,10 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
 
   return (
     <div className={styles.container}>
+      <NoteHistory
+        isOpen={isNoteHistoryOpen}
+        handleClose={() => setIsNoteHistoryOpen(false)}
+      />
       <div>
         <div
           style={{
@@ -214,18 +235,24 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
           }}
           className={styles.menu}
         >
-          <EditorMenu editor={editor} />
-          <div className={styles.last_synced_container}>
-            <Button
-              onClick={handleSaveNote}
-              loading={isLoadingSavingNote}
-              className={styles.save_button}
-              variant='light'
-            >
-              Save
+          <div className={styles.first_header_container}>
+            <div className={styles.last_synced_container}>
+              <Button
+                onClick={handleSaveNote}
+                loading={isLoadingSavingNote}
+                className={styles.save_button}
+                variant='light'
+              >
+                Save
+              </Button>
+              <p>Last saved {moment(lastSynced).fromNow()}</p>
+            </div>
+            <Button onClick={() => setIsNoteHistoryOpen(true)} variant='filled'>
+              Note History
             </Button>
-            <p>Last saved {moment(lastSynced).fromNow()}</p>
           </div>
+
+          <EditorMenu editor={editor} />
         </div>
 
         <TextEditor editor={editor} />
