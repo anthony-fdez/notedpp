@@ -29,7 +29,7 @@ function App() {
       theme={{
         colorScheme: globalStore.theme,
         white: '#FFFFFF',
-        black: '#1a1a1a',
+        black: '#1a1b1e',
         primaryColor: 'blue',
       }}
     >
