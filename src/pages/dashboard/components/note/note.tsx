@@ -24,6 +24,8 @@ import Axios from 'axios';
 import { showNotification, updateNotification } from '@mantine/notifications';
 import { IconCheck } from '@tabler/icons';
 import moment from 'moment';
+import TaskList from '@tiptap/extension-task-list';
+import TaskItem from '@tiptap/extension-task-item';
 
 const CustomDocument = Document.extend({
   content: 'heading block*',
@@ -51,6 +53,10 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
       Typography,
       Text,
       CharacterCount,
+      TaskList,
+      TaskItem.configure({
+        nested: true,
+      }),
       Link.configure({
         openOnClick: true,
       }),
