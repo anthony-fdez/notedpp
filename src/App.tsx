@@ -8,7 +8,13 @@ import { routes } from './routes';
 import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { useGlobalStore } from './globalStore/globalStore';
-import './editor.scss';
+
+const LightTheme = React.lazy(
+  () => import('./styles/workAroundComponents/lightTheme')
+);
+const DarkTheme = React.lazy(
+  () => import('./styles/workAroundComponents/darkTheme')
+);
 
 function App() {
   const globalStore = useGlobalStore();
@@ -28,6 +34,9 @@ function App() {
       }}
     >
       <NotificationsProvider>
+        <React.Suspense fallback={<></>}>
+          {globalStore.theme === 'dark' ? <DarkTheme /> : <LightTheme />}
+        </React.Suspense>
         <div className='App'>
           <BackdropSpinner />
           <RouterProvider router={router} />

@@ -24,6 +24,7 @@ import { BiUndo } from 'react-icons/bi';
 import { BiRedo } from 'react-icons/bi';
 import { Button, Menu } from '@mantine/core';
 import { TbTable } from 'react-icons/tb';
+import { RiLayoutColumnFill } from 'react-icons/ri';
 
 import styles from './editorMenu.module.css';
 
@@ -142,6 +143,13 @@ const EditorMenu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
               icon={<BsTable />}
             >
               Toggle Header Row
+            </Menu.Item>
+            <Menu.Item
+              color='blue'
+              onClick={() => editor.chain().focus().toggleHeaderColumn().run()}
+              icon={<RiLayoutColumnFill />}
+            >
+              Toggle Header Column
             </Menu.Item>
             <div className={styles.menu_item_three}>
               <span className={styles.span}>Add Column</span>
