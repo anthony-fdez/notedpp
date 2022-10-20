@@ -1,10 +1,19 @@
 import React from 'react';
 import { Editor } from '@tiptap/react';
 import { FaBold } from 'react-icons/fa';
-import { AiOutlineItalic, AiOutlineCheckSquare } from 'react-icons/ai';
+import {
+  AiOutlineItalic,
+  AiOutlineCheckSquare,
+  AiOutlineLeft,
+  AiOutlineRight,
+  AiOutlinePlus,
+  AiOutlineSplitCells,
+  AiOutlineMergeCells,
+  AiOutlineDelete,
+  AiOutlineMinus,
+} from 'react-icons/ai';
 import { MdFormatStrikethrough } from 'react-icons/md';
-import { BsCodeSlash } from 'react-icons/bs';
-import { BsTextParagraph } from 'react-icons/bs';
+import { BsTextParagraph, BsTable, BsCodeSlash } from 'react-icons/bs';
 import { MdFormatListBulleted } from 'react-icons/md';
 import { AiOutlineOrderedList } from 'react-icons/ai';
 import { BiCodeBlock } from 'react-icons/bi';
@@ -13,13 +22,16 @@ import { MdHorizontalRule } from 'react-icons/md';
 import { AiOutlineEnter } from 'react-icons/ai';
 import { BiUndo } from 'react-icons/bi';
 import { BiRedo } from 'react-icons/bi';
-import { Button } from '@mantine/core';
+import { Button, Menu } from '@mantine/core';
+import { TbTable } from 'react-icons/tb';
+
+import styles from './editorMenu.module.css';
 
 interface Props {
   editor: Editor;
 }
 
-const Menu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
+const EditorMenu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
   if (!editor) {
     return null;
   }
@@ -108,6 +120,110 @@ const Menu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
         >
           <AiOutlineCheckSquare />
         </Button>
+        <Menu shadow='md' width={350}>
+          <Menu.Target>
+            <Button variant={'subtle'}>
+              <TbTable />
+              Table
+            </Button>
+          </Menu.Target>
+
+          <Menu.Dropdown>
+            <Menu.Item
+              color='blue'
+              onClick={() => editor.chain().focus().insertTable().run()}
+              icon={<AiOutlinePlus />}
+            >
+              Add Table
+            </Menu.Item>
+            <Menu.Item
+              color='blue'
+              onClick={() => editor.chain().focus().toggleHeaderRow().run()}
+              icon={<BsTable />}
+            >
+              Toggle Header Row
+            </Menu.Item>
+            <div className={styles.menu_item_three}>
+              <span className={styles.span}>Add Column</span>
+
+              <Menu.Item
+                onClick={() => editor.chain().focus().addColumnBefore().run()}
+                icon={<AiOutlineLeft />}
+                className={styles.item}
+                color='blue'
+              >
+                Before
+              </Menu.Item>
+              <Menu.Item
+                onClick={() => editor.chain().focus().addColumnAfter().run()}
+                icon={<AiOutlineRight />}
+                className={styles.item}
+                color='blue'
+              >
+                After
+              </Menu.Item>
+            </div>
+
+            <div className={styles.menu_item_three}>
+              <span className={styles.span}>Add Row</span>
+
+              <Menu.Item
+                onClick={() => editor.chain().focus().addRowBefore().run()}
+                color='blue'
+                icon={<AiOutlineLeft />}
+                className={styles.item}
+              >
+                Before
+              </Menu.Item>
+              <Menu.Item
+                onClick={() => editor.chain().focus().addRowAfter().run()}
+                color='blue'
+                icon={<AiOutlineRight />}
+                className={styles.item}
+              >
+                After
+              </Menu.Item>
+            </div>
+
+            <Menu.Item
+              onClick={() => editor.chain().focus().splitCell().run()}
+              color='blue'
+              icon={<AiOutlineSplitCells />}
+            >
+              Split Cells
+            </Menu.Item>
+
+            <Menu.Item
+              onClick={() => editor.chain().focus().mergeCells().run()}
+              color='blue'
+              icon={<AiOutlineMergeCells />}
+            >
+              Merge Cells
+            </Menu.Item>
+            <Menu.Divider></Menu.Divider>
+            <Menu.Item
+              onClick={() => editor.chain().focus().deleteColumn().run()}
+              color={'red'}
+              icon={<AiOutlineMinus />}
+            >
+              Delete Column
+            </Menu.Item>
+            <Menu.Item
+              onClick={() => editor.chain().focus().deleteRow().run()}
+              color={'red'}
+              icon={<AiOutlineMinus />}
+            >
+              Delete Row
+            </Menu.Item>
+            <Menu.Item
+              onClick={() => editor.chain().focus().deleteTable().run()}
+              color='red'
+              icon={<AiOutlineDelete />}
+            >
+              Delete Table
+            </Menu.Item>
+          </Menu.Dropdown>
+        </Menu>
         <Button
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           variant={editor.isActive('bulletList') ? 'filled' : 'subtle'}
@@ -167,4 +283,4 @@ const Menu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
   );
 };
 
-export default Menu;
+export default EditorMenu;

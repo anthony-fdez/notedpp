@@ -26,6 +26,11 @@ import { IconCheck } from '@tabler/icons';
 import moment from 'moment';
 import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
+import Table from '@tiptap/extension-table';
+import TableRow from '@tiptap/extension-table-row';
+import TableHeader from '@tiptap/extension-table-header';
+import TableCell from '@tiptap/extension-table-cell';
+import EditorMenu from '../editor/menu/menu';
 
 const CustomDocument = Document.extend({
   content: 'heading block*',
@@ -54,9 +59,17 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
       Text,
       CharacterCount,
       TaskList,
+
       TaskItem.configure({
         nested: true,
       }),
+
+      Table.configure({
+        resizable: true,
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
       Link.configure({
         openOnClick: true,
       }),
@@ -201,7 +214,7 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
           }}
           className={styles.menu}
         >
-          <Menu editor={editor} />
+          <EditorMenu editor={editor} />
           <div className={styles.last_synced_container}>
             <Button
               onClick={handleSaveNote}
