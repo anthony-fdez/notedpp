@@ -21,7 +21,7 @@ const SideMenu = (): JSX.Element | null => {
 
     await createNote({
       globalStore,
-      note: 'Quick Note',
+      note: '<h1></h1>',
     });
 
     setIsLoadingAddingQuickNote(false);

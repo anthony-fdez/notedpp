@@ -40,10 +40,10 @@ export const createNote = async ({ globalStore, note, folder_name }: Props) => {
             color: 'red',
           });
         }
-      } catch (e) {
+      } catch (e: any) {
         showNotification({
           title: 'Error',
-          message: 'Looks like our servers are down, try again later.',
+          message: e.response.request.statusText,
           color: 'red',
         });
       }

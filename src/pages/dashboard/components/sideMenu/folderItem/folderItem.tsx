@@ -36,7 +36,7 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
 
     await createNote({
       globalStore,
-      note: 'Delete this to start your note',
+      note: '<h1></h1>', // For our editor this is the equivalent of empty strings. Since we force a header for every note
       folder_name: folder.folder_name,
     });
 

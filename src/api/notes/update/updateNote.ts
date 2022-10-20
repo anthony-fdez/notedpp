@@ -31,6 +31,12 @@ export const updateNote = async ({ globalStore, note_id, new_note }: Props) => {
           message: e.response.data.message,
           color: 'red',
         });
+      } else {
+        showNotification({
+          title: 'Error',
+          message: e.response.request.statusText,
+          color: 'red',
+        });
       }
     });
 };
