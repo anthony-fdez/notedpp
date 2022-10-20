@@ -4,6 +4,7 @@ import { useGlobalStore } from '../../../../../../globalStore/globalStore';
 import styles from '../modals.module.css';
 import Axios from 'axios';
 import { showNotification } from '@mantine/notifications';
+import { createFolder } from '../../../../../../api/notes/create/createFolder';
 
 interface Props {
   isOpen: boolean;
@@ -16,65 +17,28 @@ const NewFolderModal = ({ isOpen, handleClose }: Props): JSX.Element => {
   const [isLoadingCreatingFolder, setIsLoadingCreatingFolder] = useState(false);
   const [folderName, setFolderName] = useState('');
 
-  const handleCreateFolder = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleCreateFolder = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setIsLoadingCreatingFolder(true);
 
-    Axios.post(
-      'http://localhost:3001/notes/new-folder',
-      {
-        folder_name: folderName,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${globalStore.user?.token || ''}`,
-        },
-      }
-    )
-      .then(() => {
-        showNotification({
-          title: 'Folder Deleted',
-          message: 'Your folder was deleted successfully',
-          color: 'blue',
-        });
+    await createFolder({ globalStore, folder_name: folderName });
 
-        globalStore.updateFolders();
-
-        handleClose();
-      })
-      .catch((e): void => {
-        try {
-          if (e.response.data.message) {
-            showNotification({
-              title: 'Error',
-              message: e.response.data.message,
-              color: 'red',
-            });
-          }
-        } catch (e) {
-          showNotification({
-            title: 'Error',
-            message: 'Looks like our servers are down, try again later.',
-            color: 'red',
-          });
-        }
-      })
-      .finally(() => {
-        setIsLoadingCreatingFolder(false);
-      });
+    setIsLoadingCreatingFolder(false);
+    handleClose();
   };
 
   return (
     <Modal
-      overlayBlur={3}
       opened={isOpen}
       onClose={handleClose}
       title='Create new folder'
     >
-      <form onSubmit={(e): void => handleCreateFolder(e)}>
+      <form onSubmit={(e) => handleCreateFolder(e)}>
         <Input
-          onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => {
+          onChange={(e: {
+            target: { value: React.SetStateAction<string> };
+          }) => {
             setFolderName(e.target.value);
           }}
           placeholder='Folder Name'

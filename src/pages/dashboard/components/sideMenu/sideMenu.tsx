@@ -1,14 +1,13 @@
-import { Alert, Button, Drawer} from '@mantine/core';
+import { Alert, Button, Drawer } from '@mantine/core';
 import React, { useState } from 'react';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { MdOutlineCreate } from 'react-icons/md';
+import { createNote } from '../../../../api/notes/create/createNote';
+import { useGlobalStore } from '../../../../globalStore/globalStore';
 import { IFolder } from '../../../../interfaces/IFolder';
 import FolderItem from './folderItem/folderItem';
-import styles from './sideMenu.module.css';
-import { MdOutlineCreate } from 'react-icons/md';
-import { AiOutlinePlus } from 'react-icons/ai';
-import { useGlobalStore } from '../../../../globalStore/globalStore';
 import NewFolderModal from './modals/newFolderModal/newFolderModal';
-import Axios from 'axios';
-import { showNotification } from '@mantine/notifications';
+import styles from './sideMenu.module.css';
 
 const SideMenu = (): JSX.Element | null => {
   const globalStore = useGlobalStore();
@@ -17,50 +16,15 @@ const SideMenu = (): JSX.Element | null => {
   const [isLoadingAddingQuickNote, setIsLoadingAddingQuickNote] =
     useState(false);
 
-  const handleAddQuickNote = () => {
+  const handleCreateNote = async () => {
     setIsLoadingAddingQuickNote(true);
 
-    Axios.post(
-      'http://localhost:3001/notes/new-note',
-      {
-        note: 'Delete this to start your note',
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${globalStore.user?.token}`,
-        },
-      }
-    )
-      .then((response) => {
-        showNotification({
-          title: 'Quick note created',
-          message: 'Your quick note was added to the quick notes folder',
-          color: 'blue',
-        });
+    await createNote({
+      globalStore,
+      note: '<h1></h1>',
+    });
 
-        globalStore.updateFolders();
-        globalStore.setSelectedNote(response.data.note);
-      })
-      .catch((e) => {
-        try {
-          if (e.response.data.message) {
-            showNotification({
-              title: 'Error',
-              message: e.response.data.message,
-              color: 'red',
-            });
-          }
-        } catch (e) {
-          showNotification({
-            title: 'Error',
-            message: 'Looks like our servers are down, try again later.',
-            color: 'red',
-          });
-        }
-      })
-      .finally(() => {
-        setIsLoadingAddingQuickNote(false);
-      });
+    setIsLoadingAddingQuickNote(false);
   };
 
   const folderAndNotesButtons = () => {
@@ -69,7 +33,7 @@ const SideMenu = (): JSX.Element | null => {
         <Button
           leftIcon={<AiOutlinePlus />}
           className={styles.new_folder_button}
-          onClick={handleAddQuickNote}
+          onClick={handleCreateNote}
           loading={isLoadingAddingQuickNote}
         >
           Add Quick Note
@@ -121,7 +85,6 @@ const SideMenu = (): JSX.Element | null => {
       <div className={styles.mobile_menu}>
         <Drawer
           className={styles.drawer}
-          overlayBlur={3}
           lockScroll={false}
           opened={globalStore.isMobileMenuOpen}
           onClose={() => globalStore.setIsMobileMenuOpen(false)}
@@ -134,7 +97,16 @@ const SideMenu = (): JSX.Element | null => {
         </Drawer>
       </div>
       <div className={styles.desktop_menu}>
-        <div className={styles.container}>
+        <div
+          style={{
+            borderRight: `1px solid ${
+              globalStore.theme === 'dark'
+                ? 'rgb(80,80,80)'
+                : 'rgb(230,230,230)'
+            }`,
+          }}
+          className={styles.container}
+        >
           {folderAndNotesButtons()}
           {renderFolderList()}
         </div>

@@ -2,14 +2,14 @@ import { ActionIcon, Button, Menu, NavLink } from '@mantine/core';
 import { useClickOutside } from '@mantine/hooks';
 import { IconTrash } from '@tabler/icons';
 import React, { useState } from 'react';
+import { BsFolderSymlink } from 'react-icons/bs';
 import { FiMoreHorizontal } from 'react-icons/fi';
+import { deleteNote } from '../../../../../api/notes/delete/deleteNote';
+import { getNoteTitle } from '../../../../../functions/getNoteTitle';
 import { useGlobalStore } from '../../../../../globalStore/globalStore';
 import { INote } from '../../../../../interfaces/INote';
-import styles from './noteItem.module.css';
-import Axios from 'axios';
-import { showNotification } from '@mantine/notifications';
-import { BsFolderSymlink } from 'react-icons/bs';
 import MoveNoteModal from '../modals/moveNote/moveNoteModal';
+import styles from './noteItem.module.css';
 
 interface Props {
   note: INote;
@@ -25,58 +25,13 @@ const NoteItem = ({ note }: Props) => {
 
   const ref = useClickOutside(() => setIsMenuOpen(false));
 
-  const handleDeleteNote = () => {
+  const handleDeleteNote = async () => {
     setIsLoadingDeletingNote(true);
 
-    Axios.post(
-      'http://localhost:3001/notes/delete-note',
-      {
-        note_id: note.id,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${globalStore.user?.token}`,
-        },
-      }
-    )
-      .then(() => {
-        showNotification({
-          title: 'Note Deleted',
-          message: 'Your note was deleted successfully',
-          color: 'blue',
-        });
+    await deleteNote({ globalStore, note_id: note.id });
 
-        if (
-          globalStore.selectedNote &&
-          globalStore.selectedNote.id === note.id
-        ) {
-          globalStore.setSelectedNote(null);
-        }
-
-        globalStore.updateFolders();
-
-        setIsMenuOpen(false);
-      })
-      .catch((e) => {
-        try {
-          if (e.response.data.message) {
-            showNotification({
-              title: 'Error',
-              message: e.response.data.message,
-              color: 'red',
-            });
-          }
-        } catch (e) {
-          showNotification({
-            title: 'Error',
-            message: 'Looks like our servers are down, try again later.',
-            color: 'red',
-          });
-        }
-      })
-      .finally(() => {
-        setIsLoadingDeletingNote(false);
-      });
+    setIsLoadingDeletingNote(false);
+    setIsMenuOpen(false);
   };
 
   return (
@@ -100,7 +55,7 @@ const NoteItem = ({ note }: Props) => {
             globalStore.setSelectedNote(note);
           }}
           active={note.id === globalStore.selectedNote?.id}
-          label={note.note}
+          label={getNoteTitle({ note: note.note })}
           rightSection={
             <>
               <Menu.Target>

@@ -2,9 +2,8 @@ import { Button, Input, Modal } from '@mantine/core';
 import React, { useState } from 'react';
 import { useGlobalStore } from '../../../../../../globalStore/globalStore';
 import styles from '../modals.module.css';
-import Axios from 'axios';
-import { showNotification } from '@mantine/notifications';
 import { IFolder } from '../../../../../../interfaces/IFolder';
+import { renameFolder } from '../../../../../../api/notes/update/renameFolder';
 
 interface Props {
   isOpen: boolean;
@@ -22,59 +21,23 @@ const RenameFolderModal = ({
   const [isLoadingCreatingFolder, setIsLoadingCreatingFolder] = useState(false);
   const [newFolderName, setNewFolderName] = useState('');
 
-  const handleCreateFolder = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleCreateFolder = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setIsLoadingCreatingFolder(true);
 
-    Axios.patch(
-      'http://localhost:3001/notes/rename-folder',
-      {
-        folder_name: folder.folder_name,
-        new_folder_name: newFolderName,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${globalStore.user?.token || ''}`,
-        },
-      }
-    )
-      .then(() => {
-        showNotification({
-          title: 'Folder Renamed',
-          message: 'Your folder was renamed successfully',
-          color: 'blue',
-        });
+    await renameFolder({
+      globalStore,
+      new_folder_name: newFolderName,
+      folder_name: folder.folder_name,
+    });
 
-        globalStore.updateFolders();
-
-        handleClose();
-      })
-      .catch((e) => {
-        try {
-          if (e.response.data.message) {
-            showNotification({
-              title: 'Error',
-              message: e.response.data.message,
-              color: 'red',
-            });
-          }
-        } catch (e) {
-          showNotification({
-            title: 'Error',
-            message: 'Looks like our servers are down, try again later.',
-            color: 'red',
-          });
-        }
-      })
-      .finally(() => {
-        setIsLoadingCreatingFolder(false);
-      });
+    setIsLoadingCreatingFolder(false);
+    handleClose();
   };
 
   return (
     <Modal
-      overlayBlur={3}
       opened={isOpen}
       onClose={handleClose}
       title='Rename Folder'

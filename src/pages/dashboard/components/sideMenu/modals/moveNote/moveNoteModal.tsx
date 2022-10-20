@@ -2,6 +2,7 @@ import { Button, Modal, Select } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import Axios from 'axios';
 import React, { useState } from 'react';
+import { moveNote } from '../../../../../../api/notes/update/moveNote';
 import { useGlobalStore } from '../../../../../../globalStore/globalStore';
 import { INote } from '../../../../../../interfaces/INote';
 import styles from '../modals.module.css';
@@ -23,48 +24,19 @@ const MoveNoteModal = ({ isOpen, handleClose, note }: Props): JSX.Element => {
   const [selectedFolder, setSelectedFolder] = useState<string | null>(null);
   const [isLoadingMovingNote, setIsLoadingMovingNote] = useState(false);
 
-  const handleMoveNote = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleMoveNote = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setIsLoadingMovingNote(true);
 
-    Axios.patch(
-      'http://localhost:3001/notes/move-note',
-      {
-        note_id: note.id,
-        new_folder_id: selectedFolder,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${globalStore.user?.token || ''}`,
-        },
-      }
-    )
-      .then(() => {
-        showNotification({
-          title: 'Note moved',
-          message: 'Your note was moved to your desired folder',
-          color: 'blue',
-        });
+    await moveNote({
+      globalStore,
+      note_id: note.id,
+      new_folder_id: selectedFolder ?? '',
+    });
 
-        globalStore.updateFolders();
-
-        handleClose();
-      })
-      .catch((e) => {
-        if (e.response.data.message) {
-          showNotification({
-            title: 'Error',
-            message: e.response.data.message,
-            color: 'red',
-          });
-        }
-
-        console.log(e.response);
-      })
-      .finally(() => {
-        setIsLoadingMovingNote(false);
-      });
+    setIsLoadingMovingNote(false);
+    handleClose();
   };
 
   const renderSelect = (): JSX.Element | null => {
@@ -89,7 +61,6 @@ const MoveNoteModal = ({ isOpen, handleClose, note }: Props): JSX.Element => {
 
   return (
     <Modal
-      overlayBlur={3}
       opened={isOpen}
       onClose={handleClose}
       title='Move note to another folder'

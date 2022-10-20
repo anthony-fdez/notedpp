@@ -5,6 +5,7 @@ import styles from '../modals.module.css';
 import Axios from 'axios';
 import { showNotification } from '@mantine/notifications';
 import { IFolder } from '../../../../../../interfaces/IFolder';
+import { deleteFolder } from '../../../../../../api/notes/delete/deleteFolder';
 
 interface Props {
   folder: IFolder;
@@ -22,59 +23,22 @@ const DeleteFolderModal = ({
   const [isLoadingDeletingFolder, setIsLoadingDeletingFolder] = useState(false);
   const [confirmFolderName, setConfirmFolderName] = useState('');
 
-  const handleDeleteFolder = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleDeleteFolder = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setIsLoadingDeletingFolder(true);
 
-    Axios.post(
-      'http://localhost:3001/notes/delete-folder',
-      {
-        folder_id: folder.id,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${globalStore.user?.token || ''}`,
-        },
-      }
-    )
-      .then(() => {
-        showNotification({
-          title: 'Folder Created',
-          message: 'Your folder was created successfully',
-          color: 'blue',
-        });
+    await deleteFolder({
+      folder_id: folder.id,
+      globalStore,
+    });
 
-        if (
-          globalStore.selectedNote &&
-          globalStore.selectedNote.folderId === folder.id
-        ) {
-          globalStore.setSelectedNote(null);
-        }
-
-        globalStore.updateFolders();
-
-        handleClose();
-      })
-      .catch((e) => {
-        if (e.response.data.message) {
-          showNotification({
-            title: 'Error',
-            message: e.response.data.message,
-            color: 'red',
-          });
-        }
-
-        console.log(e.response);
-      })
-      .finally(() => {
-        setIsLoadingDeletingFolder(false);
-      });
+    handleClose();
+    setIsLoadingDeletingFolder(false);
   };
 
   return (
     <Modal
-      overlayBlur={3}
       opened={isOpen}
       onClose={handleClose}
       title='Delete Folder'

@@ -11,8 +11,8 @@ import transparentLogo from './transparentFav.png';
 
 const Home: React.FC = (): JSX.Element => {
   const globalStore = useGlobalStore();
-  console.log(globalStore.theme);
   const theme = useMantineTheme();
+
   const handleThemeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked === true) {
       return globalStore.setTheme('dark');

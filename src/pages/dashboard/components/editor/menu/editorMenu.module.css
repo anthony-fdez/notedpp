@@ -1,0 +1,14 @@
+.span {
+  font-size: 14px;
+  text-align: left;
+  padding-left: 12px;
+}
+.menu_item_three {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  align-items: center;
+  width: 100%;
+}
+.item {
+  text-align: center;
+}

@@ -9,8 +9,10 @@ import ProfileDrawer from '../profileDrawer/profileDrawer';
 import { FiMenu } from 'react-icons/fi';
 import { useGlobalStore } from '../../globalStore/globalStore';
 import { Loader } from '@mantine/core';
+import { useMantineTheme } from '@mantine/core';
 
 const Header: React.FC = (): JSX.Element => {
+  const theme = useMantineTheme();
   const globalStore = useGlobalStore();
 
   const [isUserDrawerOpen, setIsUserDrawerOpen] = useState(false);
@@ -29,7 +31,13 @@ const Header: React.FC = (): JSX.Element => {
   };
 
   return (
-    <header className={styles.container}>
+    <header
+      style={{
+        backgroundColor:
+          globalStore.theme === 'dark' ? theme.black : theme.white,
+      }}
+      className={styles.container}
+    >
       <ProfileDrawer
         isOpen={isUserDrawerOpen}
         handleClose={() => setIsUserDrawerOpen(false)}
