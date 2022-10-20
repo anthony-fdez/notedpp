@@ -3,7 +3,6 @@ interface Props {
 }
 
 export const getNoteTitle = ({ note }: Props): string => {
-  console.log(note);
   const header = note
     .split('<h1>')
     .join(',')
@@ -11,7 +10,7 @@ export const getNoteTitle = ({ note }: Props): string => {
     .join(',')
     .split(',')[1];
 
-  console.log(header);
+  if (!note || note === '' || header === '') return 'Empty Note';
 
   return header;
 };
