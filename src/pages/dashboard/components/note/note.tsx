@@ -1,5 +1,5 @@
 import { Alert, Button, useMantineTheme } from '@mantine/core';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useGlobalStore } from '../../../../globalStore/globalStore';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { useWindowScroll } from '@mantine/hooks';
@@ -32,6 +32,8 @@ import TableHeader from '@tiptap/extension-table-header';
 import TableCell from '@tiptap/extension-table-cell';
 import EditorMenu from '../editor/menu/menu';
 import NoteHistory from '../noteHistory/noteHistory';
+import DownloadButton from '../editor/downloadButton/downloadButton';
+import { useReactToPrint } from 'react-to-print';
 
 const CustomDocument = Document.extend({
   content: 'heading block*',
@@ -40,6 +42,8 @@ const CustomDocument = Document.extend({
 const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
   const theme = useMantineTheme();
   const globalStore = useGlobalStore();
+
+  const componentToDownloadRef = useRef(null);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [scroll, scrollTo] = useWindowScroll();
@@ -50,6 +54,11 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
   useEffect(() => {
     scrollTo({ y: 0 });
   }, [globalStore.selectedNote]);
+
+  const handlePrint = useReactToPrint({
+    content: () => componentToDownloadRef.current,
+    copyStyles: true,
+  });
 
   const editor = useEditor({
     extensions: [
@@ -247,15 +256,23 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
               </Button>
               <p>Last saved {moment(lastSynced).fromNow()}</p>
             </div>
-            <Button onClick={() => setIsNoteHistoryOpen(true)} variant='filled'>
-              Note History
-            </Button>
+            <div className={styles.right_section}>
+              <DownloadButton handlePrint={handlePrint} />
+              <Button
+                onClick={() => setIsNoteHistoryOpen(true)}
+                variant='light'
+              >
+                Note History
+              </Button>
+            </div>
           </div>
 
           <EditorMenu editor={editor} />
         </div>
 
-        <TextEditor editor={editor} />
+        <div ref={componentToDownloadRef}>
+          <TextEditor editor={editor} />
+        </div>
         <div className={styles.character_count_container}>
           {editor.storage.characterCount.words()} words
           <br />

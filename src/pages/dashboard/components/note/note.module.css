@@ -24,7 +24,8 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.first_header_container {
+.first_header_container,
+.right_section {
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -11,7 +11,7 @@ const TextEditor: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
   return (
     <div className={styles.container}>
       <BubbleMenuComponent editor={editor} />
-      <EditorContent className={styles.editor} editor={editor} />
+      <EditorContent id='editor' className={styles.editor} editor={editor} />
     </div>
   );
 };
