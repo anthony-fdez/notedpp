@@ -114,13 +114,6 @@ const EditorMenu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
         >
           <MdFormatStrikethrough />
         </Button>
-
-        <Button
-          onClick={() => editor.chain().focus().toggleTaskList().run()}
-          variant={editor.isActive('bulletList') ? 'filled' : 'subtle'}
-        >
-          <AiOutlineCheckSquare />
-        </Button>
         <Menu shadow='md' width={350}>
           <Menu.Target>
             <Button variant={'subtle'}>
@@ -232,6 +225,12 @@ const EditorMenu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
             </Menu.Item>
           </Menu.Dropdown>
         </Menu>
+        <Button
+          onClick={() => editor.chain().focus().toggleTaskList().run()}
+          variant={editor.isActive('taskList') ? 'filled' : 'subtle'}
+        >
+          <AiOutlineCheckSquare />
+        </Button>
         <Button
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           variant={editor.isActive('bulletList') ? 'filled' : 'subtle'}
