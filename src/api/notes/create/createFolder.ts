@@ -9,7 +9,7 @@ interface Props {
 
 export const createFolder = async ({ globalStore, folder_name }: Props) => {
   await Axios.post(
-    `${import.meta.env.VITE_BASE_URL}notes/new-folder`,
+    `${import.meta.env.VITE_BASE_URL}notes/new-folder/`,
     {
       folder_name,
     },

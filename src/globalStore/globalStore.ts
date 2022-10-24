@@ -53,7 +53,7 @@ export const useGlobalStore = create<IGlobalStore>()(
       updateFolders: () => {
         set({ isLoadingFolders: true });
 
-        Axios.get(`${import.meta.env.VITE_BASE_URL}/notes/get-all-folders`, {
+        Axios.get(`${import.meta.env.VITE_BASE_URL}notes/get-all-folders/`, {
           headers: {
             Authorization: `Bearer ${get().user?.token || ''}`,
           },

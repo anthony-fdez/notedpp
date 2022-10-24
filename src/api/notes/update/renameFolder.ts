@@ -14,7 +14,7 @@ export const renameFolder = async ({
   new_folder_name,
 }: Props) => {
   await Axios.patch(
-    `${import.meta.env.VITE_BASE_URL}/notes/rename-folder`,
+    `${import.meta.env.VITE_BASE_URL}notes/rename-folder/`,
     {
       folder_name,
       new_folder_name,

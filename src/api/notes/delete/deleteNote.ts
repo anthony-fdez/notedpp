@@ -9,7 +9,7 @@ interface Props {
 
 export const deleteNote = async ({ globalStore, note_id }: Props) => {
   await Axios.post(
-    `${import.meta.env.VITE_BASE_URL}/notes/delete-note`,
+    `${import.meta.env.VITE_BASE_URL}notes/delete-note/`,
     {
       note_id,
     },

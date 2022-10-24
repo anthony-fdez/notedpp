@@ -14,7 +14,7 @@ export const moveNote = async ({
   note_id,
 }: Props) => {
   await Axios.patch(
-    `${import.meta.env.VITE_BASE_URL}/notes/move-note`,
+    `${import.meta.env.VITE_BASE_URL}notes/move-note/`,
     {
       note_id,
       new_folder_id,

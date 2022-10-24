@@ -13,7 +13,7 @@ export const getSharedNote = async ({
   user_id,
 }: Props): Promise<INote | null> => {
   const note = await Axios.post(
-    `${import.meta.env.VITE_BASE_URL}/notes/get-note-shared`,
+    `${import.meta.env.VITE_BASE_URL}notes/get-note-shared/`,
     {
       note_id,
       user_id,
