@@ -37,7 +37,7 @@ const Shared = () => {
 
   useEffect(() => {
     hljs.initHighlighting();
-  }, []);
+  }, [noteData]);
 
   if (noteData === 'loading') {
     return (

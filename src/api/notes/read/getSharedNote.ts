@@ -17,9 +17,11 @@ export const getSharedNote = async ({
     user_id,
   })
     .then((response) => {
+      console.log(response);
       return response.data.note;
     })
     .catch((e): void => {
+      console.log(e);
       try {
         if (e.response.data.message) {
           showNotification({
