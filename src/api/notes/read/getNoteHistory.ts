@@ -13,7 +13,7 @@ export const getNoteHistory = async ({
   note_id,
 }: Props): Promise<INote[] | null> => {
   const noteHistory = await Axios.post(
-    'http://localhost:3001/notes/get-note-history',
+    `${import.meta.env.VITE_BASE_URL}/notes/get-note-history`,
     {
       note_id,
     },

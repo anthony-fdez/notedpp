@@ -12,10 +12,13 @@ export const getSharedNote = async ({
   note_id,
   user_id,
 }: Props): Promise<INote | null> => {
-  const note = await Axios.post('http://localhost:3001/notes/get-note-shared', {
-    note_id,
-    user_id,
-  })
+  const note = await Axios.post(
+    `${import.meta.env.VITE_BASE_URL}/notes/get-note-shared`,
+    {
+      note_id,
+      user_id,
+    }
+  )
     .then((response) => {
       console.log(response);
       return response.data.note;

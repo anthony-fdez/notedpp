@@ -10,7 +10,7 @@ interface Props {
 
 export const createNote = async ({ globalStore, note, folder_name }: Props) => {
   await Axios.post(
-    'http://localhost:3001/notes/new-note',
+    `${import.meta.env.VITE_BASE_URL}/notes/new-note`,
     {
       note,
       folder_name,

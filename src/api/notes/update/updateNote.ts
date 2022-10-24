@@ -10,7 +10,7 @@ interface Props {
 
 export const updateNote = async ({ globalStore, note_id, new_note }: Props) => {
   await Axios.patch(
-    'http://localhost:3001/notes/edit-note',
+    `${import.meta.env.VITE_BASE_URL}/notes/edit-note`,
     {
       new_note,
       note_id,
