@@ -7,6 +7,11 @@ import styles from './shared.module.css';
 import { MdErrorOutline } from 'react-icons/md';
 import { getSharedNote } from '../../api/notes/read/getSharedNote';
 
+// Code highlighting
+import hljs from 'highlight.js';
+import javascript from 'highlight.js/lib/languages/javascript';
+hljs.registerLanguage('javascript', javascript);
+
 const Shared = () => {
   const { note } = useParams();
   const [noteData, setNoteData] = useState<INote | 'loading' | null>('loading');
@@ -29,6 +34,10 @@ const Shared = () => {
 
     getNoteData();
   }, [note]);
+
+  useEffect(() => {
+    hljs.initHighlighting();
+  }, []);
 
   if (noteData === 'loading') {
     return (
