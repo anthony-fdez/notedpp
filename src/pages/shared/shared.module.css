@@ -1,5 +1,12 @@
 .container {
   max-width: 1000px;
   margin: auto;
-  margin-top: 150px;
+  margin-top: 80px;
+  padding: 15px;
+}
+
+@media only screen and (min-width: 600px) {
+  .container {
+    margin-top: 150px;
+  }
 }
