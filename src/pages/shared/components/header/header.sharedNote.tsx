@@ -1,5 +1,6 @@
 import { useMantineTheme } from '@mantine/core';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ThemeSwitch from '../../../../components/profileDrawer/settings/components/themeSwitch/themeSwitch';
 import { useGlobalStore } from '../../../../globalStore/globalStore';
 import styles from './header.module.css';
@@ -24,7 +25,9 @@ const Header = () => {
       className={styles.container}
     >
       <div className={styles.content}>
-        <h3>Noted++</h3>
+        <Link className={styles.link} to='/dashboard'>
+          <h3>Noted++</h3>
+        </Link>
         <div className={styles.header_right}>
           <ThemeSwitch />
         </div>
