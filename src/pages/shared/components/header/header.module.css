@@ -1,0 +1,16 @@
+.container {
+  margin-bottom: 100px;
+  padding: 20px;
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  backdrop-filter: blur(10px);
+}
+.content {
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

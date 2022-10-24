@@ -4,6 +4,7 @@ import React from 'react';
 import Logo from '../../../favN.png';
 import AnimateOnScreenLoad from '../../components/animateOnScreenLoad/animateOnScreenLoad';
 import LoginButton from '../../components/auth/loginButton/loginButtonHome';
+import ThemeSwitch from '../../components/profileDrawer/settings/components/themeSwitch/themeSwitch';
 import { useGlobalStore } from '../../globalStore/globalStore';
 import notedBackground from './Back.png';
 import styles from './home.module.css';
@@ -25,23 +26,10 @@ const Home: React.FC = (): JSX.Element => {
     <div className={styles.overall}>
       <div className={styles.container}>
         <div className={styles.content}>
-          <Switch
-            className={styles.switch}
-            size='md'
-            color={theme.colorScheme === 'dark' ? 'gray' : 'dark'}
-            defaultChecked={globalStore.theme === 'dark'}
-            onLabel={
-              <IconSun size={16} stroke={2.5} color={theme.colors.yellow[4]} />
-            }
-            onChange={(e) => handleThemeChange(e)}
-            offLabel={
-              <IconMoonStars
-                size={16}
-                stroke={2.5}
-                color={theme.colors.blue[6]}
-              />
-            }
-          />
+          <div className={styles.switch}>
+            <ThemeSwitch />
+          </div>
+
           <div className={styles.bothImages}>
             <img src={notedBackground} alt='' className={styles.image} />
             <img src={transparentLogo} alt='' className={styles.imageLogo} />
