@@ -36,7 +36,11 @@ const Shared = () => {
   }, [note]);
 
   useEffect(() => {
-    hljs.initHighlighting();
+    if (noteData) {
+      setTimeout(() => {
+        hljs.initHighlighting();
+      }, 100);
+    }
   }, [noteData]);
 
   if (noteData === 'loading') {
