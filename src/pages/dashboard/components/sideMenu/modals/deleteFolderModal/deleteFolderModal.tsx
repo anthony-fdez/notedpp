@@ -38,11 +38,7 @@ const DeleteFolderModal = ({
   };
 
   return (
-    <Modal
-      opened={isOpen}
-      onClose={handleClose}
-      title='Delete Folder'
-    >
+    <Modal opened={isOpen} onClose={handleClose} title='Delete Folder'>
       <form onSubmit={(e) => handleDeleteFolder(e)}>
         <Alert variant='filled' title='Be careful' color='red'>
           This action is irreversible, and all you notes inside this folder will
@@ -53,7 +49,7 @@ const DeleteFolderModal = ({
           deleting the folder.
         </Alert>
         <Input
-          onChange={(e) => setConfirmFolderName(e.target.value)}
+          onChange={(e: any) => setConfirmFolderName(e.target.value)}
           placeholder='Confirm folder name'
         />
         <div className={styles.footer_container}>

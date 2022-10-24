@@ -12,7 +12,7 @@ export interface IGlobalStore {
   folders: IFolder[] | null;
   isLoadingFolders: boolean;
   isMobileMenuOpen: boolean;
-  setUser: (data: IUser) => void;
+  setUser: (data: IUser | null) => void;
   setSelectedNote: (note: INote | null) => void;
   setFolders: (data: IFolder[] | null) => void;
   setIsLoadingFolders: (isLoading: boolean) => void;
