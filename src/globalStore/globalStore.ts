@@ -12,7 +12,7 @@ export interface IGlobalStore {
   folders: IFolder[] | null;
   isLoadingFolders: boolean;
   isMobileMenuOpen: boolean;
-  setUser: (data: IUser) => void;
+  setUser: (data: IUser | null) => void;
   setSelectedNote: (note: INote | null) => void;
   setFolders: (data: IFolder[] | null) => void;
   setIsLoadingFolders: (isLoading: boolean) => void;
@@ -53,7 +53,7 @@ export const useGlobalStore = create<IGlobalStore>()(
       updateFolders: () => {
         set({ isLoadingFolders: true });
 
-        Axios.get('http://localhost:3001/notes/get-all-folders', {
+        Axios.get(`${import.meta.env.VITE_BASE_URL}/notes/get-all-folders`, {
           headers: {
             Authorization: `Bearer ${get().user?.token || ''}`,
           },

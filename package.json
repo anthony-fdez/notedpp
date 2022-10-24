@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:prod": "env-cmd -f .env.prod tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint --max-warnings=0 --ext ts,tsx src",
     "lint:fix": "eslint --ext ts,tsx src --fix"
@@ -31,6 +32,7 @@
     "@tiptap/react": "^2.0.0-beta.114",
     "@tiptap/starter-kit": "^2.0.0-beta.191",
     "axios": "^1.1.2",
+    "env-cmd": "^10.1.0",
     "hljs": "^6.2.3",
     "lowlight": "^2.7.0",
     "moment": "^2.29.4",

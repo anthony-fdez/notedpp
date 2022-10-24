@@ -9,6 +9,7 @@
         "Lowlight",
         "mantine",
         "tiptap",
+        "VITE",
         "zustand"
     ],
     "ignoreWords": [],

@@ -179,7 +179,7 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
     });
 
     Axios.post(
-      'http://localhost:3001/notes/get-note',
+      `${import.meta.env.VITE_BASE_URL}/notes/get-note`,
       {
         note_id: globalStore.selectedNote?.id,
       },
