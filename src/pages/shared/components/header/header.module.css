@@ -1,0 +1,17 @@
+.container {
+  margin-bottom: 100px;
+  padding: 20px;
+  position: fixed;
+  background-color: white;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  border-bottom: 1px solid rgb(230, 230, 230);
+}
+.content {
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

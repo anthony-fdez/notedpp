@@ -32,7 +32,7 @@ import TableHeader from '@tiptap/extension-table-header';
 import TableCell from '@tiptap/extension-table-cell';
 import EditorMenu from '../editor/menu/menu';
 import NoteHistory from '../noteHistory/noteHistory';
-import DownloadButton from '../editor/downloadButton/downloadButton';
+import ShareButton from '../editor/shareButton/shareButton';
 import { useReactToPrint } from 'react-to-print';
 
 const CustomDocument = Document.extend({
@@ -257,7 +257,10 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
               <p>Last saved {moment(lastSynced).fromNow()}</p>
             </div>
             <div className={styles.right_section}>
-              <DownloadButton handlePrint={handlePrint} />
+              <ShareButton
+                note={globalStore.selectedNote}
+                handlePrint={handlePrint}
+              />
               <Button
                 onClick={() => setIsNoteHistoryOpen(true)}
                 variant='light'
