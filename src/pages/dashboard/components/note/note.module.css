@@ -4,10 +4,21 @@
   z-index: 100;
   padding-bottom: 10px;
 }
+.menu_buttons_container {
+  position: fixed;
+  bottom: 0px;
+  background-color: inherit;
+  left: 0px;
+  padding: 10px;
+  width: calc(100vw);
+}
 .last_synced_container {
   display: flex;
   align-items: center;
   padding-bottom: 10px;
+}
+.last_saved_text {
+  display: none;
 }
 .save_button {
   margin-right: 5px;
@@ -23,10 +34,18 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-bottom: 150px;
 }
 .first_header_container,
 .right_section {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media only screen and (min-width: 900px) {
+  .last_saved_text {
+    display: block;
+    opacity: 0.7;
+  }
 }
