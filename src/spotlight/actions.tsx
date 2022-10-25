@@ -49,7 +49,6 @@ export const spotlightActions = ({
 
   if (globalStore.folders) {
     globalStore.folders.forEach((folder: IFolder) => {
-      console.log(folder);
       folder.notes.forEach((note: INote) => {
         actions.push({
           title: getNoteTitle({ note: note.note }),

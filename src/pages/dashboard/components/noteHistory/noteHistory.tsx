@@ -74,8 +74,6 @@ const DrawerContents = () => {
   const renderNoteContent = (note: INote) => {
     const noteHeader = getNoteTitle({ note: note.note_archive_text ?? '' });
 
-    console.log(noteHeader);
-
     if (noteHeader === 'Empty Note')
       return (
         <Alert title='Your note was empty at this time'>
