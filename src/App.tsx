@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { RouterProvider } from 'react-router-dom';
 import './App.css';
 import BackdropSpinner from './components/backdrop/backdrop';
@@ -8,6 +8,9 @@ import { routes } from './routes';
 import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { useGlobalStore } from './globalStore/globalStore';
+import { SpotlightProvider } from '@mantine/spotlight';
+import { spotlightActions } from './spotlight/actions';
+import { AiOutlineSearch } from 'react-icons/ai';
 
 const LightTheme = React.lazy(
   () => import('./styles/workAroundComponents/lightTheme')
@@ -18,7 +21,7 @@ const DarkTheme = React.lazy(
 
 function App() {
   const globalStore = useGlobalStore();
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, logout } = useAuth0();
 
   const router = routes({ isAuthenticated });
 
@@ -34,13 +37,27 @@ function App() {
       }}
     >
       <NotificationsProvider position='top-right'>
-        <React.Suspense fallback={<></>}>
-          {globalStore.theme === 'dark' ? <DarkTheme /> : <LightTheme />}
-        </React.Suspense>
-        <div className='App'>
-          <BackdropSpinner />
-          <RouterProvider router={router} />
-        </div>
+        <SpotlightProvider
+          actions={spotlightActions({
+            globalStore,
+            logout,
+            isAuthenticated,
+          })}
+          limit={7}
+          searchPlaceholder='Search for notes or actions...'
+          shortcut={['mod + P', 'mod + K', '/']}
+          searchIcon={<AiOutlineSearch />}
+          highlightQuery
+          nothingFoundMessage='Hmm... nothing matches your search'
+        >
+          <React.Suspense fallback={<></>}>
+            {globalStore.theme === 'dark' ? <DarkTheme /> : <LightTheme />}
+          </React.Suspense>
+          <div className='App'>
+            <BackdropSpinner />
+            <RouterProvider router={router} />
+          </div>
+        </SpotlightProvider>
       </NotificationsProvider>
     </MantineProvider>
   );
