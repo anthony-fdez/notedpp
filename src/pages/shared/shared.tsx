@@ -19,8 +19,8 @@ const Shared = () => {
   useEffect(() => {
     if (!note) return;
 
-    const note_id = note.split('-')[0];
-    const user_id = note.split('-')[1];
+    const note_id = note.split('---')[0];
+    const user_id = note.split('---')[1];
 
     const getNoteData = async () => {
       const data: INote | null = await getSharedNote({ note_id, user_id });

@@ -15,7 +15,7 @@ interface Props {
 const ShareButton = ({ handlePrint, note }: Props) => {
   const copyLinkToClipboard = () => {
     navigator.clipboard.writeText(
-      `https://${window.location.host}/shared/${note.id}-${note.user_id}`
+      `https://${window.location.host}/shared/${note.id}---${note.user_id}`
     );
 
     showNotification({
