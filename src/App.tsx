@@ -49,6 +49,8 @@ function App() {
           searchIcon={<AiOutlineSearch />}
           highlightQuery
           nothingFoundMessage='Hmm... nothing matches your search'
+          overlayBlur={0}
+          overlayOpacity={0.7}
         >
           <React.Suspense fallback={<></>}>
             {globalStore.theme === 'dark' ? <DarkTheme /> : <LightTheme />}
