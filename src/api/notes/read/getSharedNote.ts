@@ -20,7 +20,6 @@ export const getSharedNote = async ({
     }
   )
     .then((response) => {
-      console.log(response);
       return response.data.note;
     })
     .catch((e): void => {

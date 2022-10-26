@@ -24,8 +24,25 @@
 .sync_container > p {
   margin-left: 5px;
 }
+.desktop_search_bar {
+  display: none;
+}
+.mobile_search_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
 @media only screen and (min-width: 900px) {
   .action_icon_mobile_menu {
+    display: none;
+  }
+  .desktop_search_bar {
+    display: block;
+    margin-right: 10px;
+  }
+  .mobile_search_button {
     display: none;
   }
 }

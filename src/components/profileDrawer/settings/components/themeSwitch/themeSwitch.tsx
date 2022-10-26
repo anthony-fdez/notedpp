@@ -28,7 +28,7 @@ const ThemeSwitch = () => {
         offLabel={
           <IconMoonStars size={16} stroke={2.5} color={theme.colors.blue[6]} />
         }
-        label='Theme'
+        label=''
       />
     </>
   );

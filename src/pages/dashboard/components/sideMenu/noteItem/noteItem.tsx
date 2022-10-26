@@ -4,10 +4,10 @@ import { IconTrash } from '@tabler/icons';
 import React, { useState } from 'react';
 import { BsFolderSymlink } from 'react-icons/bs';
 import { FiMoreHorizontal } from 'react-icons/fi';
-import { deleteNote } from '../../../../../api/notes/delete/deleteNote';
 import { getNoteTitle } from '../../../../../functions/getNoteTitle';
 import { useGlobalStore } from '../../../../../globalStore/globalStore';
 import { INote } from '../../../../../interfaces/INote';
+import DeleteNoteModal from '../modals/deleteNoteModal/deleteNoteModal';
 import MoveNoteModal from '../modals/moveNote/moveNoteModal';
 import styles from './noteItem.module.css';
 
@@ -19,20 +19,10 @@ const NoteItem = ({ note }: Props) => {
   const globalStore = useGlobalStore();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoadingDeletingNote, setIsLoadingDeletingNote] = useState(false);
-
   const [isMoveNoteModalOpen, setIsMoveNoteModalOpen] = useState(false);
+  const [isDeleteNoteModalOpen, setIsDeleteNoteModalOpen] = useState(false);
 
   const ref = useClickOutside(() => setIsMenuOpen(false));
-
-  const handleDeleteNote = async () => {
-    setIsLoadingDeletingNote(true);
-
-    await deleteNote({ globalStore, note_id: note.id });
-
-    setIsLoadingDeletingNote(false);
-    setIsMenuOpen(false);
-  };
 
   return (
     <div className={styles.note_item_container} ref={ref} key={note.id}>
@@ -40,6 +30,11 @@ const NoteItem = ({ note }: Props) => {
         note={note}
         isOpen={isMoveNoteModalOpen}
         handleClose={() => setIsMoveNoteModalOpen(false)}
+      />
+      <DeleteNoteModal
+        note={note}
+        isOpen={isDeleteNoteModalOpen}
+        handleClose={() => setIsDeleteNoteModalOpen(false)}
       />
       <Menu
         opened={isMenuOpen}
@@ -81,11 +76,10 @@ const NoteItem = ({ note }: Props) => {
           <Menu.Label>Danger zone</Menu.Label>
 
           <Button
-            loading={isLoadingDeletingNote}
             className={styles.note_button}
             color='red'
             leftIcon={<IconTrash size={14} />}
-            onClick={handleDeleteNote}
+            onClick={() => setIsDeleteNoteModalOpen(true)}
           >
             Delete Note
           </Button>

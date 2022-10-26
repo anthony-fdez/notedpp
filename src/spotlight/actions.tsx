@@ -1,15 +1,17 @@
-import { LogoutOptions } from '@auth0/auth0-react';
-import type { SpotlightAction } from '@mantine/spotlight';
-import moment from 'moment';
+
 import React from 'react';
-import { AiOutlinePlus } from 'react-icons/ai';
-import { CiLogout } from 'react-icons/ci';
-import { createNote } from '../api/notes/create/createNote';
-import { handleLogout } from '../components/auth/logoutButton/logoutButton';
-import { getNoteTitle } from '../functions/getNoteTitle';
 import { IGlobalStore } from '../globalStore/globalStore';
+import type { SpotlightAction } from '@mantine/spotlight';
+import { handleLogout } from '../components/auth/logoutButton/logoutButton';
+import { LogoutOptions } from '@auth0/auth0-react';
 import { IFolder } from '../interfaces/IFolder';
 import { INote } from '../interfaces/INote';
+import { getNoteTitle } from '../functions/getNoteTitle';
+import moment from 'moment';
+import { createNote } from '../api/notes/create/createNote';
+import { CiLogout } from 'react-icons/ci';
+import { AiOutlinePlus } from 'react-icons/ai';
+
 
 interface Props {
   globalStore: IGlobalStore;

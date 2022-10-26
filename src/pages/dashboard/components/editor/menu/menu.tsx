@@ -39,7 +39,7 @@ const EditorMenu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
 
   return (
     <>
-      <div>
+      <div className={styles.menu_container}>
         <Button
           onClick={() => editor.chain().focus().setParagraph().run()}
           variant={editor.isActive('paragraph') ? 'filled' : 'subtle'}

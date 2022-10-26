@@ -1,4 +1,4 @@
-import { Alert, Button, Drawer } from '@mantine/core';
+import { Alert, Button, Drawer, Loader } from '@mantine/core';
 import React, { useState } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { MdOutlineCreate } from 'react-icons/md';
@@ -56,8 +56,8 @@ const SideMenu = (): JSX.Element | null => {
   const renderFolderList = () => {
     if (!globalStore.folders) {
       return (
-        <Alert color='red' title='Hmm, something failed...'>
-          There was an error getting your notes, try again later.
+        <Alert icon={<Loader />} color='blue' title='Hold on tight...'>
+          Your notes are getting ready
         </Alert>
       );
     }
@@ -90,7 +90,7 @@ const SideMenu = (): JSX.Element | null => {
           onClose={() => globalStore.setIsMobileMenuOpen(false)}
           title='Noted++'
           padding='xl'
-          size='xlg'
+          size='xl'
         >
           {folderAndNotesButtons()}
           {renderFolderList()}
@@ -108,7 +108,7 @@ const SideMenu = (): JSX.Element | null => {
           className={styles.container}
         >
           {folderAndNotesButtons()}
-          {renderFolderList()}
+          <div>{renderFolderList()}</div>
         </div>
       </div>
     </>
