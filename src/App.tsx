@@ -33,7 +33,7 @@ function App() {
         primaryColor: 'blue',
       }}
     >
-      <NotificationsProvider>
+      <NotificationsProvider position='top-right'>
         <React.Suspense fallback={<></>}>
           {globalStore.theme === 'dark' ? <DarkTheme /> : <LightTheme />}
         </React.Suspense>

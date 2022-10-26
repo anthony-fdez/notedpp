@@ -254,7 +254,9 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
               >
                 Save
               </Button>
-              <p>Last saved {moment(lastSynced).fromNow()}</p>
+              <p className={styles.last_saved_text}>
+                Last saved {moment(lastSynced).fromNow()}
+              </p>
             </div>
             <div className={styles.right_section}>
               <ShareButton
@@ -269,8 +271,18 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
               </Button>
             </div>
           </div>
-
-          <EditorMenu editor={editor} />
+          <div
+            style={{
+              borderTop: `1px solid ${
+                globalStore.theme === 'dark'
+                  ? 'rgb(80,80,80)'
+                  : 'rgb(230,230,230)'
+              }`,
+            }}
+            className={styles.menu_buttons_container}
+          >
+            <EditorMenu editor={editor} />
+          </div>
         </div>
 
         <div ref={componentToDownloadRef}>
