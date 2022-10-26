@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { IGlobalStore } from '../globalStore/globalStore';
 import type { SpotlightAction } from '@mantine/spotlight';
@@ -10,6 +11,7 @@ import moment from 'moment';
 import { createNote } from '../api/notes/create/createNote';
 import { CiLogout } from 'react-icons/ci';
 import { AiOutlinePlus } from 'react-icons/ai';
+
 
 interface Props {
   globalStore: IGlobalStore;
@@ -29,10 +31,12 @@ export const spotlightActions = ({
       title: 'Create new quick note',
       description: 'Create a quick note inside your quick notes folder',
       onTrigger: async () => {
+        globalStore.setIsFullLoader(true); //Setting loader
         await createNote({
           globalStore,
           note: '<h1></h1>',
         });
+        globalStore.setIsFullLoader(false);
       },
       group: 'Actions',
       icon: <AiOutlinePlus />,
