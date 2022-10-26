@@ -1,7 +1,6 @@
-import { ActionIcon } from '@mantine/core';
+import { ActionIcon, Kbd } from '@mantine/core';
 import React, { useState } from 'react';
 
-import LoginButton from '../auth/loginButton/loginButton';
 import styles from './header.module.css';
 
 import { TbUser } from 'react-icons/tb';
@@ -10,6 +9,9 @@ import { FiMenu } from 'react-icons/fi';
 import { useGlobalStore } from '../../globalStore/globalStore';
 import { Loader } from '@mantine/core';
 import { useMantineTheme } from '@mantine/core';
+import { Input } from '@mantine/core';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { openSpotlight } from '@mantine/spotlight';
 
 const Header: React.FC = (): JSX.Element => {
   const theme = useMantineTheme();
@@ -51,7 +53,28 @@ const Header: React.FC = (): JSX.Element => {
         </ActionIcon>
         {syncDataSpinner()}
         <div className={styles.header_right_container}>
-          <LoginButton />
+          <Input
+            onClick={() => openSpotlight()}
+            className={styles.desktop_search_bar}
+            icon={<AiOutlineSearch />}
+            placeholder='Search Noted++'
+            radius={5}
+            rightSectionWidth={60}
+            rightSection={
+              <>
+                <Kbd>⌘ + K</Kbd>
+              </>
+            }
+          />
+          <ActionIcon
+            size={'lg'}
+            color={'blue'}
+            variant='light'
+            className={styles.mobile_search_button}
+            onClick={() => openSpotlight()}
+          >
+            <AiOutlineSearch />
+          </ActionIcon>
           <ActionIcon
             className={styles.profile_button}
             size='lg'

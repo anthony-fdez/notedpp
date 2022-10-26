@@ -11,7 +11,6 @@ const AnimateOnScreenLoad = ({ children }: Props) => {
   const variants: Variants = {
     hidden: {
       opacity: 0,
-      y: -100,
     },
     show: {
       opacity: 1,
