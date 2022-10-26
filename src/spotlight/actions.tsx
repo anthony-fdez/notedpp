@@ -29,7 +29,7 @@ export const spotlightActions = ({
       title: 'Create new quick note',
       description: 'Create a quick note inside your quick notes folder',
       onTrigger: async () => {
-        globalStore.setIsFullLoader(true);
+        globalStore.setIsFullLoader(true); //Setting loader
         await createNote({
           globalStore,
           note: '<h1></h1>',
