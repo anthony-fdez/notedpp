@@ -2,12 +2,11 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { RouterProvider } from 'react-router-dom';
 import './App.css';
-import FullScreenLoad from './components/animateOnScreenLoad/fullScreenLoad';
-import BackdropSpinner from './components/backdrop/backdrop';
+import FullScreenLoad from './components/backdrop/fullScreenLoad';
 import { useGlobalStore } from './globalStore/globalStore';
 
 import { SpotlightProvider } from '@mantine/spotlight';
@@ -15,7 +14,6 @@ import { spotlightActions } from './spotlight/actions';
 import { AiOutlineSearch } from 'react-icons/ai';
 
 import { routes } from './routes';
-
 
 const LightTheme = React.lazy(
   () => import('./styles/workAroundComponents/lightTheme')
@@ -61,12 +59,10 @@ function App() {
             {globalStore.theme === 'dark' ? <DarkTheme /> : <LightTheme />}
           </React.Suspense>
           <div className='App'>
-            <BackdropSpinner />
-            <RouterProvider router={router} />
             <FullScreenLoad />
+            <RouterProvider router={router} />
           </div>
         </SpotlightProvider>
-
       </NotificationsProvider>
     </MantineProvider>
   );
