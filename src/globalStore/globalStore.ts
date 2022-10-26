@@ -1,21 +1,23 @@
-import { INote } from './../interfaces/INote';
-import { IFolder } from './../interfaces/IFolder';
+import { showNotification } from '@mantine/notifications';
+import Axios from 'axios';
 import create from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
+import { IFolder } from './../interfaces/IFolder';
+import { INote } from './../interfaces/INote';
 import { IUser } from './interfaces/IUser';
-import Axios from 'axios';
-import { showNotification } from '@mantine/notifications';
 export interface IGlobalStore {
   theme: 'dark' | 'light';
   user: IUser | null;
   selectedNote: INote | null;
   folders: IFolder[] | null;
   isLoadingFolders: boolean;
+  isFullLoader: boolean;
   isMobileMenuOpen: boolean;
   setUser: (data: IUser | null) => void;
   setSelectedNote: (note: INote | null) => void;
   setFolders: (data: IFolder[] | null) => void;
   setIsLoadingFolders: (isLoading: boolean) => void;
+  setIsFullLoader: (isFullLoading: boolean) => void;
   updateFolders: () => void;
   setIsMobileMenuOpen: (isOpen: boolean) => void;
   setTheme: (theme: 'dark' | 'light') => void;
@@ -37,6 +39,7 @@ export const useGlobalStore = create<IGlobalStore>()(
       folders: null,
       selectedNote: null,
       isLoadingFolders: true,
+      isFullLoader: false,
       isMobileMenuOpen: false,
       setUser: (data: IUser | null) => {
         set({ user: data });
@@ -46,6 +49,9 @@ export const useGlobalStore = create<IGlobalStore>()(
       },
       setIsLoadingFolders: (isLoading: boolean) => {
         set({ isLoadingFolders: isLoading });
+      },
+      setIsFullLoader: (isFullLoading: boolean) => {
+        set({ isFullLoader: isFullLoading });
       },
       setSelectedNote: (noteId: INote | null) => {
         set({ selectedNote: noteId });
