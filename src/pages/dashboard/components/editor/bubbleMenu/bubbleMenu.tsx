@@ -6,7 +6,7 @@ import { FaBold } from 'react-icons/fa';
 import { AiOutlineItalic } from 'react-icons/ai';
 import { MdFormatStrikethrough } from 'react-icons/md';
 import { BsCodeSlash } from 'react-icons/bs';
-import { Box, Button, Group } from '@mantine/core';
+import { Button, Group } from '@mantine/core';
 import { useGlobalStore } from '../../../../../globalStore/globalStore';
 
 interface Props {

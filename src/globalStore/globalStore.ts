@@ -1,10 +1,10 @@
-import { showNotification } from '@mantine/notifications';
 import Axios from 'axios';
 import create from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { IFolder } from './../interfaces/IFolder';
 import { INote } from './../interfaces/INote';
 import { IUser } from './interfaces/IUser';
+
 export interface IGlobalStore {
   theme: 'dark' | 'light';
   user: IUser | null;

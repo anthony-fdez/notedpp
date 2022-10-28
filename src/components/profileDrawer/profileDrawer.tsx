@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Drawer } from '@mantine/core';
 import { useAuth0 } from '@auth0/auth0-react';
 import styles from './profileDrawer.module.css';
@@ -15,8 +15,6 @@ interface Props {
 const ProfileDrawer = ({ isOpen, handleClose }: Props): JSX.Element => {
   const globalStore = useGlobalStore();
 
-  const [accessToken, setAccessToken] = useState<string | null>(null);
-
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
@@ -28,8 +26,6 @@ const ProfileDrawer = ({ isOpen, handleClose }: Props): JSX.Element => {
           audience: `https://${domain}/api/v2/`,
           scope: 'read:current_user',
         });
-
-        setAccessToken(token);
 
         if (user) {
           globalStore.setUser({

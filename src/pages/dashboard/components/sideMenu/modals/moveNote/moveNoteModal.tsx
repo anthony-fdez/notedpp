@@ -1,6 +1,4 @@
 import { Button, Modal, Select } from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
-import Axios from 'axios';
 import React, { useState } from 'react';
 import { moveNote } from '../../../../../../api/notes/update/moveNote';
 import { useGlobalStore } from '../../../../../../globalStore/globalStore';

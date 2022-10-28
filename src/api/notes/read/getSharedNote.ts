@@ -1,6 +1,5 @@
 import { showNotification } from '@mantine/notifications';
 import Axios from 'axios';
-import { IGlobalStore } from '../../../globalStore/globalStore';
 import { INote } from '../../../interfaces/INote';
 
 interface Props {
