@@ -9,17 +9,18 @@
 }
 .content {
   margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .header_right_container {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 .sync_container {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .sync_container > p {
   margin-left: 5px;
@@ -35,6 +36,10 @@
 }
 
 @media only screen and (min-width: 900px) {
+  .content {
+    display: flex;
+    justify-content: space-between;
+  }
   .action_icon_mobile_menu {
     display: none;
   }

@@ -29,7 +29,11 @@ const Header: React.FC = (): JSX.Element => {
       );
     }
 
-    return <h3>Noted++</h3>;
+    return (
+      <div className={styles.sync_container}>
+        <h3>Noted++</h3>
+      </div>
+    );
   };
 
   return (
