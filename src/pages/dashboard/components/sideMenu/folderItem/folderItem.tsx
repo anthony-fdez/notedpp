@@ -29,10 +29,9 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
 
   const [isDeleteFolderModalOpen, setIsDeleteFolderModalOpen] = useState(false);
   const [isRenameFolderModalOpen, setIsRenameFolderModalOpen] = useState(false);
-  const [isLoadingCreatingNote, setIsLoadingCreatingNote] = useState(false);
 
   const handleCreateNote = async () => {
-    setIsLoadingCreatingNote(true);
+    globalStore.setIsFullLoader(true);
 
     await createNote({
       globalStore,
@@ -41,7 +40,8 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
     });
 
     setIsMenuOpen(false);
-    setIsLoadingCreatingNote(false);
+
+    globalStore.setIsFullLoader(false);
   };
 
   if (!folder) return null;
@@ -78,37 +78,25 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
 
           <Menu.Dropdown>
             <Menu.Label>Application</Menu.Label>
-            <Button
-              leftIcon={<AiOutlinePlus />}
-              color='gray'
-              variant='default'
-              className={styles.new_note_button}
-              loading={isLoadingCreatingNote}
-              onClick={handleCreateNote}
-            >
+            <Menu.Item onClick={handleCreateNote} icon={<AiOutlinePlus />}>
               Create Note
-            </Button>
-            <Button
-              className={styles.delete_folder_button}
-              color='gray'
-              variant='default'
-              leftIcon={<AiOutlineEdit />}
+            </Menu.Item>
+            <Menu.Item
               onClick={() => setIsRenameFolderModalOpen(true)}
+              icon={<AiOutlineEdit />}
             >
               Rename
-            </Button>
+            </Menu.Item>
+
             <Menu.Divider />
             <Menu.Label>Danger zone</Menu.Label>
-
-            <Button
-              className={styles.delete_folder_button}
+            <Menu.Item
+              icon={<AiOutlineDelete />}
               color='red'
-              variant='filled'
-              leftIcon={<AiOutlineDelete />}
               onClick={() => setIsDeleteFolderModalOpen(true)}
             >
               Delete
-            </Button>
+            </Menu.Item>
           </Menu.Dropdown>
         </Menu>
       </>

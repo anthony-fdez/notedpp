@@ -10,12 +10,11 @@ const fullScreenLoad = () => {
 
   return (
     <div>
-      {globalStore.isFullLoader ||
-        (isLoading && (
-          <div className={styles.container}>
-            <LoadingOverlay visible={true} overlayBlur={2} />
-          </div>
-        ))}
+      {(globalStore.isFullLoader || isLoading) && (
+        <div className={styles.container}>
+          <LoadingOverlay visible={true} overlayBlur={2} />
+        </div>
+      )}
     </div>
   );
 };

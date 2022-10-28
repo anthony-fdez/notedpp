@@ -1,4 +1,4 @@
-import { ActionIcon, Button, Menu, NavLink } from '@mantine/core';
+import { ActionIcon, Menu, NavLink } from '@mantine/core';
 import { useClickOutside } from '@mantine/hooks';
 import { IconTrash } from '@tabler/icons';
 import React, { useState } from 'react';
@@ -63,26 +63,22 @@ const NoteItem = ({ note }: Props) => {
         />
         <Menu.Dropdown>
           <Menu.Label>Note</Menu.Label>
-          <Button
-            leftIcon={<BsFolderSymlink />}
-            color='gray'
-            variant='default'
-            className={styles.note_button}
+          <Menu.Item
+            icon={<BsFolderSymlink />}
             onClick={() => setIsMoveNoteModalOpen(true)}
           >
             Move Note
-          </Button>
+          </Menu.Item>
 
           <Menu.Label>Danger zone</Menu.Label>
 
-          <Button
-            className={styles.note_button}
+          <Menu.Item
             color='red'
-            leftIcon={<IconTrash size={14} />}
+            icon={<IconTrash size={14} />}
             onClick={() => setIsDeleteNoteModalOpen(true)}
           >
             Delete Note
-          </Button>
+          </Menu.Item>
         </Menu.Dropdown>
       </Menu>
     </div>

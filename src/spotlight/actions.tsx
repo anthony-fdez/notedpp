@@ -34,7 +34,7 @@ export const spotlightActions = ({
           globalStore,
           note: '<h1></h1>',
         });
-        // globalStore.setIsFullLoader(false);
+        globalStore.setIsFullLoader(false);
       },
       group: 'Actions',
       icon: <AiOutlinePlus />,

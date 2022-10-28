@@ -23,5 +23,6 @@
     position: fixed;
     left: 0px;
     overflow: auto;
+    padding-bottom: 100px;
   }
 }
