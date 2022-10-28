@@ -49,7 +49,7 @@ const MoveNoteModal = ({ isOpen, handleClose, note }: Props): JSX.Element => {
     return (
       <Select
         label='Select what folder to move this note to'
-        placeholder='Pick one'
+        placeholder='Pick new folder'
         data={parsedDataForSelect}
         value={selectedFolder}
         onChange={(value) => setSelectedFolder(value)}
