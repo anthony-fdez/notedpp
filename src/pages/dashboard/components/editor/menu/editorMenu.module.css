@@ -13,16 +13,23 @@
   text-align: center;
 }
 .menu_container {
-  overflow-y: scroll;
   display: flex;
-  justify-content: center;
-  width: 100%;
+  overflow: auto;
+  margin: auto;
+  width: 100vw;
+  left: 0px;
 }
 
 .menu_container {
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .menu_container::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+  display: none;
+}
+
+@media only screen and (min-width: 1200px) {
+  .menu_container {
+    justify-content: center;
+  }
 }

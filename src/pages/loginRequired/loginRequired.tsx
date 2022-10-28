@@ -6,7 +6,7 @@ const LoginRequired = () => {
   return (
     <div className={styles.container}>
       <img className={styles.image} src='/login.svg' />
-      <h1>Hmm... looks like you are note logged in.</h1>
+      <h1>Hmm... looks like you are not logged in.</h1>
       <p>
         You have to login to be able to access the page you were looking for
       </p>
