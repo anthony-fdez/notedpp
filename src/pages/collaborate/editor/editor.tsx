@@ -4,8 +4,6 @@ import { INote } from '../../../interfaces/INote';
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
 import Collaboration from '@tiptap/extension-collaboration';
-import * as Y from 'yjs';
-import { WebrtcProvider } from 'y-webrtc';
 import TextEditor from '../../../components/editor/editor';
 import styles from './editor.module.css';
 import Document from '@tiptap/extension-document';
@@ -27,20 +25,24 @@ import { ReactNodeViewRenderer, useEditor } from '@tiptap/react';
 import CodeBlock from '../../../components/editor/codeBlock/codeBlock';
 import EditorMenu from '../../../components/editor/menu/menu';
 import { useGlobalStore } from '../../../globalStore/globalStore';
+import { useAuth0 } from '@auth0/auth0-react';
+import { stringToColor } from '../../../functions/stringToColor';
+import CollaborationCursor from '@tiptap/extension-collaboration-cursor';
+import * as Y from 'yjs';
+import { WebrtcProvider } from 'y-webrtc';
 
 const CustomDocument = Document.extend({
   content: 'heading block*',
 });
 
 interface Props {
-  note: string | undefined;
+  ydoc: Y.Doc;
+  provider: WebrtcProvider;
 }
 
-const CollaborationEditor = ({ note }: Props) => {
+const CollaborationEditor = ({ ydoc, provider }: Props) => {
   const globalStore = useGlobalStore();
-
-  const ydoc = new Y.Doc();
-  const provider = new WebrtcProvider('example-document', ydoc);
+  const { user } = useAuth0();
 
   const editor = useEditor({
     extensions: [
@@ -82,6 +84,14 @@ const CollaborationEditor = ({ note }: Props) => {
       }).configure({ lowlight }),
       Collaboration.configure({
         document: ydoc,
+      }),
+      CollaborationCursor.configure({
+        provider: provider,
+        user: {
+          name: user?.name || 'Unknown',
+          color: stringToColor(user?.name || 'Unknown'),
+          avatar: user?.picture || null,
+        },
       }),
     ],
   }) as Editor;

@@ -6,6 +6,27 @@
   overflow: auto;
 }
 
+.user_container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.avatar {
+  margin-right: 10px;
+}
+
+.alone_alert {
+  margin-bottom: 10px;
+}
+
+.invite_button {
+  margin-top: 10px;
+  width: 100%;
+}
+
 @media only screen and (min-width: 900px) {
   .mobile_menu {
     display: none;

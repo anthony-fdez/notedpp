@@ -23,6 +23,7 @@
     "@tiptap/extension-character-count": "^2.0.0-beta.199",
     "@tiptap/extension-code-block-lowlight": "^2.0.0-beta.73",
     "@tiptap/extension-collaboration": "^2.0.0-beta.199",
+    "@tiptap/extension-collaboration-cursor": "^2.0.0-beta.199",
     "@tiptap/extension-link": "^2.0.0-beta.43",
     "@tiptap/extension-placeholder": "^2.0.0-beta.53",
     "@tiptap/extension-table": "^2.0.0-beta.199",
