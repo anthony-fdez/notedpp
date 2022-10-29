@@ -1,10 +1,19 @@
 import React from 'react';
+import AnimateOnScreenLoad from '../../components/animateOnScreenLoad/animateOnScreenLoad';
+import styles from './collaborate.module.css';
+import CollaborationEditor from './editor/editor';
+import CollaborationSideMenu from './sideMenu/sideMenu';
 
 const Collaborate = () => {
   return (
-    <div>
-      <h1>Collaborate</h1>
-    </div>
+    <AnimateOnScreenLoad>
+      <>
+        <CollaborationSideMenu />
+        <div className={styles.container}>
+          <CollaborationEditor />
+        </div>
+      </>
+    </AnimateOnScreenLoad>
   );
 };
 
