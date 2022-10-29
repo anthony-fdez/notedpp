@@ -24,9 +24,9 @@ const DarkTheme = React.lazy(
 
 function App() {
   const globalStore = useGlobalStore();
-  const { isAuthenticated, logout } = useAuth0();
+  const { isAuthenticated, logout, isLoading } = useAuth0();
 
-  const router = routes({ isAuthenticated });
+  const router = routes({ isAuthenticated, isLoading });
 
   return (
     <MantineProvider
