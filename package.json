@@ -22,6 +22,7 @@
     "@tiptap/extension-bubble-menu": "^2.0.0-beta.61",
     "@tiptap/extension-character-count": "^2.0.0-beta.199",
     "@tiptap/extension-code-block-lowlight": "^2.0.0-beta.73",
+    "@tiptap/extension-collaboration": "^2.0.0-beta.199",
     "@tiptap/extension-link": "^2.0.0-beta.43",
     "@tiptap/extension-placeholder": "^2.0.0-beta.53",
     "@tiptap/extension-table": "^2.0.0-beta.199",
@@ -44,6 +45,8 @@
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.4.1",
     "react-to-print": "^2.14.7",
+    "y-webrtc": "^10.2.3",
+    "yjs": "^13.5.42",
     "zustand": "^4.1.2"
   },
   "devDependencies": {
