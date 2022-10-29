@@ -27,6 +27,11 @@
   width: 100%;
 }
 
+.import_note_button {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
 @media only screen and (min-width: 900px) {
   .mobile_menu {
     display: none;

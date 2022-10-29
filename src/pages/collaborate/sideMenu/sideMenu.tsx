@@ -7,6 +7,8 @@ import styles from './sideMenu.module.css';
 import { newShade } from '../../../functions/newShade';
 import { AiOutlineLink } from 'react-icons/ai';
 import { showNotification } from '@mantine/notifications';
+import { BiImport } from 'react-icons/bi';
+import ImportNoteModal from './modals/importNoteModal/importNoteModa';
 
 interface Props {
   provider: WebrtcProvider;
@@ -17,6 +19,7 @@ const CollaborationSideMenu = ({ provider }: Props) => {
   const awareness = provider.awareness;
 
   const [users, setUsers] = useState<any>(null);
+  const [isImportNoteModalOpen, setIsImportNoteModalOpen] = useState(false);
 
   useEffect(() => {
     awareness.on('change', (changes: any) => {
@@ -39,6 +42,18 @@ const CollaborationSideMenu = ({ provider }: Props) => {
 
     return (
       <div>
+        <ImportNoteModal
+          isOpen={isImportNoteModalOpen}
+          handleClose={() => setIsImportNoteModalOpen(false)}
+        />
+        <Button
+          variant='light'
+          leftIcon={<BiImport />}
+          className={styles.import_note_button}
+          onClick={() => setIsImportNoteModalOpen(true)}
+        >
+          Import Note
+        </Button>
         {users.length === 1 && (
           <div className={styles.alone_alert}>
             <Alert title='Feeling alone?'>
