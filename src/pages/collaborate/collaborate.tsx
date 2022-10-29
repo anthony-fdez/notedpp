@@ -7,15 +7,21 @@ import CollaborationSideMenu from './sideMenu/sideMenu';
 
 import * as Y from 'yjs';
 import { WebrtcProvider } from 'y-webrtc';
+import { Editor } from '@tiptap/react';
+import { useGlobalStore } from '../../globalStore/globalStore';
 
 const ydoc = new Y.Doc();
 
 const Collaborate = (): JSX.Element | null => {
+  const globalStore = useGlobalStore();
+
   const { note } = useParams();
   const [provider, setProvider] = useState<WebrtcProvider | null>(null);
 
   useEffect(() => {
     if (!note) return;
+
+    globalStore.setCollaborationImportedNote(null);
 
     const newProvider = new WebrtcProvider(note, ydoc);
 

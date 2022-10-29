@@ -18,16 +18,17 @@ const ImportNoteModal = ({ isOpen, handleClose }: Props): JSX.Element => {
 
   const [isConfirmImportNoteModal, setIsConfirmImportNoteModal] =
     useState(false);
+  const [selectedNote, setSelectedNote] = useState<string | null>(null);
 
   const renderFoldersAndNotes = () => {
     if (!globalStore.folders) return null;
 
     return (
       <div className={styles.accordion_container}>
-        <Accordion defaultValue='customization'>
+        <Accordion>
           {globalStore.folders.map((folder: IFolder) => {
             return (
-              <Accordion.Item key={folder.id} value='customization'>
+              <Accordion.Item key={folder.id} value={folder.id}>
                 <Accordion.Control>{folder.folder_name}</Accordion.Control>
                 <Accordion.Panel>
                   {folder.notes.map((note) => {
@@ -37,7 +38,10 @@ const ImportNoteModal = ({ isOpen, handleClose }: Props): JSX.Element => {
                         variant='subtle'
                         className={styles.note_button}
                         key={note.id}
-                        onClick={() => setIsConfirmImportNoteModal(true)}
+                        onClick={() => {
+                          setSelectedNote(note.note);
+                          setIsConfirmImportNoteModal(true);
+                        }}
                       >
                         {getNoteTitle({ note: note.note })}
                       </Button>
@@ -55,8 +59,10 @@ const ImportNoteModal = ({ isOpen, handleClose }: Props): JSX.Element => {
   return (
     <Modal opened={isOpen} onClose={handleClose} title='Import note'>
       <ConfirmImportNoteModal
+        note={selectedNote}
         isOpen={isConfirmImportNoteModal}
         handleClose={() => setIsConfirmImportNoteModal(false)}
+        handleCloseParentModal={handleClose}
       />
       <div>
         <Alert title='Override current editor'>

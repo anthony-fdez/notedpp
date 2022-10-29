@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { INote } from '../../../interfaces/INote';
 
 import { Editor } from '@tiptap/core';
@@ -97,6 +97,15 @@ const CollaborationEditor = ({ ydoc, provider }: Props) => {
       }),
     ],
   }) as Editor;
+
+  useEffect(() => {
+    if (!editor) return;
+    if (!globalStore.collaborationImportedNote) return;
+
+    editor.commands.setContent(globalStore.collaborationImportedNote);
+
+    globalStore.setCollaborationImportedNote(null);
+  }, [globalStore.collaborationImportedNote]);
 
   if (!editor) return null;
 
