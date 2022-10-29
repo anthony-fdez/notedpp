@@ -30,6 +30,7 @@ import { stringToColor } from '../../../functions/stringToColor';
 import CollaborationCursor from '@tiptap/extension-collaboration-cursor';
 import * as Y from 'yjs';
 import { WebrtcProvider } from 'y-webrtc';
+import { useMantineTheme } from '@mantine/core';
 
 const CustomDocument = Document.extend({
   content: 'heading block*',
@@ -42,6 +43,7 @@ interface Props {
 
 const CollaborationEditor = ({ ydoc, provider }: Props) => {
   const globalStore = useGlobalStore();
+  const theme = useMantineTheme();
   const { user } = useAuth0();
 
   const editor = useEditor({
@@ -99,7 +101,7 @@ const CollaborationEditor = ({ ydoc, provider }: Props) => {
   if (!editor) return null;
 
   return (
-    <div>
+    <div className={styles.container}>
       <TextEditor editor={editor} />
       <div className={styles.character_count_container}>
         {editor.storage.characterCount.words()} words
@@ -111,6 +113,9 @@ const CollaborationEditor = ({ ydoc, provider }: Props) => {
           borderTop: `1px solid ${
             globalStore.theme === 'dark' ? 'rgb(80,80,80)' : 'rgb(230,230,230)'
           }`,
+
+          backgroundColor:
+            globalStore.theme === 'dark' ? theme.black : theme.white,
         }}
         className={styles.menu_buttons_container}
       >
