@@ -6,6 +6,8 @@ import { AiOutlineLink, AiOutlinePrinter } from 'react-icons/ai';
 import { MdIosShare } from 'react-icons/md';
 import { INote } from '../../../../../interfaces/INote';
 import { showNotification } from '@mantine/notifications';
+import { BsFillPeopleFill } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   handlePrint: () => void;
@@ -13,6 +15,8 @@ interface Props {
 }
 
 const ShareButton = ({ handlePrint, note }: Props) => {
+  const navigate = useNavigate();
+
   const copyLinkToClipboard = () => {
     navigator.clipboard.writeText(
       `https://${window.location.host}/shared/${note.id}---${note.user_id}`
@@ -26,6 +30,10 @@ const ShareButton = ({ handlePrint, note }: Props) => {
     });
   };
 
+  const handleCollaborate = () => {
+    navigate(`/collaborate/${note.id}---${note.user_id}---${note.folderId}`);
+  };
+
   return (
     <>
       <Menu shadow='md' width={200}>
@@ -37,6 +45,9 @@ const ShareButton = ({ handlePrint, note }: Props) => {
 
         <Menu.Dropdown>
           <Menu.Label>Share</Menu.Label>
+          <Menu.Item onClick={handleCollaborate} icon={<BsFillPeopleFill />}>
+            Collaborate
+          </Menu.Item>
           <Menu.Item onClick={copyLinkToClipboard} icon={<AiOutlineLink />}>
             Copy Note Link
           </Menu.Item>
