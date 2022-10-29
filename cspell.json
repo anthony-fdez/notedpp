@@ -12,6 +12,7 @@
         "tabler",
         "tiptap",
         "VITE",
+        "ydoc",
         "zustand"
     ],
     "ignoreWords": [],

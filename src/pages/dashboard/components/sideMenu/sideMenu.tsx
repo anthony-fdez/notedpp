@@ -8,9 +8,12 @@ import { IFolder } from '../../../../interfaces/IFolder';
 import FolderItem from './folderItem/folderItem';
 import NewFolderModal from './modals/newFolderModal/newFolderModal';
 import styles from './sideMenu.module.css';
+import { BsFillPeopleFill } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 
 const SideMenu = (): JSX.Element | null => {
   const globalStore = useGlobalStore();
+  const navigate = useNavigate();
 
   const [isNewFolderModalOpen, setIsNewFolderModalOpen] = useState(false);
   const [isLoadingAddingQuickNote, setIsLoadingAddingQuickNote] =
@@ -25,6 +28,12 @@ const SideMenu = (): JSX.Element | null => {
     });
 
     setIsLoadingAddingQuickNote(false);
+  };
+
+  const handleCollaborate = () => {
+    const randomString = (Math.random() + 1).toString(36).substring(2);
+
+    navigate(`/collaborate/${randomString}`);
   };
 
   const folderAndNotesButtons = () => {
@@ -48,6 +57,14 @@ const SideMenu = (): JSX.Element | null => {
           variant='light'
         >
           Create new folder
+        </Button>
+        <Button
+          leftIcon={<BsFillPeopleFill />}
+          className={styles.new_folder_button}
+          onClick={handleCollaborate}
+          variant='light'
+        >
+          Collaborate
         </Button>
       </>
     );

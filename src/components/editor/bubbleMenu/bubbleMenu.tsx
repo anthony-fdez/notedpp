@@ -7,7 +7,7 @@ import { AiOutlineItalic } from 'react-icons/ai';
 import { MdFormatStrikethrough } from 'react-icons/md';
 import { BsCodeSlash } from 'react-icons/bs';
 import { Button, Group } from '@mantine/core';
-import { useGlobalStore } from '../../../../../globalStore/globalStore';
+import { useGlobalStore } from '../../../globalStore/globalStore';
 
 interface Props {
   editor: Editor;
