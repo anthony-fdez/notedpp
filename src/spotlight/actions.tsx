@@ -10,6 +10,8 @@ import moment from 'moment';
 import { createNote } from '../api/notes/create/createNote';
 import { CiLogout } from 'react-icons/ci';
 import { AiOutlinePlus } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
+import { BsFillPeopleFill } from 'react-icons/bs';
 
 interface Props {
   globalStore: IGlobalStore;
@@ -22,31 +24,48 @@ export const spotlightActions = ({
   logout,
   isAuthenticated,
 }: Props): SpotlightAction[] => {
+  const navigate = useNavigate();
   const actions: SpotlightAction[] = [];
 
   if (isAuthenticated) {
-    actions.push({
-      title: 'Create new quick note',
-      description: 'Create a quick note inside your quick notes folder',
-      onTrigger: async () => {
-        globalStore.setIsFullLoader(true); //Setting loader
-        await createNote({
-          globalStore,
-          note: '<h1></h1>',
-        });
-        globalStore.setIsFullLoader(false);
-      },
-      group: 'Actions',
-      icon: <AiOutlinePlus />,
-    });
+    actions.push(
+      {
+        title: 'Create new quick note',
+        description: 'Create a quick note inside your quick notes folder',
+        onTrigger: async () => {
+          globalStore.setIsFullLoader(true);
 
-    actions.push({
-      title: 'Logout',
-      description: 'Log out of Noted++',
-      onTrigger: () => handleLogout({ globalStore, logout }),
-      group: 'Actions',
-      icon: <CiLogout />,
-    });
+          await createNote({
+            globalStore,
+            note: '<h1></h1>',
+          });
+
+          globalStore.setIsFullLoader(false);
+
+          return navigate('/dashboard');
+        },
+        group: 'Actions',
+        icon: <AiOutlinePlus />,
+      },
+      {
+        title: 'Collaborate',
+        description: 'Start a collaboration session',
+        onTrigger: () => {
+          const randomString = (Math.random() + 1).toString(36).substring(2);
+
+          navigate(`/collaborate/${randomString}`);
+        },
+        group: 'Actions',
+        icon: <BsFillPeopleFill />,
+      },
+      {
+        title: 'Logout',
+        description: 'Log out of Noted++',
+        onTrigger: () => handleLogout({ globalStore, logout }),
+        group: 'Actions',
+        icon: <CiLogout />,
+      }
+    );
   }
 
   if (globalStore.folders) {
@@ -57,7 +76,10 @@ export const spotlightActions = ({
           description: `Folder: ${folder.folder_name} - last edited ${moment(
             note.updatedAt
           ).fromNow()}`,
-          onTrigger: () => globalStore.setSelectedNote(note),
+          onTrigger: () => {
+            globalStore.setSelectedNote(note);
+            navigate('/dashboard');
+          },
           group: 'Notes',
         });
       });

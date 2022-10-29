@@ -10,7 +10,7 @@ import { WebrtcProvider } from 'y-webrtc';
 
 const ydoc = new Y.Doc();
 
-const Collaborate = () => {
+const Collaborate = (): JSX.Element | null => {
   const { note } = useParams();
   const [provider, setProvider] = useState<WebrtcProvider | null>(null);
 
@@ -22,8 +22,8 @@ const Collaborate = () => {
     setProvider(newProvider);
   }, [note]);
 
-  if (!note) return;
-  if (!provider) return;
+  if (!note) return null;
+  if (!provider) return null;
 
   return (
     <AnimateOnScreenLoad>

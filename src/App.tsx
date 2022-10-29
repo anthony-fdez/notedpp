@@ -9,10 +9,6 @@ import './App.css';
 import FullScreenLoad from './components/backdrop/fullScreenLoad';
 import { useGlobalStore } from './globalStore/globalStore';
 
-import { SpotlightProvider } from '@mantine/spotlight';
-import { spotlightActions } from './spotlight/actions';
-import { AiOutlineSearch } from 'react-icons/ai';
-
 import { routes } from './routes';
 
 const LightTheme = React.lazy(
@@ -24,7 +20,7 @@ const DarkTheme = React.lazy(
 
 function App() {
   const globalStore = useGlobalStore();
-  const { isAuthenticated, logout, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading } = useAuth0();
 
   const router = routes({ isAuthenticated, isLoading });
 
@@ -40,29 +36,14 @@ function App() {
       }}
     >
       <NotificationsProvider position='top-right'>
-        <SpotlightProvider
-          actions={spotlightActions({
-            globalStore,
-            logout,
-            isAuthenticated,
-          })}
-          limit={7}
-          searchPlaceholder='Search for notes or actions...'
-          shortcut={['mod + P', 'mod + K', '/']}
-          searchIcon={<AiOutlineSearch />}
-          highlightQuery
-          nothingFoundMessage='Hmm... nothing matches your search'
-          overlayBlur={0}
-          overlayOpacity={0.7}
-        >
-          <React.Suspense fallback={<></>}>
-            {globalStore.theme === 'dark' ? <DarkTheme /> : <LightTheme />}
-          </React.Suspense>
-          <div className='App'>
-            <FullScreenLoad />
-            <RouterProvider router={router} />
-          </div>
-        </SpotlightProvider>
+        <React.Suspense fallback={<></>}>
+          {globalStore.theme === 'dark' ? <DarkTheme /> : <LightTheme />}
+        </React.Suspense>
+
+        <div className='App'>
+          <FullScreenLoad />
+          <RouterProvider router={router} />
+        </div>
       </NotificationsProvider>
     </MantineProvider>
   );
