@@ -1,9 +1,12 @@
-import { Accordion, Alert, Button, Input, Modal } from '@mantine/core';
+import { Accordion, Alert, Button, Modal } from '@mantine/core';
 import React, { useState } from 'react';
+import { getNoteTitle } from '../../../../../functions/getNoteTitle';
 import { useGlobalStore } from '../../../../../globalStore/globalStore';
 import { IFolder } from '../../../../../interfaces/IFolder';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 import styles from '../modals.module.css';
+import ConfirmImportNoteModal from './confirmImportModal';
 
 interface Props {
   isOpen: boolean;
@@ -13,17 +16,34 @@ interface Props {
 const ImportNoteModal = ({ isOpen, handleClose }: Props): JSX.Element => {
   const globalStore = useGlobalStore();
 
+  const [isConfirmImportNoteModal, setIsConfirmImportNoteModal] =
+    useState(false);
+
   const renderFoldersAndNotes = () => {
     if (!globalStore.folders) return null;
 
     return (
-      <div>
+      <div className={styles.accordion_container}>
         <Accordion defaultValue='customization'>
           {globalStore.folders.map((folder: IFolder) => {
             return (
               <Accordion.Item key={folder.id} value='customization'>
                 <Accordion.Control>{folder.folder_name}</Accordion.Control>
-                <Accordion.Panel></Accordion.Panel>
+                <Accordion.Panel>
+                  {folder.notes.map((note) => {
+                    return (
+                      <Button
+                        leftIcon={<AiOutlinePlus />}
+                        variant='subtle'
+                        className={styles.note_button}
+                        key={note.id}
+                        onClick={() => setIsConfirmImportNoteModal(true)}
+                      >
+                        {getNoteTitle({ note: note.note })}
+                      </Button>
+                    );
+                  })}
+                </Accordion.Panel>
               </Accordion.Item>
             );
           })}
@@ -34,6 +54,10 @@ const ImportNoteModal = ({ isOpen, handleClose }: Props): JSX.Element => {
 
   return (
     <Modal opened={isOpen} onClose={handleClose} title='Import note'>
+      <ConfirmImportNoteModal
+        isOpen={isConfirmImportNoteModal}
+        handleClose={() => setIsConfirmImportNoteModal(false)}
+      />
       <div>
         <Alert title='Override current editor'>
           Please be aware that importing one of your notes will override all the
