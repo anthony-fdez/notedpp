@@ -40,10 +40,12 @@ export const createNote = async ({ globalStore, note, folder_name }: Props) => {
             color: 'red',
           });
         }
-      } catch (e: any) {
+      } catch (error: unknown) {
         showNotification({
           title: 'Error',
-          message: e.response.request.statusText,
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          message: error.response.request.statusText || 'Internal server error',
           color: 'red',
         });
       }

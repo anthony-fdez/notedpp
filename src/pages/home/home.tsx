@@ -1,5 +1,3 @@
-import { Switch, useMantineTheme } from '@mantine/core';
-import { IconMoonStars, IconSun } from '@tabler/icons';
 import React from 'react';
 import Logo from '../../../favN.png';
 import AnimateOnScreenLoad from '../../components/animateOnScreenLoad/animateOnScreenLoad';
@@ -12,15 +10,6 @@ import transparentLogo from './transparentFav.png';
 
 const Home: React.FC = (): JSX.Element => {
   const globalStore = useGlobalStore();
-  const theme = useMantineTheme();
-
-  const handleThemeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked === true) {
-      return globalStore.setTheme('dark');
-    }
-
-    globalStore.setTheme('light');
-  };
 
   return (
     <div className={styles.overall}>

@@ -2,8 +2,6 @@ import { Alert, Button, Input, Modal } from '@mantine/core';
 import React, { useState } from 'react';
 import { useGlobalStore } from '../../../../../../globalStore/globalStore';
 import styles from '../modals.module.css';
-import Axios from 'axios';
-import { showNotification } from '@mantine/notifications';
 import { IFolder } from '../../../../../../interfaces/IFolder';
 import { deleteFolder } from '../../../../../../api/notes/delete/deleteFolder';
 
@@ -49,7 +47,7 @@ const DeleteFolderModal = ({
           deleting the folder.
         </Alert>
         <Input
-          onChange={(e: any) => setConfirmFolderName(e.target.value)}
+          onChange={(e) => setConfirmFolderName(e.target.value)}
           placeholder='Confirm folder name'
         />
         <div className={styles.footer_container}>

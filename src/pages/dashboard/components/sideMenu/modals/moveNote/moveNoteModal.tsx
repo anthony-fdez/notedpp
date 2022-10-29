@@ -1,6 +1,4 @@
 import { Button, Modal, Select } from '@mantine/core';
-import { showNotification } from '@mantine/notifications';
-import Axios from 'axios';
 import React, { useState } from 'react';
 import { moveNote } from '../../../../../../api/notes/update/moveNote';
 import { useGlobalStore } from '../../../../../../globalStore/globalStore';
@@ -51,7 +49,7 @@ const MoveNoteModal = ({ isOpen, handleClose, note }: Props): JSX.Element => {
     return (
       <Select
         label='Select what folder to move this note to'
-        placeholder='Pick one'
+        placeholder='Pick new folder'
         data={parsedDataForSelect}
         value={selectedFolder}
         onChange={(value) => setSelectedFolder(value)}

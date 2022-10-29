@@ -2,7 +2,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 import { MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { RouterProvider } from 'react-router-dom';
 import './App.css';
@@ -14,7 +14,6 @@ import { spotlightActions } from './spotlight/actions';
 import { AiOutlineSearch } from 'react-icons/ai';
 
 import { routes } from './routes';
-import { useColorScheme } from '@mantine/hooks';
 
 const LightTheme = React.lazy(
   () => import('./styles/workAroundComponents/lightTheme')
@@ -28,7 +27,6 @@ function App() {
   const { isAuthenticated, logout } = useAuth0();
 
   const router = routes({ isAuthenticated });
-  const preferredColorScheme = useColorScheme();
 
   return (
     <MantineProvider

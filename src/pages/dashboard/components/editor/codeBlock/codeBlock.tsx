@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React from 'react';
 import { NodeViewContent, NodeViewWrapper } from '@tiptap/react';
 import styles from './codeBlock.module.css';

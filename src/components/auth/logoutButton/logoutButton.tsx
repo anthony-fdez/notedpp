@@ -1,8 +1,8 @@
-import { useAuth0 } from '@auth0/auth0-react';
+import { LogoutOptions, useAuth0 } from '@auth0/auth0-react';
 
 interface IHandleLogout {
   globalStore: IGlobalStore;
-  logout: any;
+  logout: (options?: LogoutOptions | undefined) => void;
 }
 
 export const handleLogout = ({ globalStore, logout }: IHandleLogout) => {

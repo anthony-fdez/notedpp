@@ -10,7 +10,6 @@ import Document from '@tiptap/extension-document';
 import Paragraph from '@tiptap/extension-paragraph';
 import Text from '@tiptap/extension-text';
 import Link from '@tiptap/extension-link';
-import Menu from '../editor/menu/menu';
 import styles from './note.module.css';
 import Placeholder from '@tiptap/extension-placeholder';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
