@@ -47,7 +47,7 @@ const DeleteFolderModal = ({
           deleting the folder.
         </Alert>
         <Input
-          onChange={(e) => setConfirmFolderName(e.target.value)}
+          onChange={(e: any) => setConfirmFolderName(e.target.value)}
           placeholder='Confirm folder name'
         />
         <div className={styles.footer_container}>

@@ -40,7 +40,7 @@ const RenameFolderModal = ({
     <Modal opened={isOpen} onClose={handleClose} title='Rename Folder'>
       <form onSubmit={(e) => handleCreateFolder(e)}>
         <Input
-          onChange={(e) => {
+          onChange={(e: any) => {
             setNewFolderName(e.target.value);
           }}
           placeholder='New Folder Name'
