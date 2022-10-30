@@ -3,20 +3,20 @@ import styles from './chat.module.css';
 
 import { useAuth0 } from '@auth0/auth0-react';
 import { showNotification } from '@mantine/notifications';
-import { ActionIcon, Input } from '@mantine/core';
+import { ActionIcon, Input, Loader } from '@mantine/core';
 import { Socket } from 'socket.io-client';
 import { IoMdSend } from 'react-icons/io';
 import Message from './message/message';
-import { IMessage } from '../sideMenu';
+import { IMessage, ITyping } from '../sideMenu';
 
 interface Props {
   room: string;
   socket: Socket;
   messages: any;
-  someoneIsTyping: boolean;
+  typing: ITyping;
 }
 
-const Chat = ({ room, socket, someoneIsTyping, messages }: Props) => {
+const Chat = ({ room, socket, typing, messages }: Props) => {
   const { user } = useAuth0();
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
 
@@ -50,13 +50,17 @@ const Chat = ({ room, socket, someoneIsTyping, messages }: Props) => {
     }
 
     setMessageText('');
+    setTimeout(() => {
+      scrollToBottom();
+    }, 100);
   };
 
   useEffect(() => {
     if (!messages) return;
+    if (!typing.isTyping) return;
 
     scrollToBottom();
-  }, [messages]);
+  }, [messages, typing]);
 
   useEffect(() => {
     if (messageText !== '') {
@@ -79,6 +83,12 @@ const Chat = ({ room, socket, someoneIsTyping, messages }: Props) => {
       {messages.map((message: IMessage, index: number) => {
         return <Message message={message} key={`message-${index}`} />;
       })}
+      {typing.isTyping && (
+        <div className={styles.typing_container}>
+          <Loader variant='dots' />
+          <span>{typing.name}</span>
+        </div>
+      )}
       <div ref={messagesEndRef} />
       <div className={styles.footer}>
         <form

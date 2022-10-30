@@ -25,6 +25,11 @@ export interface IMessage {
   time?: string;
 }
 
+export interface ITyping {
+  isTyping: boolean;
+  name: string;
+}
+
 const socket = io(`${import.meta.env.VITE_BASE_URL}`);
 
 const CollaborationSideMenu = ({ provider, room }: Props) => {
@@ -36,7 +41,7 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
   const [isImportNoteModalOpen, setIsImportNoteModalOpen] = useState(false);
   const [selectedScreen, setSelectedScreen] = useState<string>('default');
 
-  const [someoneIsTyping, setSomeoneIsTyping] = useState<boolean>(false);
+  const [typing, setTyping] = useState<ITyping>({ isTyping: false, name: '' });
   const [messages, setMessages] = useState<IMessage[]>([]);
 
   useEffect(() => {
@@ -77,12 +82,8 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
       setMessages((messages: IMessage[]) => [...messages, message]);
     };
 
-    const onTyping = (data: any) => {
-      if (data.isTyping === true) {
-        setSomeoneIsTyping(true);
-      } else {
-        setSomeoneIsTyping(false);
-      }
+    const onTyping = (data: ITyping) => {
+      setTyping(data);
     };
 
     socket.on('message', onMessage);
@@ -166,7 +167,7 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
             socket={socket}
             room={room}
             messages={messages}
-            someoneIsTyping={someoneIsTyping}
+            typing={typing}
           />
         )}
       </div>
