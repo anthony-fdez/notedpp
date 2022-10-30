@@ -156,7 +156,7 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
               >
                 <Input
                   placeholder='Join a room'
-                  onChange={(e) => setRoomToJoin(e.target.value)}
+                  onChange={(e: any) => setRoomToJoin(e.target.value)}
                   value={roomToJoin}
                   rightSection={
                     <Tooltip label='Join Room'>
