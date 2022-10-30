@@ -31,7 +31,7 @@ const SideMenu = (): JSX.Element | null => {
   };
 
   const handleCollaborate = () => {
-    const randomString = (Math.random() + 1).toString(36).substring(2);
+    const randomString = (Math.random() + 1).toString(36).substring(6);
 
     navigate(`/collaborate/${randomString}`);
   };

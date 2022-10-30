@@ -1,10 +1,19 @@
-import { Alert, Avatar, Button, Drawer, SegmentedControl } from '@mantine/core';
+import {
+  ActionIcon,
+  Alert,
+  Avatar,
+  Button,
+  Drawer,
+  Input,
+  SegmentedControl,
+  Tooltip,
+} from '@mantine/core';
 import React, { useEffect, useState } from 'react';
 import { WebrtcProvider } from 'y-webrtc';
 import { useGlobalStore } from '../../../globalStore/globalStore';
 import styles from './sideMenu.module.css';
 
-import { AiOutlineLink } from 'react-icons/ai';
+import { AiOutlineLink, AiOutlineRight } from 'react-icons/ai';
 import { showNotification } from '@mantine/notifications';
 import { BiImport } from 'react-icons/bi';
 import ImportNoteModal from './modals/importNoteModal/importNoteModa';
@@ -12,6 +21,7 @@ import Chat from './chat/chat';
 import io from 'socket.io-client';
 import { useAuth0 } from '@auth0/auth0-react';
 import { BiMessageAlt } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   provider: WebrtcProvider;
@@ -37,10 +47,12 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
   const globalStore = useGlobalStore();
   const awareness = provider.awareness;
   const { user } = useAuth0();
+  const navigate = useNavigate();
 
   const [users, setUsers] = useState<any>(null);
   const [isImportNoteModalOpen, setIsImportNoteModalOpen] = useState(false);
   const [selectedScreen, setSelectedScreen] = useState<string>('default');
+  const [roomToJoin, setRoomToJoin] = useState('');
 
   const [typing, setTyping] = useState<ITyping>({ isTyping: false, name: '' });
   const [messages, setMessages] = useState<IMessage[]>([]);
@@ -131,19 +143,41 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
         {users.length === 1 && (
           <div className={styles.alone_alert}>
             <Alert title='Feeling alone?'>
-              Looks like its only you in the room now, try inviting some
-              friends.
+              Looks like its only you in the room now, try inviting some friends
+              or join their room.
+              <p style={{ marginTop: '15px' }}>
+                My Room: <strong>{room}</strong>
+              </p>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  navigate(`/collaborate/${roomToJoin}`);
+                }}
+              >
+                <Input
+                  placeholder='Join a room'
+                  onChange={(e) => setRoomToJoin(e.target.value)}
+                  value={roomToJoin}
+                  rightSection={
+                    <Tooltip label='Join Room'>
+                      <ActionIcon type='submit'>
+                        <AiOutlineRight />
+                      </ActionIcon>
+                    </Tooltip>
+                  }
+                />
+              </form>
               <Button
                 onClick={handleCopyRoomLink}
                 leftIcon={<AiOutlineLink />}
                 className={styles.invite_button}
               >
-                Copy room link
+                Copy my room&apos;s link
               </Button>
             </Alert>
           </div>
         )}
-        <p>People</p>
+        <p>People ({users.length})</p>
 
         {users.map((user: any, index: number) => {
           return (

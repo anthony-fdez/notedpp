@@ -51,7 +51,7 @@ export const spotlightActions = ({
         title: 'Collaborate',
         description: 'Start a collaboration session',
         onTrigger: () => {
-          const randomString = (Math.random() + 1).toString(36).substring(2);
+          const randomString = (Math.random() + 1).toString(36).substring(6);
 
           navigate(`/collaborate/${randomString}`);
         },
