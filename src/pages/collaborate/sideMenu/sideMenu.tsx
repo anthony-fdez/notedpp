@@ -80,6 +80,14 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
       };
 
       setMessages((messages: IMessage[]) => [...messages, message]);
+
+      if (selectedScreen === 'default') {
+        showNotification({
+          title: data.name,
+          message: data.message,
+          color: 'blue',
+        });
+      }
     };
 
     const onTyping = (data: ITyping) => {
@@ -90,7 +98,7 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
     socket.on('typing', onTyping);
 
     return () => socket.off('message', onMessage);
-  }, [socket]);
+  }, [socket, selectedScreen]);
 
   useEffect(
     () => () => {

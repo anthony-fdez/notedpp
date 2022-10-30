@@ -57,7 +57,6 @@ const Chat = ({ room, socket, typing, messages }: Props) => {
 
   useEffect(() => {
     if (!messages) return;
-    if (!typing.isTyping) return;
 
     scrollToBottom();
   }, [messages, typing]);
