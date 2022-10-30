@@ -84,7 +84,12 @@ const ImportNoteModal = ({ isOpen, handleClose }: Props): JSX.Element => {
   };
 
   return (
-    <Modal opened={isOpen} onClose={handleClose} title='Import note'>
+    <Modal
+      overlayBlur={5}
+      opened={isOpen}
+      onClose={handleClose}
+      title='Import note'
+    >
       <ConfirmImportNoteModal
         note={selectedNote}
         isOpen={isConfirmImportNoteModal}

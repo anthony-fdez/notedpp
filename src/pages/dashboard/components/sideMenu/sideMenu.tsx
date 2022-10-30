@@ -101,6 +101,7 @@ const SideMenu = (): JSX.Element | null => {
 
       <div className={styles.mobile_menu}>
         <Drawer
+          overlayBlur={5}
           className={styles.drawer}
           lockScroll={false}
           opened={globalStore.isMobileMenuOpen}

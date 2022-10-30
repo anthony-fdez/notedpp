@@ -28,7 +28,12 @@ const DeleteNoteModal = ({ isOpen, handleClose, note }: Props): JSX.Element => {
   };
 
   return (
-    <Modal opened={isOpen} onClose={handleClose} title='Delete note'>
+    <Modal
+      overlayBlur={5}
+      opened={isOpen}
+      onClose={handleClose}
+      title='Delete note'
+    >
       <Alert color='red' title='Are you sure?'>
         Your note will be gone forever
       </Alert>
