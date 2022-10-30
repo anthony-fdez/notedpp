@@ -34,11 +34,10 @@ const Collaborate = (): JSX.Element | null => {
   return (
     <AnimateOnScreenLoad>
       <>
-        <CollaborationSideMenu provider={provider} />
+        <CollaborationSideMenu room={note} provider={provider} />
         <div className={styles.container}>
           <CollaborationEditor ydoc={ydoc} provider={provider} />
         </div>
-        <Chat />
       </>
     </AnimateOnScreenLoad>
   );

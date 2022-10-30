@@ -39,9 +39,11 @@
 @media only screen and (min-width: 900px) {
   .mobile_menu {
     display: none;
+    position: relative;
   }
   .desktop_menu {
     display: block;
+    position: relative;
   }
   .container {
     width: 300px;

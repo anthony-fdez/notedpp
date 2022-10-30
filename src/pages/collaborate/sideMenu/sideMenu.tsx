@@ -9,18 +9,35 @@ import { showNotification } from '@mantine/notifications';
 import { BiImport } from 'react-icons/bi';
 import ImportNoteModal from './modals/importNoteModal/importNoteModa';
 import Chat from './chat/chat';
+import io from 'socket.io-client';
+import { useAuth0 } from '@auth0/auth0-react';
 
 interface Props {
   provider: WebrtcProvider;
+  room: string;
 }
 
-const CollaborationSideMenu = ({ provider }: Props) => {
+export interface IMessage {
+  id?: string;
+  message: string;
+  name: string;
+  quotedMessage?: string;
+  time?: string;
+}
+
+const socket = io(`${import.meta.env.VITE_BASE_URL}`);
+
+const CollaborationSideMenu = ({ provider, room }: Props) => {
   const globalStore = useGlobalStore();
   const awareness = provider.awareness;
+  const { user } = useAuth0();
 
   const [users, setUsers] = useState<any>(null);
   const [isImportNoteModalOpen, setIsImportNoteModalOpen] = useState(false);
   const [selectedScreen, setSelectedScreen] = useState<string>('default');
+
+  const [someoneIsTyping, setSomeoneIsTyping] = useState<boolean>(false);
+  const [messages, setMessages] = useState<IMessage[]>([]);
 
   useEffect(() => {
     awareness.on('change', () => {
@@ -37,6 +54,52 @@ const CollaborationSideMenu = ({ provider }: Props) => {
       color: 'blue',
     });
   };
+
+  useEffect(() => {
+    if (!user) return;
+
+    socket.emit('join', {
+      userName: user.name,
+      room: room,
+    });
+  }, [user]);
+
+  useEffect((): any => {
+    const onMessage = (data: IMessage) => {
+      const message = {
+        message: data.message,
+        name: data.name,
+        id: data.id,
+        time: data.time,
+        quotedMessage: data.quotedMessage,
+      };
+
+      setMessages((messages: IMessage[]) => [...messages, message]);
+    };
+
+    const onTyping = (data: any) => {
+      if (data.isTyping === true) {
+        setSomeoneIsTyping(true);
+      } else {
+        setSomeoneIsTyping(false);
+      }
+    };
+
+    socket.on('message', onMessage);
+    socket.on('typing', onTyping);
+
+    return () => socket.off('message', onMessage);
+  }, [socket]);
+
+  useEffect(
+    () => () => {
+      socket.emit('leaveRoom', {
+        userName: user?.name,
+        room: room,
+      });
+    },
+    []
+  );
 
   const defaultScreen = () => {
     return (
@@ -96,7 +159,16 @@ const CollaborationSideMenu = ({ provider }: Props) => {
             { label: 'Chat', value: 'chat' },
           ]}
         />
-        {selectedScreen === 'default' ? defaultScreen() : <Chat />}
+        {selectedScreen === 'default' ? (
+          defaultScreen()
+        ) : (
+          <Chat
+            socket={socket}
+            room={room}
+            messages={messages}
+            someoneIsTyping={someoneIsTyping}
+          />
+        )}
       </div>
     );
   };

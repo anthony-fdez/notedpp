@@ -1,0 +1,23 @@
+.container {
+  height: calc(100vh - 260px);
+  overflow: auto;
+  overflow-x: hidden;
+}
+/* .container {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+.container::-webkit-scrollbar {
+  display: none; 
+} */
+
+.footer {
+  width: 100%;
+  position: absolute;
+  bottom: 70px;
+  left: 0px;
+  padding: 5px;
+}
+.input {
+  width: 100%;
+}
