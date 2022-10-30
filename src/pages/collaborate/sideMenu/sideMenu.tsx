@@ -11,6 +11,7 @@ import ImportNoteModal from './modals/importNoteModal/importNoteModa';
 import Chat from './chat/chat';
 import io from 'socket.io-client';
 import { useAuth0 } from '@auth0/auth0-react';
+import { BiMessageAlt } from 'react-icons/bi';
 
 interface Props {
   provider: WebrtcProvider;
@@ -86,6 +87,8 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
           title: data.name,
           message: data.message,
           color: 'blue',
+          onClick: () => setSelectedScreen('chat'),
+          icon: <BiMessageAlt />,
         });
       }
     };
