@@ -8,6 +8,7 @@ import { RouterProvider } from 'react-router-dom';
 import './App.css';
 import FullScreenLoad from './components/backdrop/fullScreenLoad';
 import { useGlobalStore } from './globalStore/globalStore';
+import AppBroke from './pages/errors/appBroke/appBroke';
 
 import { routes } from './routes';
 
@@ -20,9 +21,15 @@ const DarkTheme = React.lazy(
 
 function App() {
   const globalStore = useGlobalStore();
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading, error } = useAuth0();
 
   const router = routes({ isAuthenticated, isLoading });
+
+  if (error) {
+    return (
+      <AppBroke message="Looks like this error was caused by an authentication issue, try logging out and back in and hopefully the problem won't persist." />
+    );
+  }
 
   return (
     <MantineProvider

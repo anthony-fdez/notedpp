@@ -182,7 +182,10 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
         {users.map((user: any, index: number) => {
           return (
             <div className={styles.user_container} key={`user-${index}`}>
-              <Avatar className={styles.avatar} src={user.user.avatar} />
+              <Avatar
+                className={styles.avatar}
+                src={user.user.avatar ?? null}
+              />
               {user.user.name}
             </div>
           );
