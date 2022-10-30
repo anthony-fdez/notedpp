@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { getNoteTitle } from '../../../../../functions/getNoteTitle';
 import { useGlobalStore } from '../../../../../globalStore/globalStore';
 import { IFolder } from '../../../../../interfaces/IFolder';
-import { AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlinePlus, AiFillWarning } from 'react-icons/ai';
 
 import styles from '../modals.module.css';
 import ConfirmImportNoteModal from './confirmImportModal';
@@ -21,9 +21,7 @@ const ImportNoteModal = ({ isOpen, handleClose }: Props): JSX.Element => {
   const [selectedNote, setSelectedNote] = useState<string | null>(null);
 
   const renderFoldersAndNotes = () => {
-    if (!globalStore.folders) return null;
-
-    if (globalStore.folders.length === 0) {
+    if (!globalStore.folders || globalStore.folders.length === 0) {
       return (
         <>
           <Alert title="You don't have any notes">
@@ -41,13 +39,31 @@ const ImportNoteModal = ({ isOpen, handleClose }: Props): JSX.Element => {
 
     return (
       <>
-        <Alert title='Override current editor'>
+        <Alert
+          icon={<AiFillWarning />}
+          color='red'
+          variant='filled'
+          title='Override current editor'
+        >
           Please be aware that importing one of your notes will override all the
           contents in the current collaboration session.
         </Alert>
         <div className={styles.accordion_container}>
           <Accordion>
             {globalStore.folders.map((folder: IFolder) => {
+              if (folder.notes.length === 0) {
+                return (
+                  <Accordion.Item key={folder.id} value={folder.id}>
+                    <Accordion.Control>{folder.folder_name}</Accordion.Control>
+                    <Accordion.Panel>
+                      <Alert key={folder.id} title='Empty Folder'>
+                        This folder does not have any notes.
+                      </Alert>
+                    </Accordion.Panel>
+                  </Accordion.Item>
+                );
+              }
+
               return (
                 <Accordion.Item key={folder.id} value={folder.id}>
                   <Accordion.Control>{folder.folder_name}</Accordion.Control>
@@ -73,11 +89,6 @@ const ImportNoteModal = ({ isOpen, handleClose }: Props): JSX.Element => {
               );
             })}
           </Accordion>
-        </div>
-        <div className={styles.footer_container}>
-          <Button loaderPosition='left' type='submit'>
-            Import Note
-          </Button>
         </div>
       </>
     );
