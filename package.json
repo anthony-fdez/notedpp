@@ -46,6 +46,7 @@
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.4.1",
     "react-to-print": "^2.14.7",
+    "socket.io-client": "^4.5.3",
     "y-webrtc": "^10.2.3",
     "yjs": "^13.5.42",
     "zustand": "^4.1.2"

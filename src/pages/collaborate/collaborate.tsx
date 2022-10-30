@@ -7,8 +7,8 @@ import CollaborationSideMenu from './sideMenu/sideMenu';
 
 import * as Y from 'yjs';
 import { WebrtcProvider } from 'y-webrtc';
-import { Editor } from '@tiptap/react';
 import { useGlobalStore } from '../../globalStore/globalStore';
+import Chat from './sideMenu/chat/chat';
 
 const ydoc = new Y.Doc();
 
@@ -38,6 +38,7 @@ const Collaborate = (): JSX.Element | null => {
         <div className={styles.container}>
           <CollaborationEditor ydoc={ydoc} provider={provider} />
         </div>
+        <Chat />
       </>
     </AnimateOnScreenLoad>
   );

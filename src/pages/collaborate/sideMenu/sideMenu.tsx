@@ -1,14 +1,14 @@
-import { Alert, Avatar, Button, Drawer, useMantineTheme } from '@mantine/core';
+import { Alert, Avatar, Button, Drawer, SegmentedControl } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
 import { WebrtcProvider } from 'y-webrtc';
 import { useGlobalStore } from '../../../globalStore/globalStore';
 import styles from './sideMenu.module.css';
 
-import { newShade } from '../../../functions/newShade';
 import { AiOutlineLink } from 'react-icons/ai';
 import { showNotification } from '@mantine/notifications';
 import { BiImport } from 'react-icons/bi';
 import ImportNoteModal from './modals/importNoteModal/importNoteModa';
+import Chat from './chat/chat';
 
 interface Props {
   provider: WebrtcProvider;
@@ -20,9 +20,10 @@ const CollaborationSideMenu = ({ provider }: Props) => {
 
   const [users, setUsers] = useState<any>(null);
   const [isImportNoteModalOpen, setIsImportNoteModalOpen] = useState(false);
+  const [selectedScreen, setSelectedScreen] = useState<string>('default');
 
   useEffect(() => {
-    awareness.on('change', (changes: any) => {
+    awareness.on('change', () => {
       setUsers(Array.from(awareness.getStates().values()));
     });
   }, [awareness]);
@@ -37,11 +38,9 @@ const CollaborationSideMenu = ({ provider }: Props) => {
     });
   };
 
-  const sideMenuContents = () => {
-    if (!users) return null;
-
+  const defaultScreen = () => {
     return (
-      <div>
+      <>
         <ImportNoteModal
           isOpen={isImportNoteModalOpen}
           handleClose={() => setIsImportNoteModalOpen(false)}
@@ -79,6 +78,25 @@ const CollaborationSideMenu = ({ provider }: Props) => {
             </div>
           );
         })}
+      </>
+    );
+  };
+
+  const sideMenuContents = () => {
+    if (!users) return null;
+
+    return (
+      <div>
+        <SegmentedControl
+          className={styles.segmented_control}
+          value={selectedScreen}
+          onChange={setSelectedScreen}
+          data={[
+            { label: 'People', value: 'default' },
+            { label: 'Chat', value: 'chat' },
+          ]}
+        />
+        {selectedScreen === 'default' ? defaultScreen() : <Chat />}
       </div>
     );
   };
