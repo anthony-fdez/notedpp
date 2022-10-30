@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './shareButton.module.css';
 import { AiOutlineLink, AiOutlinePrinter } from 'react-icons/ai';
 import { MdIosShare } from 'react-icons/md';
-import { INote } from '../../../../../interfaces/INote';
+import { INote } from '../../../../interfaces/INote';
 import { showNotification } from '@mantine/notifications';
 
 interface Props {

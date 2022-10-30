@@ -37,7 +37,12 @@ const RenameFolderModal = ({
   };
 
   return (
-    <Modal opened={isOpen} onClose={handleClose} title='Rename Folder'>
+    <Modal
+      overlayBlur={5}
+      opened={isOpen}
+      onClose={handleClose}
+      title='Rename Folder'
+    >
       <form onSubmit={(e) => handleCreateFolder(e)}>
         <Input
           onChange={(e: any) => {

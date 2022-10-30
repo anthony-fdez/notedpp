@@ -13,6 +13,7 @@ export interface IGlobalStore {
   isLoadingFolders: boolean;
   isFullLoader: boolean;
   isMobileMenuOpen: boolean;
+  collaborationImportedNote: string | null;
   setUser: (data: IUser | null) => void;
   setSelectedNote: (note: INote | null) => void;
   setFolders: (data: IFolder[] | null) => void;
@@ -21,6 +22,7 @@ export interface IGlobalStore {
   updateFolders: () => void;
   setIsMobileMenuOpen: (isOpen: boolean) => void;
   setTheme: (theme: 'dark' | 'light') => void;
+  setCollaborationImportedNote: (note: string | null) => void;
 }
 
 export const useGlobalStore = create<IGlobalStore>()(
@@ -41,6 +43,7 @@ export const useGlobalStore = create<IGlobalStore>()(
       isLoadingFolders: true,
       isFullLoader: false,
       isMobileMenuOpen: false,
+      collaborationImportedNote: null,
       setUser: (data: IUser | null) => {
         set({ user: data });
       },
@@ -80,6 +83,9 @@ export const useGlobalStore = create<IGlobalStore>()(
       },
       setTheme: (theme: 'dark' | 'light') => {
         set({ theme });
+      },
+      setCollaborationImportedNote: (note: string | null) => {
+        set({ collaborationImportedNote: note });
       },
     })),
     {

@@ -16,6 +16,7 @@ const NoteHistory = ({ isOpen, handleClose }: Props): JSX.Element => {
   return (
     <>
       <Drawer
+        overlayBlur={5}
         className={styles.drawer}
         opened={isOpen}
         onClose={handleClose}

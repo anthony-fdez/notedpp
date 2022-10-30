@@ -2,6 +2,7 @@ import React from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import MainLayout from './components/layout/mainLayout/mainLayout';
+import Collaborate from './pages/collaborate/collaborate';
 import Dashboard from './pages/dashboard/dashboard';
 import AppBroke from './pages/errors/appBroke/appBroke';
 import NotFound from './pages/errors/notFound/notFound';
@@ -11,9 +12,10 @@ import Shared from './pages/shared/shared';
 
 interface Props {
   isAuthenticated: boolean;
+  isLoading: boolean;
 }
 
-export const routes = ({ isAuthenticated }: Props) => {
+export const routes = ({ isAuthenticated, isLoading }: Props) => {
   const router = createBrowserRouter([
     {
       path: '*',
@@ -39,15 +41,28 @@ export const routes = ({ isAuthenticated }: Props) => {
       ),
     },
     {
+      path: '/collaborate/:note',
+      errorElement: <AppBroke />,
+      element:
+        isAuthenticated || isLoading ? (
+          <MainLayout>
+            <Collaborate />
+          </MainLayout>
+        ) : (
+          <Navigate to='/login-required' />
+        ),
+    },
+    {
       path: '/dashboard',
       errorElement: <AppBroke />,
-      element: isAuthenticated ? (
-        <MainLayout>
-          <Dashboard />
-        </MainLayout>
-      ) : (
-        <Navigate to='/login-required' />
-      ),
+      element:
+        isAuthenticated || isLoading ? (
+          <MainLayout>
+            <Dashboard />
+          </MainLayout>
+        ) : (
+          <Navigate to='/login-required' />
+        ),
     },
   ]);
 

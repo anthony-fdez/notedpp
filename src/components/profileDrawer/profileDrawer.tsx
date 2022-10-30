@@ -79,6 +79,7 @@ const ProfileDrawer = ({ isOpen, handleClose }: Props): JSX.Element => {
   return (
     <>
       <Drawer
+        overlayBlur={5}
         lockScroll={false}
         opened={isOpen}
         position='right'

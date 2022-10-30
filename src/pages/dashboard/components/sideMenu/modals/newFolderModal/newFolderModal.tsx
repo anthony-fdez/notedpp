@@ -27,7 +27,12 @@ const NewFolderModal = ({ isOpen, handleClose }: Props): JSX.Element => {
   };
 
   return (
-    <Modal opened={isOpen} onClose={handleClose} title='Create new folder'>
+    <Modal
+      overlayBlur={5}
+      opened={isOpen}
+      onClose={handleClose}
+      title='Create new folder'
+    >
       <form onSubmit={(e) => handleCreateFolder(e)}>
         <Input
           onChange={(e: {

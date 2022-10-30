@@ -36,7 +36,12 @@ const DeleteFolderModal = ({
   };
 
   return (
-    <Modal opened={isOpen} onClose={handleClose} title='Delete Folder'>
+    <Modal
+      overlayBlur={5}
+      opened={isOpen}
+      onClose={handleClose}
+      title='Delete Folder'
+    >
       <form onSubmit={(e) => handleDeleteFolder(e)}>
         <Alert variant='filled' title='Be careful' color='red'>
           This action is irreversible, and all you notes inside this folder will

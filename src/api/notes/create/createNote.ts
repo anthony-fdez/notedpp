@@ -32,6 +32,7 @@ export const createNote = async ({ globalStore, note, folder_name }: Props) => {
       globalStore.setSelectedNote(response.data.note);
     })
     .catch((e) => {
+      console.log(e);
       try {
         if (e.response.data.message) {
           showNotification({

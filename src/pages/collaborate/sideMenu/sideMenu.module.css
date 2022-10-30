@@ -1,0 +1,57 @@
+.desktop_menu {
+  display: none;
+}
+
+.drawer {
+  overflow: auto;
+}
+
+.user_container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.avatar {
+  margin-right: 10px;
+}
+
+.alone_alert {
+  margin-bottom: 10px;
+}
+
+.invite_button {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.import_note_button {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.segmented_control {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 900px) {
+  .mobile_menu {
+    display: none;
+    position: relative;
+  }
+  .desktop_menu {
+    display: block;
+    position: relative;
+  }
+  .container {
+    width: 300px;
+    height: calc(100vh - 70px);
+    padding: 20px;
+    position: fixed;
+    left: 0px;
+    overflow: auto;
+    padding-bottom: 100px;
+  }
+}

@@ -12,6 +12,7 @@ import { useMantineTheme } from '@mantine/core';
 import { Input } from '@mantine/core';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { openSpotlight } from '@mantine/spotlight';
+import { Link } from 'react-router-dom';
 
 const Header: React.FC = (): JSX.Element => {
   const theme = useMantineTheme();
@@ -31,7 +32,12 @@ const Header: React.FC = (): JSX.Element => {
 
     return (
       <div className={styles.sync_container}>
-        <h3>Noted++</h3>
+        <Link
+          style={{ color: 'inherit', textDecoration: 'none' }}
+          to='/dashboard'
+        >
+          <h3>Noted++</h3>
+        </Link>
       </div>
     );
   };
