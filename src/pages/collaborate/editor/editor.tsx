@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useEffect } from 'react';
-import { INote } from '../../../interfaces/INote';
 
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
@@ -111,6 +111,7 @@ const CollaborationEditor = ({ ydoc, provider }: Props) => {
 
   return (
     <div className={styles.container}>
+      {/* @ts-ignore */}
       <TextEditor editor={editor} />
       <div className={styles.character_count_container}>
         {editor.storage.characterCount.words()} words
@@ -128,6 +129,7 @@ const CollaborationEditor = ({ ydoc, provider }: Props) => {
         }}
         className={styles.menu_buttons_container}
       >
+        {/* @ts-ignore */}
         <EditorMenu editor={editor} />
       </div>
     </div>

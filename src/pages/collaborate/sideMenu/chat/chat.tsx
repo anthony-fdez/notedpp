@@ -101,7 +101,7 @@ const Chat = ({ room, socket, typing, messages }: Props) => {
             placeholder='Message'
             className={styles.input}
             value={messageText}
-            onChange={(e) => setMessageText(e.target.value)}
+            onChange={(e: any) => setMessageText(e.target.value)}
             rightSection={
               <ActionIcon type='submit' color='blue'>
                 <IoMdSend />
