@@ -172,6 +172,8 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
                 onSubmit={(e) => {
                   e.preventDefault();
                   navigate(`/collaborate/${roomToJoin}`);
+
+                  window.location.reload();
                 }}
               >
                 <Input
