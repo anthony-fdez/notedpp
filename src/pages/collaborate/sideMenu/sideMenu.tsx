@@ -16,12 +16,13 @@ import styles from './sideMenu.module.css';
 import { AiOutlineLink, AiOutlineRight } from 'react-icons/ai';
 import { showNotification } from '@mantine/notifications';
 import { BiImport } from 'react-icons/bi';
-import ImportNoteModal from './modals/importNoteModal/importNoteModa';
+import ImportNoteModal from './modals/importNoteModal/importNoteModal';
 import Chat from './chat/chat';
 import io from 'socket.io-client';
 import { useAuth0 } from '@auth0/auth0-react';
 import { BiMessageAlt } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
+import { ImExit } from 'react-icons/im';
 
 interface Props {
   provider: WebrtcProvider;
@@ -80,7 +81,15 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
       userName: user.name,
       room: room,
     });
-  }, [user]);
+  }, [user, room]);
+
+  const handleLeaveRoom = () => {
+    const randomString = (Math.random() + 1).toString(36).substring(6);
+
+    navigate(`/collaborate/${randomString}`);
+
+    window.location.reload();
+  };
 
   useEffect((): any => {
     const onMessage = (data: IMessage) => {
@@ -113,7 +122,7 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
     socket.on('typing', onTyping);
 
     return () => socket.off('message', onMessage);
-  }, [socket, selectedScreen]);
+  }, [socket, selectedScreen, room]);
 
   useEffect(
     () => () => {
@@ -122,10 +131,12 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
         room: room,
       });
     },
-    []
+    [room]
   );
 
-  const defaultScreen = () => {
+  const defaultScreen = (): JSX.Element | null => {
+    if (!users) return null;
+
     return (
       <>
         <ImportNoteModal
@@ -140,6 +151,15 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
         >
           Import Note
         </Button>
+        <Button
+          variant='light'
+          color='red'
+          leftIcon={<ImExit />}
+          className={styles.import_note_button}
+          onClick={() => handleLeaveRoom()}
+        >
+          Leave Room
+        </Button>
         {users.length === 1 && (
           <div className={styles.alone_alert}>
             <Alert title='Feeling alone?'>
@@ -152,6 +172,8 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
                 onSubmit={(e) => {
                   e.preventDefault();
                   navigate(`/collaborate/${roomToJoin}`);
+
+                  window.location.reload();
                 }}
               >
                 <Input
@@ -180,9 +202,16 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
         <p>People ({users.length})</p>
 
         {users.map((user: any, index: number) => {
+          if (!user.user) return null;
+
+          console.log(user);
+
           return (
             <div className={styles.user_container} key={`user-${index}`}>
-              <Avatar className={styles.avatar} src={user.user.avatar} />
+              <Avatar
+                className={styles.avatar}
+                src={user.user.avatar ?? null}
+              />
               {user.user.name}
             </div>
           );

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit';
@@ -46,57 +46,65 @@ const CollaborationEditor = ({ ydoc, provider }: Props) => {
   const theme = useMantineTheme();
   const { user } = useAuth0();
 
-  const editor = useEditor({
-    extensions: [
-      StarterKit.configure({ document: false }),
-      Document,
-      CustomDocument,
-      Paragraph,
-      Typography,
-      Text,
-      CharacterCount,
-      TaskList,
+  const [editor, setEditor] = useState<Editor | null>(null);
 
-      TaskItem.configure({
-        nested: true,
-      }),
+  useEffect(() => {
+    if (!user) return;
 
-      Table.configure({
-        resizable: true,
-      }),
-      TableRow,
-      TableHeader,
-      TableCell,
-      Link.configure({
-        openOnClick: true,
-      }),
-      Placeholder.configure({
-        placeholder: ({ node }) => {
-          if (node.type.name === 'heading') {
-            return 'What’s the title?';
-          }
+    const newEditor = new Editor({
+      extensions: [
+        StarterKit.configure({ document: false }),
+        Document,
+        CustomDocument,
+        Paragraph,
+        Typography,
+        Text,
+        CharacterCount,
+        TaskList,
 
-          return 'Can you add some further context?';
-        },
-      }),
-      CodeBlockLowlight.extend({
-        addNodeView() {
-          return ReactNodeViewRenderer(CodeBlock);
-        },
-      }).configure({ lowlight }),
-      Collaboration.configure({
-        document: ydoc,
-      }),
-      CollaborationCursor.configure({
-        provider: provider,
-        user: {
-          name: user?.name || 'Unknown',
-          color: stringToColor(user?.name || 'Unknown'),
-          avatar: user?.picture || null,
-        },
-      }),
-    ],
-  }) as Editor;
+        TaskItem.configure({
+          nested: true,
+        }),
+
+        Table.configure({
+          resizable: true,
+        }),
+        TableRow,
+        TableHeader,
+        TableCell,
+        Link.configure({
+          openOnClick: true,
+        }),
+        Placeholder.configure({
+          placeholder: ({ node }) => {
+            if (node.type.name === 'heading') {
+              return 'What’s the title?';
+            }
+
+            return 'Can you add some further context?';
+          },
+        }),
+        CodeBlockLowlight.extend({
+          addNodeView() {
+            return ReactNodeViewRenderer(CodeBlock);
+          },
+        }).configure({ lowlight }),
+        Collaboration.configure({
+          document: ydoc,
+        }),
+        CollaborationCursor.configure({
+          provider: provider,
+          user: {
+            name: user?.name || 'Unknown',
+            color: stringToColor(user?.name || 'Unknown'),
+            avatar: user.picture || null,
+          },
+        }),
+      ],
+    }) as Editor;
+
+    setEditor(newEditor);
+  }, [user]);
 
   useEffect(() => {
     if (!editor) return;
@@ -105,7 +113,7 @@ const CollaborationEditor = ({ ydoc, provider }: Props) => {
     editor.commands.setContent(globalStore.collaborationImportedNote);
 
     globalStore.setCollaborationImportedNote(null);
-  }, [globalStore.collaborationImportedNote]);
+  }, [globalStore.collaborationImportedNote, editor]);
 
   if (!editor) return null;
 

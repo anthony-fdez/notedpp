@@ -4,4 +4,14 @@
   align-items: center;
   justify-content: center;
   height: 80vh;
+  padding: 20px;
+  text-align: center;
+}
+.image {
+  width: 400px;
+  margin-bottom: 50px;
+  max-width: 80%;
+}
+.extra_message {
+  margin-top: 25px;
 }
