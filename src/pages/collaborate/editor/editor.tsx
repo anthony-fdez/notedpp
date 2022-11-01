@@ -21,7 +21,7 @@ import Table from '@tiptap/extension-table';
 import TableRow from '@tiptap/extension-table-row';
 import TableHeader from '@tiptap/extension-table-header';
 import TableCell from '@tiptap/extension-table-cell';
-import { ReactNodeViewRenderer, useEditor } from '@tiptap/react';
+import { ReactNodeViewRenderer } from '@tiptap/react';
 import CodeBlock from '../../../components/editor/codeBlock/codeBlock';
 import EditorMenu from '../../../components/editor/menu/menu';
 import { useGlobalStore } from '../../../globalStore/globalStore';

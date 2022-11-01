@@ -8,7 +8,6 @@ import CollaborationSideMenu from './sideMenu/sideMenu';
 import * as Y from 'yjs';
 import { WebrtcProvider } from 'y-webrtc';
 import { useGlobalStore } from '../../globalStore/globalStore';
-import Chat from './sideMenu/chat/chat';
 
 const ydoc = new Y.Doc();
 
