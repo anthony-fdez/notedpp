@@ -3,18 +3,20 @@ import React, { useState } from 'react';
 
 import styles from './header.module.css';
 
-import { TbUser } from 'react-icons/tb';
 import ProfileDrawer from '../profileDrawer/profileDrawer';
-import { FiMenu } from 'react-icons/fi';
 import { useGlobalStore } from '../../globalStore/globalStore';
 import { Loader } from '@mantine/core';
 import { useMantineTheme } from '@mantine/core';
 import { Input } from '@mantine/core';
-import { AiOutlineSearch } from 'react-icons/ai';
+import {
+  AiOutlineSearch,
+  AiOutlineArrowLeft,
+  AiOutlineMenu,
+  AiOutlineUser,
+} from 'react-icons/ai';
 import { openSpotlight } from '@mantine/spotlight';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { BsArrowLeft } from 'react-icons/bs';
 
 const Header: React.FC = (): JSX.Element => {
   const theme = useMantineTheme();
@@ -36,7 +38,7 @@ const Header: React.FC = (): JSX.Element => {
             }}
             to='/dashboard'
           >
-            <BsArrowLeft style={{ marginRight: '10px' }} size={24} />
+            <AiOutlineArrowLeft style={{ marginRight: '10px' }} size={24} />
             <h3>Noted++</h3>
           </Link>
         </div>
@@ -81,7 +83,7 @@ const Header: React.FC = (): JSX.Element => {
           onClick={() => globalStore.setIsMobileMenuOpen(true)}
           className={styles.action_icon_mobile_menu}
         >
-          {<FiMenu />}
+          {<AiOutlineMenu />}
         </ActionIcon>
         {headerLeft()}
         <div className={styles.header_right_container}>
@@ -114,7 +116,7 @@ const Header: React.FC = (): JSX.Element => {
             variant='light'
             onClick={() => setIsUserDrawerOpen(true)}
           >
-            <TbUser size={18} />
+            <AiOutlineUser size={18} />
           </ActionIcon>
         </div>
       </div>

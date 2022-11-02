@@ -1,8 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react';
 
-import { MantineProvider } from '@mantine/core';
+import { LoadingOverlay, MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import { RouterProvider } from 'react-router-dom';
 import './App.css';
@@ -43,14 +43,13 @@ function App() {
       }}
     >
       <NotificationsProvider position='top-right'>
-        <React.Suspense fallback={<></>}>
+        <Suspense fallback={<LoadingOverlay visible overlayBlur={3} />}>
           {globalStore.theme === 'dark' ? <DarkTheme /> : <LightTheme />}
-        </React.Suspense>
-
-        <div className='App'>
-          <FullScreenLoad />
-          <RouterProvider router={router} />
-        </div>
+          <div className='App'>
+            <FullScreenLoad />
+            <RouterProvider router={router} />
+          </div>
+        </Suspense>
       </NotificationsProvider>
     </MantineProvider>
   );

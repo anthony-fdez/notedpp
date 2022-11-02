@@ -1,7 +1,7 @@
 import { Alert, Button, useMantineTheme } from '@mantine/core';
 import React, { useEffect, useRef, useState } from 'react';
 import { useGlobalStore } from '../../../../globalStore/globalStore';
-import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { AiOutlineInfoCircle, AiOutlineCheckCircle } from 'react-icons/ai';
 import { useWindowScroll } from '@mantine/hooks';
 import TextEditor from '../../../../components/editor/editor';
 import { useEditor, Editor, ReactNodeViewRenderer } from '@tiptap/react';
@@ -21,7 +21,6 @@ import Typography from '@tiptap/extension-typography';
 import { updateNote } from '../../../../api/notes/update/updateNote';
 import Axios from 'axios';
 import { showNotification, updateNotification } from '@mantine/notifications';
-import { IconCheck } from '@tabler/icons';
 import moment from 'moment';
 import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
@@ -195,7 +194,7 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
           color: 'blue',
           title: 'Loaded',
           message: 'Note contents loaded. Yay',
-          icon: <IconCheck size={16} />,
+          icon: <AiOutlineCheckCircle size={16} />,
           autoClose: 1000,
         });
 
