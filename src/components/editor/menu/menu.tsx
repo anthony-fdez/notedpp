@@ -1,6 +1,5 @@
 import React from 'react';
 import { Editor } from '@tiptap/react';
-import { FaBold } from 'react-icons/fa';
 import {
   AiOutlineItalic,
   AiOutlineCheckSquare,
@@ -11,20 +10,21 @@ import {
   AiOutlineMergeCells,
   AiOutlineDelete,
   AiOutlineMinus,
+  AiOutlineOrderedList,
+  AiOutlineEnter,
+  AiOutlineFileText,
+  AiOutlineBold,
+  AiOutlineStrikethrough,
+  AiOutlineTable,
+  AiOutlineBorderTop,
+  AiOutlineBorderLeft,
+  AiOutlineUnorderedList,
+  AiOutlineBorderVerticle,
+  AiOutlineUndo,
+  AiOutlineRedo,
 } from 'react-icons/ai';
-import { MdFormatStrikethrough } from 'react-icons/md';
-import { BsTextParagraph, BsTable, BsCodeSlash } from 'react-icons/bs';
-import { MdFormatListBulleted } from 'react-icons/md';
-import { AiOutlineOrderedList } from 'react-icons/ai';
-import { BiCodeBlock } from 'react-icons/bi';
-import { GoQuote } from 'react-icons/go';
-import { MdHorizontalRule } from 'react-icons/md';
-import { AiOutlineEnter } from 'react-icons/ai';
-import { BiUndo } from 'react-icons/bi';
-import { BiRedo } from 'react-icons/bi';
+import { BsCodeSlash, BsCodeSquare, BsChatLeftQuote } from 'react-icons/bs';
 import { Button, Menu } from '@mantine/core';
-import { TbTable } from 'react-icons/tb';
-import { RiLayoutColumnFill } from 'react-icons/ri';
 
 import styles from './editorMenu.module.css';
 
@@ -44,7 +44,7 @@ const EditorMenu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
           onClick={() => editor.chain().focus().setParagraph().run()}
           variant={editor.isActive('paragraph') ? 'filled' : 'subtle'}
         >
-          <BsTextParagraph />
+          <AiOutlineFileText />
         </Button>
         <Button
           onClick={() =>
@@ -100,7 +100,7 @@ const EditorMenu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
           onClick={() => editor.chain().focus().toggleBold().run()}
           variant={editor.isActive('bold') ? 'filled' : 'subtle'}
         >
-          <FaBold />
+          <AiOutlineBold />
         </Button>
         <Button
           onClick={() => editor.chain().focus().toggleItalic().run()}
@@ -112,12 +112,12 @@ const EditorMenu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
           onClick={() => editor.chain().focus().toggleStrike().run()}
           variant={editor.isActive('strike') ? 'filled' : 'subtle'}
         >
-          <MdFormatStrikethrough />
+          <AiOutlineStrikethrough />
         </Button>
         <Menu shadow='md' width={350}>
           <Menu.Target>
             <Button variant={'subtle'}>
-              <TbTable />
+              <AiOutlineTable />
               Table
             </Button>
           </Menu.Target>
@@ -133,14 +133,14 @@ const EditorMenu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
             <Menu.Item
               color='blue'
               onClick={() => editor.chain().focus().toggleHeaderRow().run()}
-              icon={<BsTable />}
+              icon={<AiOutlineBorderTop />}
             >
               Toggle Header Row
             </Menu.Item>
             <Menu.Item
               color='blue'
               onClick={() => editor.chain().focus().toggleHeaderColumn().run()}
-              icon={<RiLayoutColumnFill />}
+              icon={<AiOutlineBorderLeft />}
             >
               Toggle Header Column
             </Menu.Item>
@@ -235,7 +235,7 @@ const EditorMenu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           variant={editor.isActive('bulletList') ? 'filled' : 'subtle'}
         >
-          <MdFormatListBulleted />
+          <AiOutlineUnorderedList />
         </Button>
         <Button
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
@@ -253,19 +253,19 @@ const EditorMenu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
           variant={editor.isActive('codeBlock') ? 'filled' : 'subtle'}
         >
-          <BiCodeBlock />
+          <BsCodeSquare />
         </Button>
         <Button
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
           variant={editor.isActive('blockquote') ? 'filled' : 'subtle'}
         >
-          <GoQuote />
+          <BsChatLeftQuote />
         </Button>
         <Button
           onClick={() => editor.chain().focus().setHorizontalRule().run()}
           variant='subtle'
         >
-          <MdHorizontalRule />
+          <AiOutlineBorderVerticle />
         </Button>
         <Button
           onClick={() => editor.chain().focus().setHardBreak().run()}
@@ -277,13 +277,13 @@ const EditorMenu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
           onClick={() => editor.chain().focus().undo().run()}
           variant='subtle'
         >
-          <BiUndo />
+          <AiOutlineUndo />
         </Button>
         <Button
           onClick={() => editor.chain().focus().redo().run()}
           variant='subtle'
         >
-          <BiRedo />
+          <AiOutlineRedo />
         </Button>
       </div>
     </>

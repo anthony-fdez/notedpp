@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 
 import { useGlobalStore } from '../../globalStore/globalStore';
 import styles from './dashboard.module.css';
 import SideMenu from './components/sideMenu/sideMenu';
-import Note from './components/note/note';
 import AnimateOnScreenLoad from '../../components/animateOnScreenLoad/animateOnScreenLoad';
+import { LoadingOverlay } from '@mantine/core';
+
+const Note = lazy(() => import('./components/note/note'));
 
 const Dashboard = (): JSX.Element | null => {
   const globalStore = useGlobalStore();
@@ -22,7 +24,11 @@ const Dashboard = (): JSX.Element | null => {
       <>
         <SideMenu />
         <div className={styles.dashboard_container}>
-          <Note />
+          <Suspense
+            fallback={<LoadingOverlay visible={true} overlayBlur={3} />}
+          >
+            <Note />
+          </Suspense>
         </div>
       </>
     </AnimateOnScreenLoad>

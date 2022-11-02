@@ -204,8 +204,6 @@ const CollaborationSideMenu = ({ provider, room }: Props) => {
         {users.map((user: any, index: number) => {
           if (!user.user) return null;
 
-          console.log(user);
-
           return (
             <div className={styles.user_container} key={`user-${index}`}>
               <Avatar

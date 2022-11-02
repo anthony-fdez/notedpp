@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import MainLayout from './components/layout/mainLayout/mainLayout';
-import Collaborate from './pages/collaborate/collaborate';
-import Dashboard from './pages/dashboard/dashboard';
-import AppBroke from './pages/errors/appBroke/appBroke';
-import NotFound from './pages/errors/notFound/notFound';
-import Home from './pages/home/home';
-import LoginRequired from './pages/loginRequired/loginRequired';
-import Shared from './pages/shared/shared';
+
+const Collaborate = lazy(() => import('./pages/collaborate/collaborate'));
+const Dashboard = lazy(() => import('./pages/dashboard/dashboard'));
+const AppBroke = lazy(() => import('./pages/errors/appBroke/appBroke'));
+const NotFound = lazy(() => import('./pages/errors/notFound/notFound'));
+const LoginRequired = lazy(() => import('./pages/loginRequired/loginRequired'));
+const Shared = lazy(() => import('./pages/shared/shared'));
+const Home = lazy(() => import('./pages/home/home'));
 
 interface Props {
   isAuthenticated: boolean;

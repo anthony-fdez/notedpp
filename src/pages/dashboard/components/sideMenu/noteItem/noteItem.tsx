@@ -1,15 +1,17 @@
 import { ActionIcon, Menu, NavLink } from '@mantine/core';
 import { useClickOutside } from '@mantine/hooks';
-import { IconTrash } from '@tabler/icons';
 import React, { useState } from 'react';
-import { BsFolderSymlink } from 'react-icons/bs';
-import { FiMoreHorizontal } from 'react-icons/fi';
 import { getNoteTitle } from '../../../../../functions/getNoteTitle';
 import { useGlobalStore } from '../../../../../globalStore/globalStore';
 import { INote } from '../../../../../interfaces/INote';
 import DeleteNoteModal from '../modals/deleteNoteModal/deleteNoteModal';
 import MoveNoteModal from '../modals/moveNote/moveNoteModal';
 import styles from './noteItem.module.css';
+import {
+  AiOutlineDelete,
+  AiOutlineMore,
+  AiOutlineFolderOpen,
+} from 'react-icons/ai';
 
 interface Props {
   note: INote;
@@ -55,7 +57,7 @@ const NoteItem = ({ note }: Props) => {
             <>
               <Menu.Target>
                 <ActionIcon onClick={() => setIsMenuOpen(true)}>
-                  <FiMoreHorizontal />
+                  <AiOutlineMore />
                 </ActionIcon>
               </Menu.Target>
             </>
@@ -64,7 +66,7 @@ const NoteItem = ({ note }: Props) => {
         <Menu.Dropdown>
           <Menu.Label>Note</Menu.Label>
           <Menu.Item
-            icon={<BsFolderSymlink />}
+            icon={<AiOutlineFolderOpen />}
             onClick={() => setIsMoveNoteModalOpen(true)}
           >
             Move Note
@@ -74,7 +76,7 @@ const NoteItem = ({ note }: Props) => {
 
           <Menu.Item
             color='red'
-            icon={<IconTrash size={14} />}
+            icon={<AiOutlineDelete size={14} />}
             onClick={() => setIsDeleteNoteModalOpen(true)}
           >
             Delete Note

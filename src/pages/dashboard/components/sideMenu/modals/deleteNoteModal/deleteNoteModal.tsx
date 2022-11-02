@@ -34,11 +34,12 @@ const DeleteNoteModal = ({ isOpen, handleClose, note }: Props): JSX.Element => {
       onClose={handleClose}
       title='Delete note'
     >
-      <Alert color='red' title='Are you sure?'>
-        Your note will be gone forever
-      </Alert>
+      <p>Are you sure you want to delete this note?</p>
       <form onSubmit={(e) => handleDeleteNote(e)}>
         <div className={styles.footer_container}>
+          <Button color='blue' onClick={handleClose} mr={10} variant='subtle'>
+            Cancel
+          </Button>
           <Button
             color='red'
             loaderPosition='left'
