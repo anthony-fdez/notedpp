@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import LoginButton from '../../components/auth/loginButton/loginButton';
 import styles from './home.module.css';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
