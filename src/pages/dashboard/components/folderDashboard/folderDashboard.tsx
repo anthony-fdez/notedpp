@@ -42,27 +42,7 @@ const FolderDashboard = () => {
     });
 
     if (notesToDisplay.length === 0) {
-      if (status === 'note') {
-        return (
-          <Alert title='Pretty empty out here man'>
-            Cmon bro, start writing some notes or something.
-          </Alert>
-        );
-      } else if (status === 'not_started') {
-        return <Alert title='Nothing here...'>So far so empty...</Alert>;
-      } else if (status === 'working') {
-        return (
-          <Alert title='Not working on anything'>
-            You should start working on something you lazy mf
-          </Alert>
-        );
-      } else if (status === 'done') {
-        return (
-          <Alert title='Good work'>
-            You should be proud of yourself for NOT DOING ANYTHING
-          </Alert>
-        );
-      }
+      return <Text color='dimmed'>No notes here...</Text>;
     } else
       return notesToDisplay.map((note: INote) => {
         return <NoteItemFolderDashboard note={note} key={note.id} />;
