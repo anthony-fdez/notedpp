@@ -5,6 +5,7 @@ import styles from './dashboard.module.css';
 import SideMenu from './components/sideMenu/sideMenu';
 import AnimateOnScreenLoad from '../../components/animateOnScreenLoad/animateOnScreenLoad';
 import { LoadingOverlay } from '@mantine/core';
+import FolderDashboard from './components/folderDashboard/folderDashboard';
 
 const Note = lazy(() => import('./components/note/note'));
 
@@ -27,7 +28,7 @@ const Dashboard = (): JSX.Element | null => {
           <Suspense
             fallback={<LoadingOverlay visible={true} overlayBlur={3} />}
           >
-            <Note />
+            {globalStore.isFolderDashboard ? <FolderDashboard /> : <Note />}
           </Suspense>
         </div>
       </>

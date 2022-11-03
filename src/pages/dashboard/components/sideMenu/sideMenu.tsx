@@ -1,6 +1,6 @@
-import { Alert, Button, Drawer, Loader } from '@mantine/core';
+import { Alert, Button, Collapse, Drawer, Loader } from '@mantine/core';
 import React, { useState } from 'react';
-import { AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlinePlus, AiFillCaretDown } from 'react-icons/ai';
 import { MdOutlineCreate } from 'react-icons/md';
 import { createNote } from '../../../../api/notes/create/createNote';
 import { useGlobalStore } from '../../../../globalStore/globalStore';
@@ -18,6 +18,7 @@ const SideMenu = (): JSX.Element | null => {
   const [isNewFolderModalOpen, setIsNewFolderModalOpen] = useState(false);
   const [isLoadingAddingQuickNote, setIsLoadingAddingQuickNote] =
     useState(false);
+  const [showActions, setShowActions] = useState(false);
 
   const handleCreateNote = async () => {
     setIsLoadingAddingQuickNote(true);
@@ -28,6 +29,7 @@ const SideMenu = (): JSX.Element | null => {
     });
 
     setIsLoadingAddingQuickNote(false);
+    setShowActions(false);
   };
 
   const handleCollaborate = () => {
@@ -40,32 +42,45 @@ const SideMenu = (): JSX.Element | null => {
     return (
       <>
         <Button
-          leftIcon={<AiOutlinePlus />}
+          onClick={() => setShowActions(!showActions)}
+          rightIcon={
+            <AiFillCaretDown style={showActions ? { rotate: '180deg' } : {}} />
+          }
+          variant='subtle'
           className={styles.new_folder_button}
-          onClick={handleCreateNote}
-          loading={isLoadingAddingQuickNote}
         >
-          Add Quick Note
+          Actions
         </Button>
-        <Button
-          leftIcon={<MdOutlineCreate />}
-          className={styles.new_folder_button}
-          onClick={() => {
-            setIsNewFolderModalOpen(true);
-            globalStore.setIsMobileMenuOpen(false);
-          }}
-          variant='light'
-        >
-          Create new folder
-        </Button>
-        <Button
-          leftIcon={<BsFillPeopleFill />}
-          className={styles.new_folder_button}
-          onClick={handleCollaborate}
-          variant='light'
-        >
-          Collaborate
-        </Button>
+        <Collapse in={showActions}>
+          <Button
+            leftIcon={<AiOutlinePlus />}
+            className={styles.new_folder_button}
+            onClick={handleCreateNote}
+            loading={isLoadingAddingQuickNote}
+          >
+            Add Quick Note
+          </Button>
+          <Button
+            leftIcon={<MdOutlineCreate />}
+            className={styles.new_folder_button}
+            onClick={() => {
+              setIsNewFolderModalOpen(true);
+              globalStore.setIsMobileMenuOpen(false);
+              setShowActions(false);
+            }}
+            variant='light'
+          >
+            Create new folder
+          </Button>
+          <Button
+            leftIcon={<BsFillPeopleFill />}
+            className={styles.new_folder_button}
+            onClick={handleCollaborate}
+            variant='light'
+          >
+            Collaborate
+          </Button>
+        </Collapse>
       </>
     );
   };

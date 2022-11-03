@@ -1,0 +1,19 @@
+.notes_container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+.note_container {
+  display: grid;
+  grid-template-rows: auto;
+  gap: 10px;
+  margin-right: 50px;
+  height: fit-content;
+}
+
+.timeline_item_container {
+  height: fit-content;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 10px;
+}

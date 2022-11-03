@@ -6,4 +6,5 @@ export interface INote {
   folderId: string;
   createdAt: string;
   updatedAt: string;
+  status: 'note' | 'not_started' | 'working' | 'done';
 }

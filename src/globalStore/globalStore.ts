@@ -3,12 +3,14 @@ import create from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { IFolder } from './../interfaces/IFolder';
 import { INote } from './../interfaces/INote';
+import { IFolderDashboard } from './interfaces/IFolderDashboard';
 import { IUser } from './interfaces/IUser';
 
 export interface IGlobalStore {
   theme: 'dark' | 'light';
   user: IUser | null;
   selectedNote: INote | null;
+  isFolderDashboard: IFolderDashboard | null;
   folders: IFolder[] | null;
   isLoadingFolders: boolean;
   isFullLoader: boolean;
@@ -23,6 +25,7 @@ export interface IGlobalStore {
   setIsMobileMenuOpen: (isOpen: boolean) => void;
   setTheme: (theme: 'dark' | 'light') => void;
   setCollaborationImportedNote: (note: string | null) => void;
+  setIsFolderDashboard: (data: IFolderDashboard | null) => void;
 }
 
 export const useGlobalStore = create<IGlobalStore>()(
@@ -40,6 +43,7 @@ export const useGlobalStore = create<IGlobalStore>()(
       },
       folders: null,
       selectedNote: null,
+      isFolderDashboard: null,
       isLoadingFolders: true,
       isFullLoader: false,
       isMobileMenuOpen: false,
@@ -86,6 +90,9 @@ export const useGlobalStore = create<IGlobalStore>()(
       },
       setCollaborationImportedNote: (note: string | null) => {
         set({ collaborationImportedNote: note });
+      },
+      setIsFolderDashboard(data: IFolderDashboard | null) {
+        set({ isFolderDashboard: data });
       },
     })),
     {

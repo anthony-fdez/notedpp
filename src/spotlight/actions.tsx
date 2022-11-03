@@ -41,6 +41,7 @@ export const spotlightActions = ({
           });
 
           globalStore.setIsFullLoader(false);
+          globalStore.setIsFolderDashboard(null);
 
           return navigate('/dashboard');
         },
@@ -78,6 +79,7 @@ export const spotlightActions = ({
           ).fromNow()}`,
           onTrigger: () => {
             globalStore.setSelectedNote(note);
+            globalStore.setIsFolderDashboard(null);
             navigate('/dashboard');
           },
           group: 'Notes',

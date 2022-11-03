@@ -9,6 +9,7 @@ export const handleLogout = ({ globalStore, logout }: IHandleLogout) => {
   globalStore.setFolders(null);
   globalStore.setSelectedNote(null);
   globalStore.setUser(null);
+  globalStore.setIsFolderDashboard(null);
 
   logout();
 };

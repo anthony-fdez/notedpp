@@ -16,6 +16,7 @@ import styles from './folderItem.module.css';
 import { useGlobalStore } from '../../../../../globalStore/globalStore';
 import { useClickOutside } from '@mantine/hooks';
 import { createNote } from '../../../../../api/notes/create/createNote';
+import { BsColumns } from 'react-icons/bs';
 
 interface Props {
   folder: IFolder;
@@ -42,6 +43,18 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
     setIsMenuOpen(false);
 
     globalStore.setIsFullLoader(false);
+  };
+
+  const getNotesThatAreNotCompleted = () => {
+    let notCompletedNotes = 0;
+
+    folder.notes.map((note: INote) => {
+      if (note.status !== 'done') {
+        notCompletedNotes++;
+      }
+    });
+
+    return notCompletedNotes;
   };
 
   if (!folder) return null;
@@ -103,7 +116,7 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
     );
   };
 
-  if (folder.notes.length === 0) {
+  if (getNotesThatAreNotCompleted() === 0) {
     return (
       <div ref={ref}>
         <NavLink
@@ -130,14 +143,34 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
   return (
     <div ref={ref}>
       <NavLink
-        description={`${folder.notes.length} notes.`}
+        description={`${getNotesThatAreNotCompleted()} notes.`}
         label={folder.folder_name}
         childrenOffset={28}
         noWrap={true}
       >
+        <Button
+          mt={10}
+          leftIcon={<BsColumns />}
+          variant='light'
+          className={styles.dashboard_button}
+          onClick={() => {
+            if (globalStore.isFolderDashboard) {
+              globalStore.setIsFolderDashboard(null);
+            } else {
+              globalStore.setIsFolderDashboard({
+                isOpen: true,
+                folder,
+              });
+            }
+          }}
+        >
+          Dashboard
+        </Button>
         {actionsButton()}
         {folder.notes.map((note: INote) => {
-          return <NoteItem key={note.id} note={note} />;
+          if (note.status !== 'done') {
+            return <NoteItem key={note.id} note={note} />;
+          }
         })}
         <br></br>
       </NavLink>

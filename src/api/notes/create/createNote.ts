@@ -30,6 +30,7 @@ export const createNote = async ({ globalStore, note, folder_name }: Props) => {
 
       globalStore.updateFolders();
       globalStore.setSelectedNote(response.data.note);
+      globalStore.setIsFolderDashboard(null);
     })
     .catch((e) => {
       console.log(e);
