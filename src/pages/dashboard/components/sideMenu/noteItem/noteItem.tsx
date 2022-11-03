@@ -50,6 +50,7 @@ const NoteItem = ({ note }: Props) => {
           noWrap={true}
           onClick={() => {
             globalStore.setSelectedNote(note);
+            globalStore.setIsFolderDashboard(null);
           }}
           active={note.id === globalStore.selectedNote?.id}
           label={getNoteTitle({ note: note.note })}

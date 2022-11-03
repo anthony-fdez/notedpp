@@ -1,0 +1,15 @@
+.notes_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+.note_container {
+  background-color: whitesmoke;
+  padding: 10px;
+}
+.right_container {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  height: calc(100vh - 120px);
+  gap: 10px;
+}

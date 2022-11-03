@@ -1,4 +1,6 @@
+import { IFolder } from '../../interfaces/IFolder';
+
 export interface IFolderDashboard {
-  folder_id: string;
+  folder: IFolder;
   isOpen: boolean;
 }

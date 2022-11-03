@@ -141,10 +141,14 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
           variant='light'
           className={styles.dashboard_button}
           onClick={() => {
-            globalStore.setIsFolderDashboard({
-              isOpen: true,
-              folder_id: folder.id,
-            });
+            if (globalStore.isFolderDashboard) {
+              globalStore.setIsFolderDashboard(null);
+            } else {
+              globalStore.setIsFolderDashboard({
+                isOpen: true,
+                folder,
+              });
+            }
           }}
         >
           Dashboard
