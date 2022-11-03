@@ -217,9 +217,15 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
 
   if (!globalStore.selectedNote) {
     return (
-      <Alert icon={<AiOutlineInfoCircle />} title='No Note selected'>
-        Select a note within a folder on the left hand side menu.
-      </Alert>
+      <div className={styles.no_note}>
+        <img
+          className={styles.no_note_image}
+          src='/empty.svg'
+          alt='No note selected'
+        />
+        <h1>No note selected</h1>
+        <p> Select a note within a folder on the left hand side menu.</p>
+      </div>
     );
   }
 
