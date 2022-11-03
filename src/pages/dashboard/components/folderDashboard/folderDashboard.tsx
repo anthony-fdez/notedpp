@@ -6,7 +6,7 @@ import AnimateOnScreenLoad from '../../../../components/animateOnScreenLoad/anim
 import { INote } from '../../../../interfaces/INote';
 import NoteItemFolderDashboard from './noteItem/noteItemFolderDashboard';
 import { IFolder } from '../../../../interfaces/IFolder';
-import { Button, Collapse, Text, Timeline } from '@mantine/core';
+import { Alert, Button, Collapse, Text, Timeline } from '@mantine/core';
 
 import { AiOutlineFileDone, AiOutlineClockCircle } from 'react-icons/ai';
 import { BiNote } from 'react-icons/bi';
@@ -32,11 +32,41 @@ const FolderDashboard = () => {
   const renderNotes = (status: 'note' | 'not_started' | 'working' | 'done') => {
     if (!globalStore.isFolderDashboard) return null;
 
-    return globalStore.isFolderDashboard.folder.notes.map((note: INote) => {
+    const notesToDisplay: INote[] = [];
+
+    globalStore.isFolderDashboard.folder.notes.map((note: INote) => {
       if (note.status === status) {
+        notesToDisplay.push(note);
         return <NoteItemFolderDashboard note={note} key={note.id} />;
       }
     });
+
+    if (notesToDisplay.length === 0) {
+      if (status === 'note') {
+        return (
+          <Alert title='Pretty empty out here man'>
+            Cmon bro, start writing some notes or something.
+          </Alert>
+        );
+      } else if (status === 'not_started') {
+        return <Alert title='Nothing here...'>So far so empty...</Alert>;
+      } else if (status === 'working') {
+        return (
+          <Alert title='Not working on anything'>
+            You should start working on something you lazy mf
+          </Alert>
+        );
+      } else if (status === 'done') {
+        return (
+          <Alert title='Good work'>
+            You should be proud of yourself for NOT DOING ANYTHING
+          </Alert>
+        );
+      }
+    } else
+      return notesToDisplay.map((note: INote) => {
+        return <NoteItemFolderDashboard note={note} key={note.id} />;
+      });
   };
 
   return (
@@ -45,11 +75,6 @@ const FolderDashboard = () => {
         <div className={styles.notes_container}>
           <div className={styles.note_container}>
             <h2>{globalStore.isFolderDashboard?.folder.folder_name}</h2>
-            {renderNotes('note')}
-            {renderNotes('note')}
-            {renderNotes('note')}
-            {renderNotes('note')}
-            {renderNotes('note')}
             {renderNotes('note')}
           </div>
           <div className={styles.right_container}>
@@ -60,20 +85,13 @@ const FolderDashboard = () => {
                 title='Not Started'
               >
                 <div className={styles.timeline_item_container}>
-                  {renderNotes('note')}
+                  {renderNotes('not_started')}
                 </div>
               </Timeline.Item>
 
               <Timeline.Item bullet={<BiNote />} title='Working on it'>
                 <div className={styles.timeline_item_container}>
-                  {renderNotes('note')}
-                  {renderNotes('note')}
-                  {renderNotes('note')}
-                  {renderNotes('note')}
-                  {renderNotes('note')}
-                  {renderNotes('note')}
-                  {renderNotes('note')}
-                  {renderNotes('note')}
+                  {renderNotes('working')}
                 </div>
               </Timeline.Item>
 
@@ -93,8 +111,7 @@ const FolderDashboard = () => {
                 </Button>
                 <Collapse in={showCompletedNotes}>
                   <div className={styles.timeline_item_container}>
-                    {renderNotes('note')}
-                    {renderNotes('note')}
+                    {renderNotes('done')}
                   </div>
                 </Collapse>
               </Timeline.Item>
