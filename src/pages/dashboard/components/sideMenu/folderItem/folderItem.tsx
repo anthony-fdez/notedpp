@@ -45,6 +45,18 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
     globalStore.setIsFullLoader(false);
   };
 
+  const getNotesThatAreNotCompleted = () => {
+    let notCompletedNotes = 0;
+
+    folder.notes.map((note: INote) => {
+      if (note.status !== 'done') {
+        notCompletedNotes++;
+      }
+    });
+
+    return notCompletedNotes;
+  };
+
   if (!folder) return null;
 
   const actionsButton = () => {
@@ -104,7 +116,7 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
     );
   };
 
-  if (folder.notes.length === 0) {
+  if (getNotesThatAreNotCompleted() === 0) {
     return (
       <div ref={ref}>
         <NavLink
@@ -131,12 +143,13 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
   return (
     <div ref={ref}>
       <NavLink
-        description={`${folder.notes.length} notes.`}
+        description={`${getNotesThatAreNotCompleted()} notes.`}
         label={folder.folder_name}
         childrenOffset={28}
         noWrap={true}
       >
         <Button
+          mt={10}
           leftIcon={<BsColumns />}
           variant='light'
           className={styles.dashboard_button}
@@ -155,7 +168,9 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
         </Button>
         {actionsButton()}
         {folder.notes.map((note: INote) => {
-          return <NoteItem key={note.id} note={note} />;
+          if (note.status !== 'done') {
+            return <NoteItem key={note.id} note={note} />;
+          }
         })}
         <br></br>
       </NavLink>
