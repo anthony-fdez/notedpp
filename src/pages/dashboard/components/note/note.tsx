@@ -209,6 +209,8 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
             message: e.response.data.message,
             autoClose: 1000,
           });
+
+          globalStore.setSelectedNote(null);
         }
       });
   }, [editor, globalStore.selectedNote?.id]);

@@ -16,6 +16,7 @@ import styles from './folderItem.module.css';
 import { useGlobalStore } from '../../../../../globalStore/globalStore';
 import { useClickOutside } from '@mantine/hooks';
 import { createNote } from '../../../../../api/notes/create/createNote';
+import { BsColumns } from 'react-icons/bs';
 
 interface Props {
   folder: IFolder;
@@ -135,6 +136,19 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
         childrenOffset={28}
         noWrap={true}
       >
+        <Button
+          leftIcon={<BsColumns />}
+          variant='light'
+          className={styles.dashboard_button}
+          onClick={() => {
+            globalStore.setIsFolderDashboard({
+              isOpen: true,
+              folder_id: folder.id,
+            });
+          }}
+        >
+          Dashboard
+        </Button>
         {actionsButton()}
         {folder.notes.map((note: INote) => {
           return <NoteItem key={note.id} note={note} />;
