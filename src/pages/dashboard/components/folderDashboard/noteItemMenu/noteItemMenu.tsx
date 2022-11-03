@@ -1,4 +1,4 @@
-import { Menu, Text } from '@mantine/core';
+import { Menu } from '@mantine/core';
 import React, { useState } from 'react';
 import { INote } from '../../../../../interfaces/INote';
 
