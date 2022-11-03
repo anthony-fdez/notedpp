@@ -44,6 +44,7 @@
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
+    "react-lazy-load-image-component": "^1.5.5",
     "react-router-dom": "^6.4.1",
     "react-to-print": "^2.14.7",
     "socket.io-client": "^4.5.3",
@@ -54,6 +55,7 @@
   "devDependencies": {
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@types/react-lazy-load-image-component": "^1.5.2",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "@vitejs/plugin-react": "^2.1.0",

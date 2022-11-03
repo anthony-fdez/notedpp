@@ -1,106 +1,71 @@
 .container {
+  overflow-x: hidden;
+  background-color: black;
+  color: white;
+}
+.jumbo {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-image: url('/images/lighthouse.webp');
+  background-position: center;
+  background-size: cover;
+  color: white;
+}
+
+.jumbo_text_container {
+  width: calc(100%);
+  padding: 20px;
+  position: absolute;
+  bottom: 0px;
+  z-index: 10;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 50px;
+}
+.bottom_fade {
+  position: absolute;
+  background: linear-gradient(transparent, black);
+  width: 100%;
+  height: 70vh;
+  left: 0px;
+  bottom: 0px;
+  z-index: 0;
 }
 
 .content {
+  max-width: 1400px;
+  margin: auto;
+  padding: 20px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+.image_section {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  margin-top: 100px;
 }
-.bothImages,
-.rightContainer {
-  grid-row: 1/2;
+.image_section_header {
+  font-size: 2rem;
 }
-
-.bothImages {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-height: 100vh;
-  overflow: hidden;
-}
-
-.imageLogo {
-  max-width: 450px;
-  width: 50vw;
+.illustration_image {
+  width: 50%;
+  margin: auto;
 }
 .image {
-  object-fit: contain;
+  width: 100%;
+  border-radius: 5px;
 }
-
-.rightContainer {
+.footer {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  align-items: flex-start;
-  background-color: #1a1a1a;
-  padding: 100px 50px;
-  z-index: 99;
+  margin-top: 200px;
 }
-.logo {
+.footer > img {
   width: 50px;
-}
-.content h1 {
-  font-size: 4rem;
-  margin: 45px 0;
-}
-
-.content h3 {
-  font-size: 2rem;
-  text-align: start;
-}
-
-.lightContainer {
-  background-color: white;
-}
-.darkContainer {
-  background-color: #1a1a1a;
-}
-.dark {
-  color: #f1f1f1;
-}
-.light {
-  color: black;
-}
-
-.switch {
-  position: absolute;
-  top: 15px;
-  right: 50px;
-  z-index: 100;
-}
-
-.button {
-  margin-top: 45px;
-}
-
-.imageLogo {
-  position: absolute;
-}
-.overall {
-  overflow: hidden;
-}
-@media (max-width: 770px) {
-  .content {
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    overflow-x: hidden;
-  }
-  .rightContainer {
-    width: 100vw;
-  }
-  .bothImages {
-    height: 400px;
-  }
-  .rightContainer {
-    padding: 50px 20px;
-  }
-}
-
-@media (max-width: 310px) {
-  .content h1 {
-    font-size: 3rem;
-  }
 }
