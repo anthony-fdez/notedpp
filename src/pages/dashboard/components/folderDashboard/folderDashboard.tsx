@@ -6,7 +6,7 @@ import AnimateOnScreenLoad from '../../../../components/animateOnScreenLoad/anim
 import { INote } from '../../../../interfaces/INote';
 import NoteItemFolderDashboard from './noteItem/noteItemFolderDashboard';
 import { IFolder } from '../../../../interfaces/IFolder';
-import { Alert, Button, Collapse, Text, Timeline } from '@mantine/core';
+import { Button, Collapse, Text, Timeline } from '@mantine/core';
 
 import { AiOutlineFileDone, AiOutlineClockCircle } from 'react-icons/ai';
 import { BiNote } from 'react-icons/bi';

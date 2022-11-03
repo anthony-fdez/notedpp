@@ -1,4 +1,4 @@
-import { Alert, Button, Modal } from '@mantine/core';
+import {  Button, Modal } from '@mantine/core';
 import React, { useState } from 'react';
 import { deleteNote } from '../../../../../../api/notes/delete/deleteNote';
 import { useGlobalStore } from '../../../../../../globalStore/globalStore';
