@@ -46,14 +46,18 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 40px;
-  margin-top: 100px;
+  margin-bottom: 30vh;
 }
 .image_section_header {
   font-size: 2rem;
 }
+.image_right_section {
+  margin-top: 100px;
+}
 .illustration_image {
   width: 50%;
   margin: auto;
+  height: fit-content;
 }
 .image {
   width: 100%;
