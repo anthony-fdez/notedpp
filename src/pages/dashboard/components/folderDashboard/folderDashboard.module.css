@@ -1,15 +1,17 @@
 .notes_container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: 1fr 2fr;
 }
 .note_container {
-  background-color: whitesmoke;
-  padding: 10px;
-}
-.right_container {
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  height: calc(100vh - 120px);
+  grid-template-rows: auto;
+  gap: 10px;
+  margin-right: 50px;
+}
+
+.timeline_item_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
   gap: 10px;
 }

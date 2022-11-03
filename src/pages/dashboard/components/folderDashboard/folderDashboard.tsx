@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './folderDashboard.module.css';
 
 import { useGlobalStore } from '../../../../globalStore/globalStore';
@@ -6,9 +6,15 @@ import AnimateOnScreenLoad from '../../../../components/animateOnScreenLoad/anim
 import { INote } from '../../../../interfaces/INote';
 import NoteItemFolderDashboard from './noteItem/noteItemFolderDashboard';
 import { IFolder } from '../../../../interfaces/IFolder';
+import { Button, Collapse, Text, Timeline } from '@mantine/core';
+
+import { AiOutlineFileDone, AiOutlineClockCircle } from 'react-icons/ai';
+import { BiNote } from 'react-icons/bi';
 
 const FolderDashboard = () => {
   const globalStore = useGlobalStore();
+
+  const [showCompletedNotes, setShowCompletedNotes] = useState(false);
 
   useEffect(() => {
     if (!globalStore.folders) return;
@@ -38,19 +44,61 @@ const FolderDashboard = () => {
       <>
         <div className={styles.notes_container}>
           <div className={styles.note_container}>
-            <h1>Notes</h1>
+            <h2>{globalStore.isFolderDashboard?.folder.folder_name}</h2>
+            {renderNotes('note')}
+            {renderNotes('note')}
+            {renderNotes('note')}
+            {renderNotes('note')}
+            {renderNotes('note')}
             {renderNotes('note')}
           </div>
-          <div className={styles.note_container}>
-            <h1>Working on it</h1>
-          </div>
           <div className={styles.right_container}>
-            <div className={styles.note_container}>
-              <h1>Not started</h1>
-            </div>
-            <div className={styles.note_container}>
-              <h1>Done</h1>
-            </div>
+            <Timeline active={2} bulletSize={28} lineWidth={2}>
+              <Timeline.Item
+                lineVariant='dashed'
+                bullet={<AiOutlineClockCircle />}
+                title='Not Started'
+              >
+                <div className={styles.timeline_item_container}>
+                  {renderNotes('note')}
+                </div>
+              </Timeline.Item>
+
+              <Timeline.Item bullet={<BiNote />} title='Working on it'>
+                <div className={styles.timeline_item_container}>
+                  {renderNotes('note')}
+                  {renderNotes('note')}
+                  {renderNotes('note')}
+                  {renderNotes('note')}
+                  {renderNotes('note')}
+                  {renderNotes('note')}
+                  {renderNotes('note')}
+                  {renderNotes('note')}
+                </div>
+              </Timeline.Item>
+
+              <Timeline.Item
+                bullet={<AiOutlineFileDone />}
+                title='Done'
+                lineVariant='dashed'
+              >
+                <Text mb={10} color='dimmed'>
+                  Completed and archived notes.
+                </Text>
+                <Button
+                  mb={10}
+                  onClick={() => setShowCompletedNotes(!showCompletedNotes)}
+                >
+                  Show Completed Notes
+                </Button>
+                <Collapse in={showCompletedNotes}>
+                  <div className={styles.timeline_item_container}>
+                    {renderNotes('note')}
+                    {renderNotes('note')}
+                  </div>
+                </Collapse>
+              </Timeline.Item>
+            </Timeline>
           </div>
         </div>
       </>
