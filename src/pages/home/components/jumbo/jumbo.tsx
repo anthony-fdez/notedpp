@@ -22,7 +22,9 @@ const Jumbo = (): JSX.Element => {
         </Fade>
       </div>
       <div className={styles.images_preview}>
-        <div className={styles.images_glow} />
+        <Fade className={styles.glow_container} triggerOnce delay={1300}>
+          <div className={styles.images_glow} />
+        </Fade>
         <Parallax speed={-5}>
           <Fade triggerOnce delay={500}>
             <LazyLoadImage

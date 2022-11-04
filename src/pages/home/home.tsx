@@ -6,6 +6,7 @@ import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
 import { Fade } from 'react-awesome-reveal';
 import { Text } from '@mantine/core';
 import Jumbo from './components/jumbo/jumbo';
+import Footer from './components/footer/footer';
 
 const Home: React.FC = (): JSX.Element => {
   return (
@@ -91,13 +92,8 @@ const Home: React.FC = (): JSX.Element => {
               </Parallax>
             </div>
           </Fade>
-
-          <div className={styles.footer}>
-            <img src='/icon.png' />
-            <h1>Noted++</h1>
-            <LoginButton />
-          </div>
         </div>
+        <Footer />
       </div>
     </ParallaxProvider>
   );

@@ -1,0 +1,60 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 80%;
+  margin: auto;
+  width: 700px;
+  text-align: center;
+  margin-bottom: 200px;
+  position: relative;
+}
+.footer > img {
+  width: 50px;
+  z-index: 10;
+}
+.text_container {
+  margin-bottom: 30px;
+  z-index: 10;
+}
+.glow_container {
+  background-color: red;
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  margin: auto;
+  bottom: 0;
+  z-index: 0;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 10px 100px 500px 230px rgb(34, 139, 230, 0.2);
+  }
+  20% {
+    box-shadow: 10px 20px 700px 300px rgb(34, 139, 230, 0.4);
+  }
+  40% {
+    box-shadow: 10px 50px 500px 270px rgb(34, 197, 230, 0.5);
+  }
+  60% {
+    box-shadow: 10px 100px 500px 300px rgb(19, 73, 211, 0.4);
+  }
+  80% {
+    box-shadow: 10px 100px 500px 250px rgb(14, 104, 178, 0.4);
+  }
+  100% {
+    box-shadow: 10px 100px 500px 230px rgb(34, 139, 230, 0.2);
+  }
+}
+.glow_animation {
+  box-shadow: 10px 10px 500px 200px rgb(34, 139, 230);
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  z-index: 0;
+  animation: glow 20s infinite !important;
+  height: 0px;
+  width: 0px;
+}

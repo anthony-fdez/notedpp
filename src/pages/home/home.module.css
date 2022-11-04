@@ -32,13 +32,3 @@
   width: 100%;
   border-radius: 5px;
 }
-.footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin-top: 200px;
-}
-.footer > img {
-  width: 50px;
-}
