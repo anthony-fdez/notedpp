@@ -32,3 +32,24 @@
   width: 100%;
   border-radius: 5px;
 }
+
+@media only screen and (max-width: 900px) {
+  .image_section {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10vh;
+  }
+  .image {
+    width: 100%;
+    border-radius: 5px;
+    z-index: 10;
+  }
+  .image_right_section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
