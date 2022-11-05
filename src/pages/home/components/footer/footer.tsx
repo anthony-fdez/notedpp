@@ -1,15 +1,21 @@
 import React from 'react';
-import { Fade } from 'react-awesome-reveal';
+import { Reveal } from 'react-awesome-reveal';
 import LoginButton from '../../../../components/auth/loginButton/loginButton';
+import { fadeFromBottom } from '../animations/fadeInAnimations';
 import styles from './footer.module.css';
 
 const Footer = () => {
   return (
-    <Fade triggerOnce delay={400}>
+    <Reveal keyframes={fadeFromBottom} triggerOnce delay={400}>
       <div className={styles.footer}>
-        <Fade className={styles.glow_container} triggerOnce delay={1000}>
+        <Reveal
+          keyframes={fadeFromBottom}
+          className={styles.glow_container}
+          triggerOnce
+          delay={1000}
+        >
           <div className={styles.glow_animation} />
-        </Fade>
+        </Reveal>
         <img src='/icon.png' />
 
         <div className={styles.text_container}>
@@ -22,7 +28,7 @@ const Footer = () => {
 
         <LoginButton />
       </div>
-    </Fade>
+    </Reveal>
   );
 };
 

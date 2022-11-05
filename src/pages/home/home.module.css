@@ -17,6 +17,12 @@
   gap: 40px;
   margin-bottom: 30vh;
 }
+.image_section_opposite {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+  margin-bottom: 30vh;
+}
 .image_section_header {
   font-size: 2rem;
 }
@@ -37,6 +43,13 @@
   .image_section {
     display: flex;
     flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10vh;
+  }
+  .image_section_opposite {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-bottom: 10vh;

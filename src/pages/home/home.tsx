@@ -1,12 +1,14 @@
 import React from 'react';
-import LoginButton from '../../components/auth/loginButton/loginButton';
-import styles from './home.module.css';
+import Reveal from 'react-awesome-reveal';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
-import { Fade } from 'react-awesome-reveal';
-import { Text } from '@mantine/core';
-import Jumbo from './components/jumbo/jumbo';
 import Footer from './components/footer/footer';
+import Jumbo from './components/jumbo/jumbo';
+import styles from './home.module.css';
+import {
+  fadeFromLeft,
+  fadeFromRight,
+} from './components/animations/fadeInAnimations';
 
 const Home: React.FC = (): JSX.Element => {
   return (
@@ -14,7 +16,7 @@ const Home: React.FC = (): JSX.Element => {
       <div className={styles.container}>
         <Jumbo />
         <div className={styles.content}>
-          <Fade triggerOnce delay={500}>
+          <Reveal keyframes={fadeFromLeft} triggerOnce delay={500}>
             <div className={styles.image_section}>
               <LazyLoadImage
                 className={styles.image}
@@ -39,14 +41,9 @@ const Home: React.FC = (): JSX.Element => {
                 </div>
               </Parallax>
             </div>
-          </Fade>
-          <Fade triggerOnce delay={500}>
-            <div className={styles.image_section}>
-              <LazyLoadImage
-                className={styles.image}
-                alt={'First Screenshot'}
-                src='/images/2.png' // use normal <img> attributes as props
-              />
+          </Reveal>
+          <Reveal keyframes={fadeFromRight} triggerOnce delay={500}>
+            <div className={styles.image_section_opposite}>
               <Parallax speed={-10}>
                 <div className={styles.image_right_section}>
                   <img
@@ -64,9 +61,14 @@ const Home: React.FC = (): JSX.Element => {
                   </p>
                 </div>
               </Parallax>
+              <LazyLoadImage
+                className={styles.image}
+                alt={'First Screenshot'}
+                src='/images/2.png' // use normal <img> attributes as props
+              />
             </div>
-          </Fade>
-          <Fade triggerOnce delay={500}>
+          </Reveal>
+          <Reveal keyframes={fadeFromLeft} triggerOnce delay={500}>
             <div className={styles.image_section}>
               <LazyLoadImage
                 className={styles.image}
@@ -91,7 +93,7 @@ const Home: React.FC = (): JSX.Element => {
                 </div>
               </Parallax>
             </div>
-          </Fade>
+          </Reveal>
         </div>
         <Footer />
       </div>
