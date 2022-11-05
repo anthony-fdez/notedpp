@@ -55,6 +55,7 @@
   position: absolute;
   z-index: 0;
   animation: glow 20s infinite !important;
-  height: 0px;
-  width: 0px;
+  height: 1px;
+  width: 1px;
+  border-radius: 50%;
 }

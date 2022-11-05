@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Reveal from 'react-awesome-reveal';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
@@ -9,12 +9,17 @@ import {
   fadeFromLeft,
   fadeFromRight,
 } from './components/animations/fadeInAnimations';
+import { useElementSize } from '@mantine/hooks';
 
 const Home: React.FC = (): JSX.Element => {
+  const { ref, width, height } = useElementSize();
+
   return (
     <ParallaxProvider>
       <div className={styles.container}>
-        <Jumbo />
+        <div ref={ref}>
+          {width && height && <Jumbo width={width} height={height} />}
+        </div>
         <div className={styles.content}>
           <Reveal keyframes={fadeFromLeft} triggerOnce delay={500}>
             <div className={styles.image_section}>

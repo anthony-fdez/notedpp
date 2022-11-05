@@ -8,7 +8,7 @@
   color: white;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  max-width: 1500px;
+  /* max-width: 1500px; */
   margin: auto;
   align-items: center;
   padding: 50px;
@@ -58,16 +58,18 @@
     box-shadow: 10px 100px 500px 230px rgb(34, 139, 230);
   }
   20% {
-    box-shadow: 10px 20px 700px 300px rgb(34, 139, 230);
+    box-shadow: 10px 20px 1000px 300px rgb(34, 139, 230);
   }
   40% {
     box-shadow: 10px 50px 500px 270px rgb(34, 197, 230);
+    transform: scaleX(2);
   }
   60% {
     box-shadow: 10px 100px 500px 300px rgb(19, 73, 211);
   }
   80% {
     box-shadow: 10px 100px 500px 250px rgb(14, 104, 178);
+    transform: scaleX(1.4);
   }
   100% {
     box-shadow: 10px 100px 500px 230px rgb(34, 139, 230);
@@ -79,9 +81,10 @@
   width: 0px;
   position: absolute;
   z-index: 0;
-  animation: glow 20s infinite !important;
-  height: 0px;
-  width: 0px;
+  animation: glow 50s infinite !important;
+  height: 1px;
+  width: 1px;
+  border-radius: 50%;
 }
 
 @media only screen and (max-width: 900px) {
