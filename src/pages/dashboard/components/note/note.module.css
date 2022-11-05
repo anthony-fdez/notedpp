@@ -42,6 +42,19 @@
   justify-content: space-between;
   align-items: center;
 }
+.no_note {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+.no_note_image {
+  max-width: 80%;
+  width: 300px;
+  margin-bottom: 30px;
+}
 
 @media only screen and (min-width: 900px) {
   .last_saved_text {

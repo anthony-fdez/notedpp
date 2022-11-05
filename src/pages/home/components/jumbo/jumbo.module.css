@@ -1,0 +1,147 @@
+.jumbo {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: show;
+  background-position: center;
+  background-size: cover;
+  color: white;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  /* max-width: 1500px; */
+  margin: auto;
+  align-items: center;
+  padding: 50px;
+}
+.header_text {
+  font-size: 3rem;
+  line-height: 2rem;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.images_preview {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.jumbo_image_1,
+.jumbo_image_2,
+.jumbo_image_3 {
+  width: 30vw;
+  max-width: 500px;
+  min-width: 300px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+.jumbo_image_1 {
+  margin-left: 150px;
+  margin-bottom: -100px;
+}
+.jumbo_image_2 {
+  margin-left: -100px;
+}
+.jumbo_image_3 {
+  margin-top: -120px;
+}
+
+.glow_container {
+  position: absolute;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 10px 100px 500px 230px rgb(34, 139, 230);
+  }
+  20% {
+    box-shadow: 10px 20px 1000px 300px rgb(34, 139, 230);
+  }
+  40% {
+    box-shadow: 10px 50px 500px 270px rgb(34, 197, 230);
+    transform: scaleX(2);
+  }
+  60% {
+    box-shadow: 10px 100px 500px 300px rgb(19, 73, 211);
+  }
+  80% {
+    box-shadow: 10px 100px 500px 250px rgb(14, 104, 178);
+    transform: scaleX(1.4);
+  }
+  100% {
+    box-shadow: 10px 100px 500px 230px rgb(34, 139, 230);
+  }
+}
+.images_glow {
+  box-shadow: 10px 10px 500px 200px rgb(34, 139, 230);
+  height: 0px;
+  width: 0px;
+  position: absolute;
+  z-index: 0;
+  animation: glow 50s infinite !important;
+  height: 1px;
+  width: 1px;
+  border-radius: 50%;
+}
+
+@media only screen and (max-width: 900px) {
+  .jumbo {
+    grid-template-columns: 100vw;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .header_text {
+    font-size: 3rem;
+    line-height: 3rem;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    max-width: 90%;
+  }
+
+  @keyframes glow {
+    0% {
+      box-shadow: 10px 100px 500px 130px rgb(34, 139, 230);
+    }
+    20% {
+      box-shadow: 10px 20px 700px 200px rgb(34, 139, 230);
+    }
+    40% {
+      box-shadow: 10px 50px 500px 170px rgb(34, 197, 230);
+    }
+    60% {
+      box-shadow: 10px 100px 500px 200px rgb(19, 73, 211);
+    }
+    80% {
+      box-shadow: 10px 100px 500px 150px rgb(14, 104, 178);
+    }
+    100% {
+      box-shadow: 10px 100px 500px 130px rgb(34, 139, 230);
+    }
+  }
+
+  .jumbo_image_1,
+  .jumbo_image_2,
+  .jumbo_image_3 {
+    width: 100%;
+    max-width: 400px;
+
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  }
+  .jumbo_image_1 {
+    width: 70vw;
+    margin-left: 20px;
+    margin-bottom: -50px;
+  }
+  .jumbo_image_2 {
+    margin-left: -50px;
+  }
+  .jumbo_image_3 {
+    margin-top: -100px;
+    width: 70vw;
+  }
+}
