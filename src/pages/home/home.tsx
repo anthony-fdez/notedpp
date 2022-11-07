@@ -1,15 +1,15 @@
+import { useElementSize } from '@mantine/hooks';
 import React, { useState } from 'react';
 import Reveal from 'react-awesome-reveal';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
-import Footer from './components/footer/footer';
-import Jumbo from './components/jumbo/jumbo';
-import styles from './home.module.css';
 import {
   fadeFromLeft,
   fadeFromRight,
 } from './components/animations/fadeInAnimations';
-import { useElementSize } from '@mantine/hooks';
+import Footer from './components/footer/footer';
+import Jumbo from './components/jumbo/jumbo';
+import styles from './home.module.css';
 
 const Home: React.FC = (): JSX.Element => {
   const { ref, width, height } = useElementSize();
@@ -39,9 +39,9 @@ const Home: React.FC = (): JSX.Element => {
                     Fully Feature Rich Text Editor!
                   </h2>
                   <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industrys
-                    standard dummy text ever since the 1500s
+                    Modern text editor which is easy to use and has every option
+                    you would need. Making tables, typing code snippets, making
+                    headers, everything is easy to do in noted++.
                   </p>
                 </div>
               </Parallax>
@@ -60,9 +60,9 @@ const Home: React.FC = (): JSX.Element => {
                     Productivity workflow!
                   </h2>
                   <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industrys
-                    standard dummy text ever since the 1500s
+                    Managing your notes and tasks are now easier than ever!
+                    Great schedule organizer; always keep track of what is next
+                    in your life.
                   </p>
                 </div>
               </Parallax>
@@ -91,9 +91,10 @@ const Home: React.FC = (): JSX.Element => {
                     A collaboration environment.
                   </h2>
                   <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industrys
-                    standard dummy text ever since the 1500s
+                    Any kind of profession utilizes collaboration and
+                    networking, and noted++ lets you do just that. Sharing notes
+                    is as easy as one click and having the ability to have
+                    multiple people working on one note is even easier!
                   </p>
                 </div>
               </Parallax>
