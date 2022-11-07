@@ -20,10 +20,7 @@ const Footer = () => {
 
         <div className={styles.text_container}>
           <h1>Noted++</h1>
-          <p>
-            Elit aute labore amet officia tempor. Consectetur est incididunt
-            veniam laboris proident
-          </p>
+          <p>All your note needs, all in one place.</p>
         </div>
 
         <LoginButton />
