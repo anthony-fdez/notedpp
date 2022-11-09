@@ -21,7 +21,7 @@ const Home: React.FC = (): JSX.Element => {
           {width && height && <Jumbo width={width} height={height} />}
         </div>
         <div className={styles.content}>
-          <Reveal keyframes={fadeFromLeft} triggerOnce delay={500}>
+          <Reveal delay={200} keyframes={fadeFromLeft}>
             <div className={styles.image_section}>
               <LazyLoadImage
                 className={styles.image}
@@ -47,7 +47,7 @@ const Home: React.FC = (): JSX.Element => {
               </Parallax>
             </div>
           </Reveal>
-          <Reveal keyframes={fadeFromRight} triggerOnce delay={500}>
+          <Reveal keyframes={fadeFromRight} delay={200}>
             <div className={styles.image_section_opposite}>
               <Parallax speed={-10}>
                 <div className={styles.image_right_section}>
@@ -73,7 +73,7 @@ const Home: React.FC = (): JSX.Element => {
               />
             </div>
           </Reveal>
-          <Reveal keyframes={fadeFromLeft} triggerOnce delay={500}>
+          <Reveal keyframes={fadeFromLeft} delay={200}>
             <div className={styles.image_section}>
               <LazyLoadImage
                 className={styles.image}
