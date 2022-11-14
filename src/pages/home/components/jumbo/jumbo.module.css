@@ -56,27 +56,32 @@
 @keyframes glow {
   0% {
     box-shadow: 10px 100px 500px 230px rgb(34, 139, 230);
+    transform: scaleX(2);
   }
   20% {
     box-shadow: 10px 20px 1000px 300px rgb(34, 139, 230);
+    transform: scaleX(1.5);
   }
   40% {
     box-shadow: 10px 50px 500px 270px rgb(34, 197, 230);
-    transform: scaleX(2);
+    transform: scaleX(1.7);
   }
   60% {
     box-shadow: 10px 100px 500px 300px rgb(19, 73, 211);
+    transform: scaleX(2.2);
   }
   80% {
     box-shadow: 10px 100px 500px 250px rgb(14, 104, 178);
-    transform: scaleX(1.4);
+    transform: scaleX(1.6);
   }
   100% {
     box-shadow: 10px 100px 500px 230px rgb(34, 139, 230);
+    transform: scaleX(2);
   }
 }
 .images_glow {
   box-shadow: 10px 10px 500px 200px rgb(34, 139, 230);
+  transform: scaleX(2);
   height: 0px;
   width: 0px;
   position: absolute;
