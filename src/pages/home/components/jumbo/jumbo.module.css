@@ -36,8 +36,20 @@
   max-width: 500px;
   min-width: 300px;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5);
-  z-index: 10;
+  z-index: 10 !important;
+  transition: 800ms;
+  position: relative;
 }
+
+.jumbo_image_1:hover,
+.jumbo_image_2:hover,
+.jumbo_image_3:hover {
+  position: relative;
+  transform: scale(1.5);
+  z-index: 1000 !important;
+  transition: 500ms;
+}
+
 .jumbo_image_1 {
   margin-left: 150px;
   margin-bottom: -100px;
