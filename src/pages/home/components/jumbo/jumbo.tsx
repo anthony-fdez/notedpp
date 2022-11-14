@@ -26,10 +26,11 @@ const Jumbo = ({ width, height }: Props): JSX.Element => {
   const variants: Variants = {
     show: {
       opacity: 1,
+      transition: { duration: 0.2 },
     },
     hide: {
       opacity: 0.1,
-      // transition: { duration: 2 },
+      transition: { duration: 0.2 },
     },
   };
 

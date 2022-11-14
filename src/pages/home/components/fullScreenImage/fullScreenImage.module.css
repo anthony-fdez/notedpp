@@ -1,0 +1,29 @@
+@media only screen and (min-width: 900px) {
+  .container,
+  .container_full_screen {
+    position: relative;
+    width: 100%;
+    transition: 300ms;
+    cursor: pointer;
+  }
+  .container:hover {
+    transform: scale(1.01);
+    transition: 100ms;
+  }
+
+  .container_full_screen {
+    margin-bottom: 600px;
+    transition: 300ms;
+  }
+
+  .image {
+    position: absolute;
+    width: 100%;
+    max-width: 1360px;
+  }
+}
+
+.container,
+.container_full_screen {
+  z-index: 9000 !important;
+}

@@ -8,6 +8,7 @@ import {
   fadeFromRight,
 } from './components/animations/fadeInAnimations';
 import Footer from './components/footer/footer';
+import FullScreenImage from './components/fullScreenImage/fullScreenImage';
 import Jumbo from './components/jumbo/jumbo';
 import styles from './home.module.css';
 
@@ -23,11 +24,14 @@ const Home: React.FC = (): JSX.Element => {
         <div className={styles.content}>
           <Reveal delay={200} keyframes={fadeFromLeft}>
             <div className={styles.image_section}>
-              <LazyLoadImage
-                className={styles.image}
-                alt={'First Screenshot'}
-                src='/images/1.png' // use normal <img> attributes as props
-              />
+              <FullScreenImage position='left'>
+                <LazyLoadImage
+                  className={styles.image}
+                  alt={'First Screenshot'}
+                  src='/images/1.png' // use normal <img> attributes as props
+                />
+              </FullScreenImage>
+
               <Parallax speed={-10}>
                 <div className={styles.image_right_section}>
                   <img
@@ -35,6 +39,7 @@ const Home: React.FC = (): JSX.Element => {
                     alt='Writer'
                     src='/writer.svg'
                   />
+
                   <h2 className={styles.image_section_header}>
                     Fully Feature Rich Text Editor!
                   </h2>
@@ -66,20 +71,25 @@ const Home: React.FC = (): JSX.Element => {
                   </p>
                 </div>
               </Parallax>
-              <LazyLoadImage
-                className={styles.image}
-                alt={'First Screenshot'}
-                src='/images/2.png' // use normal <img> attributes as props
-              />
+              <FullScreenImage position='right'>
+                <LazyLoadImage
+                  className={styles.image}
+                  alt={'First Screenshot'}
+                  src='/images/2.png' // use normal <img> attributes as props
+                />
+              </FullScreenImage>
             </div>
           </Reveal>
           <Reveal keyframes={fadeFromLeft} delay={200}>
             <div className={styles.image_section}>
-              <LazyLoadImage
-                className={styles.image}
-                alt={'First Screenshot'}
-                src='/images/3.png' // use normal <img> attributes as props
-              />
+              <FullScreenImage position='left'>
+                <LazyLoadImage
+                  className={styles.image}
+                  alt={'First Screenshot'}
+                  src='/images/3.png' // use normal <img> attributes as props
+                />
+              </FullScreenImage>
+
               <Parallax speed={-10}>
                 <div className={styles.image_right_section}>
                   <img
