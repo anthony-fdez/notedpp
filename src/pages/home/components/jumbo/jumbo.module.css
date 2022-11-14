@@ -36,8 +36,20 @@
   max-width: 500px;
   min-width: 300px;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5);
-  z-index: 10;
+  z-index: 10 !important;
+  transition: 800ms;
+  position: relative;
 }
+
+.jumbo_image_1:hover,
+.jumbo_image_2:hover,
+.jumbo_image_3:hover {
+  position: relative;
+  transform: scale(1.5);
+  z-index: 1000 !important;
+  transition: 500ms;
+}
+
 .jumbo_image_1 {
   margin-left: 150px;
   margin-bottom: -100px;
@@ -56,27 +68,32 @@
 @keyframes glow {
   0% {
     box-shadow: 10px 100px 500px 230px rgb(34, 139, 230);
+    transform: scaleX(2);
   }
   20% {
     box-shadow: 10px 20px 1000px 300px rgb(34, 139, 230);
+    transform: scaleX(1.5);
   }
   40% {
     box-shadow: 10px 50px 500px 270px rgb(34, 197, 230);
-    transform: scaleX(2);
+    transform: scaleX(1.7);
   }
   60% {
     box-shadow: 10px 100px 500px 300px rgb(19, 73, 211);
+    transform: scaleX(2.2);
   }
   80% {
     box-shadow: 10px 100px 500px 250px rgb(14, 104, 178);
-    transform: scaleX(1.4);
+    transform: scaleX(1.6);
   }
   100% {
     box-shadow: 10px 100px 500px 230px rgb(34, 139, 230);
+    transform: scaleX(2);
   }
 }
 .images_glow {
   box-shadow: 10px 10px 500px 200px rgb(34, 139, 230);
+  transform: scaleX(2);
   height: 0px;
   width: 0px;
   position: absolute;
