@@ -1,4 +1,4 @@
-import { Alert, Button, useMantineTheme } from '@mantine/core';
+import { Alert, Button, Tooltip, useMantineTheme } from '@mantine/core';
 import React, { useEffect, useRef, useState } from 'react';
 import { useGlobalStore } from '../../../../globalStore/globalStore';
 import { AiOutlineInfoCircle, AiOutlineCheckCircle } from 'react-icons/ai';
@@ -269,6 +269,7 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
                 note={globalStore.selectedNote}
                 handlePrint={handlePrint}
               />
+
               <Button
                 onClick={() => setIsNoteHistoryOpen(true)}
                 variant='light'

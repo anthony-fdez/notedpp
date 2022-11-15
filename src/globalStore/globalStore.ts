@@ -31,7 +31,7 @@ export interface IGlobalStore {
 export const useGlobalStore = create<IGlobalStore>()(
   devtools(
     persist((set, get) => ({
-      theme: 'light',
+      theme: 'dark',
       user: {
         email: null,
         email_verified: null,

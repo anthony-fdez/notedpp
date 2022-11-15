@@ -24,7 +24,7 @@ import {
   AiOutlineRedo,
 } from 'react-icons/ai';
 import { BsCodeSlash, BsCodeSquare, BsChatLeftQuote } from 'react-icons/bs';
-import { Button, Menu } from '@mantine/core';
+import { Button, Menu, Tooltip } from '@mantine/core';
 
 import styles from './editorMenu.module.css';
 
@@ -40,86 +40,108 @@ const EditorMenu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
   return (
     <>
       <div className={styles.menu_container}>
-        <Button
-          onClick={() => editor.chain().focus().setParagraph().run()}
-          variant={editor.isActive('paragraph') ? 'filled' : 'subtle'}
-        >
-          <AiOutlineFileText />
-        </Button>
-        <Button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 1 }).run()
-          }
-          variant={
-            editor.isActive('heading', { level: 1 }) ? 'filled' : 'subtle'
-          }
-        >
-          H1
-        </Button>
-        <Button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 2 }).run()
-          }
-          variant={
-            editor.isActive('heading', { level: 2 }) ? 'filled' : 'subtle'
-          }
-        >
-          H2
-        </Button>
-        <Button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 3 }).run()
-          }
-          variant={
-            editor.isActive('heading', { level: 3 }) ? 'filled' : 'subtle'
-          }
-        >
-          H3
-        </Button>
-        <Button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 4 }).run()
-          }
-          variant={
-            editor.isActive('heading', { level: 4 }) ? 'filled' : 'subtle'
-          }
-        >
-          H4
-        </Button>
-        <Button
-          onClick={() =>
-            editor.chain().focus().toggleHeading({ level: 5 }).run()
-          }
-          variant={
-            editor.isActive('heading', { level: 5 }) ? 'filled' : 'subtle'
-          }
-        >
-          H5
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().toggleBold().run()}
-          variant={editor.isActive('bold') ? 'filled' : 'subtle'}
-        >
-          <AiOutlineBold />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().toggleItalic().run()}
-          variant={editor.isActive('italic') ? 'filled' : 'subtle'}
-        >
-          <AiOutlineItalic />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().toggleStrike().run()}
-          variant={editor.isActive('strike') ? 'filled' : 'subtle'}
-        >
-          <AiOutlineStrikethrough />
-        </Button>
+        <Tooltip openDelay={500} label='Paragraph'>
+          <Button
+            onClick={() => editor.chain().focus().setParagraph().run()}
+            variant={editor.isActive('paragraph') ? 'filled' : 'subtle'}
+          >
+            <AiOutlineFileText />
+          </Button>
+        </Tooltip>
+
+        <Tooltip openDelay={500} label='Heading 1'>
+          <Button
+            onClick={() =>
+              editor.chain().focus().toggleHeading({ level: 1 }).run()
+            }
+            variant={
+              editor.isActive('heading', { level: 1 }) ? 'filled' : 'subtle'
+            }
+          >
+            H1
+          </Button>
+        </Tooltip>
+        <Tooltip openDelay={500} label='Heading 2'>
+          <Button
+            onClick={() =>
+              editor.chain().focus().toggleHeading({ level: 2 }).run()
+            }
+            variant={
+              editor.isActive('heading', { level: 2 }) ? 'filled' : 'subtle'
+            }
+          >
+            H2
+          </Button>
+        </Tooltip>
+        <Tooltip openDelay={500} label='Heading 3'>
+          <Button
+            onClick={() =>
+              editor.chain().focus().toggleHeading({ level: 3 }).run()
+            }
+            variant={
+              editor.isActive('heading', { level: 3 }) ? 'filled' : 'subtle'
+            }
+          >
+            H3
+          </Button>
+        </Tooltip>
+        <Tooltip openDelay={500} label='Heading 4'>
+          <Button
+            onClick={() =>
+              editor.chain().focus().toggleHeading({ level: 4 }).run()
+            }
+            variant={
+              editor.isActive('heading', { level: 4 }) ? 'filled' : 'subtle'
+            }
+          >
+            H4
+          </Button>
+        </Tooltip>
+        <Tooltip openDelay={500} label='Heading 5'>
+          <Button
+            onClick={() =>
+              editor.chain().focus().toggleHeading({ level: 5 }).run()
+            }
+            variant={
+              editor.isActive('heading', { level: 5 }) ? 'filled' : 'subtle'
+            }
+          >
+            H5
+          </Button>
+        </Tooltip>
+        <Tooltip openDelay={500} label='Bold'>
+          <Button
+            onClick={() => editor.chain().focus().toggleBold().run()}
+            variant={editor.isActive('bold') ? 'filled' : 'subtle'}
+          >
+            <AiOutlineBold />
+          </Button>
+        </Tooltip>
+        <Tooltip openDelay={500} label='Italic'>
+          <Button
+            onClick={() => editor.chain().focus().toggleItalic().run()}
+            variant={editor.isActive('italic') ? 'filled' : 'subtle'}
+          >
+            <AiOutlineItalic />
+          </Button>
+        </Tooltip>
+        <Tooltip openDelay={500} label='Strike Through'>
+          <Button
+            onClick={() => editor.chain().focus().toggleStrike().run()}
+            variant={editor.isActive('strike') ? 'filled' : 'subtle'}
+          >
+            <AiOutlineStrikethrough />
+          </Button>
+        </Tooltip>
+
         <Menu shadow='md' width={350}>
           <Menu.Target>
-            <Button variant={'subtle'}>
-              <AiOutlineTable />
-              Table
-            </Button>
+            <Tooltip openDelay={500} label='Table'>
+              <Button variant={'subtle'}>
+                <AiOutlineTable />
+                Table
+              </Button>
+            </Tooltip>
           </Menu.Target>
 
           <Menu.Dropdown>
@@ -225,66 +247,86 @@ const EditorMenu: React.JSXElementConstructor<Props> = ({ editor }: Props) => {
             </Menu.Item>
           </Menu.Dropdown>
         </Menu>
-        <Button
-          onClick={() => editor.chain().focus().toggleTaskList().run()}
-          variant={editor.isActive('taskList') ? 'filled' : 'subtle'}
-        >
-          <AiOutlineCheckSquare />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
-          variant={editor.isActive('bulletList') ? 'filled' : 'subtle'}
-        >
-          <AiOutlineUnorderedList />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          variant={editor.isActive('orderedList') ? 'filled' : 'subtle'}
-        >
-          <AiOutlineOrderedList />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().toggleCode().run()}
-          variant={editor.isActive('code') ? 'filled' : 'subtle'}
-        >
-          <BsCodeSlash />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-          variant={editor.isActive('codeBlock') ? 'filled' : 'subtle'}
-        >
-          <BsCodeSquare />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          variant={editor.isActive('blockquote') ? 'filled' : 'subtle'}
-        >
-          <BsChatLeftQuote />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().setHorizontalRule().run()}
-          variant='subtle'
-        >
-          <AiOutlineBorderVerticle />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().setHardBreak().run()}
-          variant='subtle'
-        >
-          <AiOutlineEnter />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().undo().run()}
-          variant='subtle'
-        >
-          <AiOutlineUndo />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().redo().run()}
-          variant='subtle'
-        >
-          <AiOutlineRedo />
-        </Button>
+        <Tooltip openDelay={500} label='Check List'>
+          <Button
+            onClick={() => editor.chain().focus().toggleTaskList().run()}
+            variant={editor.isActive('taskList') ? 'filled' : 'subtle'}
+          >
+            <AiOutlineCheckSquare />
+          </Button>
+        </Tooltip>
+        <Tooltip openDelay={500} label='Unordered List'>
+          <Button
+            onClick={() => editor.chain().focus().toggleBulletList().run()}
+            variant={editor.isActive('bulletList') ? 'filled' : 'subtle'}
+          >
+            <AiOutlineUnorderedList />
+          </Button>
+        </Tooltip>
+        <Tooltip openDelay={500} label='Ordered List'>
+          <Button
+            onClick={() => editor.chain().focus().toggleOrderedList().run()}
+            variant={editor.isActive('orderedList') ? 'filled' : 'subtle'}
+          >
+            <AiOutlineOrderedList />
+          </Button>
+        </Tooltip>
+        <Tooltip openDelay={500} label='Code Inline'>
+          <Button
+            onClick={() => editor.chain().focus().toggleCode().run()}
+            variant={editor.isActive('code') ? 'filled' : 'subtle'}
+          >
+            <BsCodeSlash />
+          </Button>
+        </Tooltip>
+        <Tooltip openDelay={500} label='Code Block'>
+          <Button
+            onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+            variant={editor.isActive('codeBlock') ? 'filled' : 'subtle'}
+          >
+            <BsCodeSquare />
+          </Button>
+        </Tooltip>
+        <Tooltip openDelay={500} label='Quote'>
+          <Button
+            onClick={() => editor.chain().focus().toggleBlockquote().run()}
+            variant={editor.isActive('blockquote') ? 'filled' : 'subtle'}
+          >
+            <BsChatLeftQuote />
+          </Button>
+        </Tooltip>
+        <Tooltip openDelay={500} label='Horizontal Divider'>
+          <Button
+            onClick={() => editor.chain().focus().setHorizontalRule().run()}
+            variant='subtle'
+          >
+            <AiOutlineBorderVerticle />
+          </Button>
+        </Tooltip>
+        <Tooltip openDelay={500} label='Line Break'>
+          <Button
+            onClick={() => editor.chain().focus().setHardBreak().run()}
+            variant='subtle'
+          >
+            <AiOutlineEnter />
+          </Button>
+        </Tooltip>
+        <Tooltip openDelay={500} label='Undo'>
+          <Button
+            onClick={() => editor.chain().focus().undo().run()}
+            variant='subtle'
+          >
+            <AiOutlineUndo />
+          </Button>
+        </Tooltip>
+        <Tooltip openDelay={500} label='Redo'>
+          <Button
+            onClick={() => editor.chain().focus().redo().run()}
+            variant='subtle'
+          >
+            <AiOutlineRedo />
+          </Button>
+        </Tooltip>
       </div>
     </>
   );
