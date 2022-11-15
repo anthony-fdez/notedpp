@@ -1,4 +1,4 @@
-import { ActionIcon, Menu, NavLink } from '@mantine/core';
+import { ActionIcon, Menu, NavLink, Tooltip } from '@mantine/core';
 import { useClickOutside } from '@mantine/hooks';
 import React, { useState } from 'react';
 import { getNoteTitle } from '../../../../../functions/getNoteTitle';
@@ -57,13 +57,20 @@ const NoteItem = ({ note }: Props) => {
           rightSection={
             <>
               <Menu.Target>
-                <ActionIcon onClick={() => setIsMenuOpen(true)}>
-                  <AiOutlineMore />
-                </ActionIcon>
+                <Tooltip
+                  openDelay={500}
+                  position='top-end'
+                  label='Note Actions'
+                >
+                  <ActionIcon onClick={() => setIsMenuOpen(true)}>
+                    <AiOutlineMore />
+                  </ActionIcon>
+                </Tooltip>
               </Menu.Target>
             </>
           }
         />
+
         <Menu.Dropdown>
           <Menu.Label>Note</Menu.Label>
           <Menu.Item
