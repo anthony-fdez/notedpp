@@ -10,7 +10,6 @@ import styles from './jumbo.module.css';
 
 import { motion, Variants } from 'framer-motion';
 import MouseAnimation from '../mouseAnimation/mouseAnimation';
-import FullScreenImage from '../fullScreenImage/fullScreenImage';
 
 interface Props {
   width: number;
@@ -53,7 +52,13 @@ const Jumbo = ({ width, height }: Props): JSX.Element => {
         <motion.div className={styles.images_preview}>
           <Fade className={styles.glow_container} triggerOnce delay={1300}>
             <MouseAnimation {...{ height, width, x, y, moveX: 110, moveY: 45 }}>
-              <div className={styles.images_glow} />
+              <div
+                className={
+                  !hover1 && !hover2 && !hover3
+                    ? styles.images_glow
+                    : styles.images_glow_secondary
+                }
+              />
             </MouseAnimation>
           </Fade>
           <Parallax speed={-10}>
