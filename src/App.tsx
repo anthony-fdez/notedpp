@@ -1,6 +1,10 @@
 import { useAuth0 } from '@auth0/auth0-react';
 
-import { LoadingOverlay, MantineProvider } from '@mantine/core';
+import {
+  LoadingOverlay,
+  MantineProvider,
+  useMantineTheme,
+} from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import React, { Suspense } from 'react';
 
@@ -21,6 +25,7 @@ const DarkTheme = React.lazy(
 
 function App() {
   const globalStore = useGlobalStore();
+  const theme = useMantineTheme();
   const { isAuthenticated, isLoading, error } = useAuth0();
 
   const router = routes({ isAuthenticated, isLoading });
@@ -36,9 +41,19 @@ function App() {
       withCSSVariables
       withGlobalStyles
       theme={{
+        globalStyles: (theme) => ({
+          body: {
+            ...theme.fn.fontStyles(),
+            backgroundColor:
+              theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.white,
+            color:
+              theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
+            lineHeight: theme.lineHeight,
+          },
+        }),
         colorScheme: globalStore.theme,
-        white: '#FFFFFF',
-        black: '#1A1B1E',
+        white: theme.colors.gray[0],
+        black: theme.colors.dark[9],
         primaryColor: 'blue',
       }}
     >
