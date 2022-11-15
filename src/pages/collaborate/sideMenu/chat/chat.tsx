@@ -21,7 +21,6 @@ const Chat = ({ room, socket, typing, messages }: Props) => {
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
 
   const [messageText, setMessageText] = useState<string>('');
-  const [quotedMessage, setQuotedMessage] = useState<any>(null);
 
   const scrollToBottom = (): null | void => {
     if (!messagesEndRef.current) return null;
@@ -36,7 +35,6 @@ const Chat = ({ room, socket, typing, messages }: Props) => {
       id: user?.sub,
       room: room,
       time: new Date(),
-      quotedMessage: quotedMessage,
     };
 
     if (messageText.length > 1) {

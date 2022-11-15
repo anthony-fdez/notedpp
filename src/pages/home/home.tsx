@@ -1,5 +1,5 @@
 import { useElementSize } from '@mantine/hooks';
-import React, { useState } from 'react';
+import React from 'react';
 import Reveal from 'react-awesome-reveal';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';

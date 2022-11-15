@@ -1,7 +1,7 @@
-import { Alert, Button, Tooltip, useMantineTheme } from '@mantine/core';
+import { Button, useMantineTheme } from '@mantine/core';
 import React, { useEffect, useRef, useState } from 'react';
 import { useGlobalStore } from '../../../../globalStore/globalStore';
-import { AiOutlineInfoCircle, AiOutlineCheckCircle } from 'react-icons/ai';
+import { AiOutlineCheckCircle } from 'react-icons/ai';
 import { useWindowScroll } from '@mantine/hooks';
 import TextEditor from '../../../../components/editor/editor';
 import { useEditor, Editor, ReactNodeViewRenderer } from '@tiptap/react';
