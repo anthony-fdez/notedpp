@@ -1,4 +1,4 @@
-import { Alert, Button, Menu, NavLink, Tooltip } from '@mantine/core';
+import { Alert, Button, Menu, NavLink } from '@mantine/core';
 import React, { useState } from 'react';
 import {
   AiOutlineDelete,
@@ -17,7 +17,6 @@ import { useGlobalStore } from '../../../../../globalStore/globalStore';
 import { useClickOutside } from '@mantine/hooks';
 import { createNote } from '../../../../../api/notes/create/createNote';
 import { BsColumns } from 'react-icons/bs';
-import { rightArrow } from '@tiptap/extension-typography';
 
 interface Props {
   folder: IFolder;
