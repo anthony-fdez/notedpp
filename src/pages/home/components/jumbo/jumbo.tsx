@@ -10,6 +10,7 @@ import styles from './jumbo.module.css';
 
 import { motion, Variants } from 'framer-motion';
 import MouseAnimation from '../mouseAnimation/mouseAnimation';
+import FullScreenImage from '../fullScreenImage/fullScreenImage';
 
 interface Props {
   width: number;
@@ -51,12 +52,14 @@ const Jumbo = ({ width, height }: Props): JSX.Element => {
       <MouseAnimation {...{ height, width, x, y, moveX: 40, moveY: 15 }}>
         <motion.div className={styles.images_preview}>
           <Fade className={styles.glow_container} triggerOnce delay={1300}>
-            <div className={styles.images_glow} />
+            <MouseAnimation {...{ height, width, x, y, moveX: 110, moveY: 45 }}>
+              <div className={styles.images_glow} />
+            </MouseAnimation>
           </Fade>
-          <Parallax speed={-5}>
+          <Parallax speed={-10}>
             <Reveal keyframes={fadeFromRight} triggerOnce delay={500}>
               <MouseAnimation
-                {...{ height, width, x, y, moveX: 40, moveY: 25 }}
+                {...{ height, width, x, y, moveX: 60, moveY: 25 }}
               >
                 <motion.div
                   variants={variants}
@@ -79,7 +82,7 @@ const Jumbo = ({ width, height }: Props): JSX.Element => {
           </Parallax>
 
           <Reveal keyframes={fadeFromLeft} triggerOnce delay={800}>
-            <MouseAnimation {...{ height, width, x, y, moveX: 15, moveY: 10 }}>
+            <MouseAnimation {...{ height, width, x, y, moveX: 25, moveY: 10 }}>
               <motion.div
                 variants={variants}
                 animate={hover1 || hover3 ? 'hide' : 'show'}
@@ -98,7 +101,7 @@ const Jumbo = ({ width, height }: Props): JSX.Element => {
               </motion.div>
             </MouseAnimation>
           </Reveal>
-          <Parallax speed={10}>
+          <Parallax speed={15}>
             <Reveal keyframes={fadeFromRight} triggerOnce delay={1100}>
               <MouseAnimation
                 {...{ height, width, x, y, moveX: 30, moveY: 20 }}
