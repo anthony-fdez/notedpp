@@ -38,16 +38,14 @@ const Jumbo = ({ width, height }: Props): JSX.Element => {
     <motion.div ref={ref} className={styles.jumbo}>
       <div className={styles.jumbo_text_container}>
         <Reveal keyframes={fadeFromLeft} triggerOnce>
-          <MouseAnimation {...{ height, width, x, y, moveX: 40, moveY: 15 }}>
-            <div>
-              <span>Noted++</span>
-              <h1 className={styles.header_text}>
-                All your note needs.
-                <Text color='blue'>All in one place.</Text>
-              </h1>
-              <LoginButton />
-            </div>
-          </MouseAnimation>
+          <div>
+            <span>Noted++</span>
+            <h1 className={styles.header_text}>
+              All your note needs.
+              <Text color='blue'>All in one place.</Text>
+            </h1>
+            <LoginButton />
+          </div>
         </Reveal>
       </div>
       <MouseAnimation {...{ height, width, x, y, moveX: 40, moveY: 15 }}>
