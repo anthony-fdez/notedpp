@@ -38,27 +38,33 @@ const Jumbo = ({ width, height }: Props): JSX.Element => {
     <motion.div ref={ref} className={styles.jumbo}>
       <div className={styles.jumbo_text_container}>
         <Reveal keyframes={fadeFromLeft} triggerOnce>
-          <MouseAnimation {...{ height, width, x, y, moveX: 40, moveY: 15 }}>
-            <div>
-              <span>Noted++</span>
-              <h1 className={styles.header_text}>
-                All your note needs.
-                <Text color='blue'>All in one place.</Text>
-              </h1>
-              <LoginButton />
-            </div>
-          </MouseAnimation>
+          <div>
+            <span>Noted++</span>
+            <h1 className={styles.header_text}>
+              All your note needs.
+              <Text color='blue'>All in one place.</Text>
+            </h1>
+            <LoginButton />
+          </div>
         </Reveal>
       </div>
       <MouseAnimation {...{ height, width, x, y, moveX: 40, moveY: 15 }}>
         <motion.div className={styles.images_preview}>
           <Fade className={styles.glow_container} triggerOnce delay={1300}>
-            <div className={styles.images_glow} />
+            <MouseAnimation {...{ height, width, x, y, moveX: 110, moveY: 45 }}>
+              <div
+                className={
+                  !hover1 && !hover2 && !hover3
+                    ? styles.images_glow
+                    : styles.images_glow_secondary
+                }
+              />
+            </MouseAnimation>
           </Fade>
-          <Parallax speed={-5}>
+          <Parallax speed={-10}>
             <Reveal keyframes={fadeFromRight} triggerOnce delay={500}>
               <MouseAnimation
-                {...{ height, width, x, y, moveX: 40, moveY: 25 }}
+                {...{ height, width, x, y, moveX: 60, moveY: 25 }}
               >
                 <motion.div
                   variants={variants}
@@ -81,7 +87,7 @@ const Jumbo = ({ width, height }: Props): JSX.Element => {
           </Parallax>
 
           <Reveal keyframes={fadeFromLeft} triggerOnce delay={800}>
-            <MouseAnimation {...{ height, width, x, y, moveX: 15, moveY: 10 }}>
+            <MouseAnimation {...{ height, width, x, y, moveX: 25, moveY: 10 }}>
               <motion.div
                 variants={variants}
                 animate={hover1 || hover3 ? 'hide' : 'show'}
@@ -100,7 +106,7 @@ const Jumbo = ({ width, height }: Props): JSX.Element => {
               </motion.div>
             </MouseAnimation>
           </Reveal>
-          <Parallax speed={10}>
+          <Parallax speed={15}>
             <Reveal keyframes={fadeFromRight} triggerOnce delay={1100}>
               <MouseAnimation
                 {...{ height, width, x, y, moveX: 30, moveY: 20 }}
