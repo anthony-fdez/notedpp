@@ -11,6 +11,9 @@ import styles from './jumbo.module.css';
 import { motion, Variants } from 'framer-motion';
 import MouseAnimation from '../mouseAnimation/mouseAnimation';
 import Modal from '../modal/modal';
+import Section1 from '../sections/section1';
+import Section2 from '../sections/section2';
+import Section3 from '../sections/section3';
 
 interface Props {
   width: number;
@@ -65,13 +68,28 @@ const Jumbo = ({ width, height }: Props): JSX.Element => {
   return (
     <>
       <Modal
-        image='/images/2.png'
+        image='/images/1.png'
         isOpen={modal_1}
         handleClose={() => setModal_1(false)}
         layoutId='jumbo_image_1'
+        Content={<Section1 />}
+      />
+      <Modal
+        image='/images/2.png'
+        isOpen={modal_2}
+        handleClose={() => setModal_2(false)}
+        layoutId='jumbo_image_2'
+        Content={<Section2 />}
+      />
+      <Modal
+        image='/images/3.png'
+        isOpen={modal_3}
+        handleClose={() => setModal_3(false)}
+        layoutId='jumbo_image_3'
+        Content={<Section3 />}
       />
       <motion.div
-        animate={modal_1 ? 'open' : 'closed'}
+        animate={modal_1 || modal_2 || modal_3 ? 'open' : 'closed'}
         variants={modalOpenVariants}
         ref={ref}
         className={styles.jumbo}
@@ -135,6 +153,8 @@ const Jumbo = ({ width, height }: Props): JSX.Element => {
                 {...{ height, width, x, y, moveX: 25, moveY: 10 }}
               >
                 <motion.div
+                  onClick={() => setModal_2(true)}
+                  layoutId='jumbo_image_2'
                   variants={variants}
                   animate={hover1 || hover3 ? 'hide' : 'show'}
                 >
@@ -158,6 +178,8 @@ const Jumbo = ({ width, height }: Props): JSX.Element => {
                   {...{ height, width, x, y, moveX: 30, moveY: 20 }}
                 >
                   <motion.div
+                    onClick={() => setModal_3(true)}
+                    layoutId='jumbo_image_3'
                     variants={variants}
                     animate={hover1 || hover2 ? 'hide' : 'show'}
                   >

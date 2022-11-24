@@ -27,3 +27,12 @@
 .image {
   width: 100%;
 }
+.content > h2 {
+  font-size: 3rem;
+}
+.content > img {
+  display: none;
+}
+.content {
+  margin-bottom: 150px;
+}

@@ -23,13 +23,13 @@
   gap: 40px;
   margin-bottom: 30vh;
 }
-.image_section_header {
+.image_right_section > h2 {
   font-size: 2rem;
 }
 .image_right_section {
   margin-top: 100px;
 }
-.illustration_image {
+.image_right_section > img {
   width: 50%;
   margin: auto;
   height: fit-content;

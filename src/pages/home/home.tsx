@@ -10,6 +10,9 @@ import {
 import Footer from './components/footer/footer';
 import FullScreenImage from './components/fullScreenImage/fullScreenImage';
 import Jumbo from './components/jumbo/jumbo';
+import Section1 from './components/sections/section1';
+import Section2 from './components/sections/section2';
+import Section3 from './components/sections/section3';
 import styles from './home.module.css';
 
 const Home: React.FC = (): JSX.Element => {
@@ -34,20 +37,7 @@ const Home: React.FC = (): JSX.Element => {
 
               <Parallax speed={-10}>
                 <div className={styles.image_right_section}>
-                  <img
-                    className={styles.illustration_image}
-                    alt='Writer'
-                    src='/writer.svg'
-                  />
-
-                  <h2 className={styles.image_section_header}>
-                    Fully Feature Rich Text Editor!
-                  </h2>
-                  <p>
-                    Modern text editor which is easy to use and has every option
-                    you would need. Making tables, typing code snippets, making
-                    headers, everything is easy to do in noted++.
-                  </p>
+                  <Section1 />
                 </div>
               </Parallax>
             </div>
@@ -56,19 +46,7 @@ const Home: React.FC = (): JSX.Element => {
             <div className={styles.image_section_opposite}>
               <Parallax speed={-10}>
                 <div className={styles.image_right_section}>
-                  <img
-                    className={styles.illustration_image}
-                    alt='Workflow'
-                    src='/workflow.svg'
-                  />
-                  <h2 className={styles.image_section_header}>
-                    Productivity workflow!
-                  </h2>
-                  <p>
-                    Managing your notes and tasks are now easier than ever!
-                    Great schedule organizer; always keep track of what is next
-                    in your life.
-                  </p>
+                  <Section2 />
                 </div>
               </Parallax>
               <FullScreenImage position='right'>
@@ -92,20 +70,7 @@ const Home: React.FC = (): JSX.Element => {
 
               <Parallax speed={-10}>
                 <div className={styles.image_right_section}>
-                  <img
-                    className={styles.illustration_image}
-                    alt='Collaboration'
-                    src='/collaboration.svg'
-                  />
-                  <h2 className={styles.image_section_header}>
-                    A collaboration environment.
-                  </h2>
-                  <p>
-                    Any kind of profession utilizes collaboration and
-                    networking, and noted++ lets you do just that. Sharing notes
-                    is as easy as one click and having the ability to have
-                    multiple people working on one note is even easier!
-                  </p>
+                  <Section3 />
                 </div>
               </Parallax>
             </div>

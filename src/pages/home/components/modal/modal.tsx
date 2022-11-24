@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
+import Footer from '../footer/footer';
 import styles from './modal.module.css';
 
 interface Props {
@@ -7,9 +8,10 @@ interface Props {
   handleClose: () => void;
   image: string;
   layoutId: string;
+  Content: JSX.Element;
 }
 
-const Modal = ({ isOpen, handleClose, image, layoutId }: Props) => {
+const Modal = ({ isOpen, handleClose, image, layoutId, Content }: Props) => {
   return (
     <>
       <AnimatePresence>
@@ -37,19 +39,8 @@ const Modal = ({ isOpen, handleClose, image, layoutId }: Props) => {
                 className={styles.image}
                 src={image}
               />
-              <h1>Hello</h1>
-              <h1>Hello</h1>
-              <h1>Hello</h1>
-              <h1>Hello</h1>
-              <h1>Hello</h1>
-              <h1>Hello</h1>
-              <h1>Hello</h1>
-              <h1>Hello</h1>
-              <h1>Hello</h1>
-              <h1>Hello</h1>
-              <h1>Hello</h1>
-              <h1>Hello</h1>
-              <h1>Hello</h1>
+              <div className={styles.content}>{Content}</div>
+              <Footer />
             </motion.div>
           </>
         )}
