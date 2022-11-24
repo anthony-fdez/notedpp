@@ -54,13 +54,15 @@ const Jumbo = ({ width, height }: Props): JSX.Element => {
       scale: 0.8,
       transition: {
         duration: 0.8,
+        type: 'spring',
       },
     },
     closed: {
       opacity: 1,
       scale: 1,
       transition: {
-        duration: 0.5,
+        duration: 1,
+        type: 'spring',
       },
     },
   };

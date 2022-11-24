@@ -25,10 +25,10 @@ const Modal = ({ isOpen, handleClose, image, layoutId, Content }: Props) => {
               className={styles.backdrop}
             />
             <motion.div
-              initial={{ opacity: 0, scale: 1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.5 }}
-              transition={{ duration: 0.5 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.1 }}
               className={styles.modal_container}
             >
               <motion.img
