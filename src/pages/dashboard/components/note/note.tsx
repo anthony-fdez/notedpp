@@ -189,14 +189,6 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
     )
       .then((response) => {
         globalStore.setSelectedNote(response.data.note);
-        updateNotification({
-          id: 'loading-note',
-          color: 'blue',
-          title: 'Loaded',
-          message: 'Note contents loaded. Yay',
-          icon: <AiOutlineCheckCircle size={16} />,
-          autoClose: 1000,
-        });
 
         globalStore.updateFolders();
       })
