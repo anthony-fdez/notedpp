@@ -13,6 +13,30 @@ export default defineConfig({
       devOptions: {
         enabled: true,
       },
+      manifest: {
+        name: 'Noted++',
+        short_name: 'Noted++',
+        description: 'Notes on the web like never before',
+        theme_color: '#ffffff',
+        icons: [
+          {
+            src: 'icon.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'icon.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+          {
+            src: 'icon.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable',
+          },
+        ],
+      },
     }),
   ],
 });
