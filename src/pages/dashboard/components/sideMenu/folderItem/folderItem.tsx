@@ -90,7 +90,7 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
           </Menu.Target>
 
           <Menu.Dropdown>
-            <Menu.Label>Application</Menu.Label>
+            <Menu.Label>Folder</Menu.Label>
             <Menu.Item onClick={handleCreateNote} icon={<AiOutlinePlus />}>
               Create Note
             </Menu.Item>
@@ -98,9 +98,26 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
               onClick={() => setIsRenameFolderModalOpen(true)}
               icon={<AiOutlineEdit />}
             >
-              Rename
+              Rename Folder
             </Menu.Item>
 
+            <Menu.Divider />
+            <Menu.Label>Layout</Menu.Label>
+            <Menu.Item
+              icon={<BsColumns />}
+              onClick={() => {
+                if (globalStore.isFolderDashboard) {
+                  globalStore.setIsFolderDashboard(null);
+                } else {
+                  globalStore.setIsFolderDashboard({
+                    isOpen: true,
+                    folder,
+                  });
+                }
+              }}
+            >
+              Dashboard View
+            </Menu.Item>
             <Menu.Divider />
             <Menu.Label>Danger zone</Menu.Label>
             <Menu.Item
@@ -108,7 +125,7 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
               color='red'
               onClick={() => setIsDeleteFolderModalOpen(true)}
             >
-              Delete
+              Delete Folder
             </Menu.Item>
           </Menu.Dropdown>
         </Menu>
@@ -148,24 +165,6 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
         childrenOffset={28}
         noWrap={true}
       >
-        <Button
-          mt={10}
-          leftIcon={<BsColumns />}
-          variant='light'
-          className={styles.dashboard_button}
-          onClick={() => {
-            if (globalStore.isFolderDashboard) {
-              globalStore.setIsFolderDashboard(null);
-            } else {
-              globalStore.setIsFolderDashboard({
-                isOpen: true,
-                folder,
-              });
-            }
-          }}
-        >
-          Dashboard
-        </Button>
         {actionsButton()}
         {folder.notes.map((note: INote) => {
           if (note.status !== 'done') {
