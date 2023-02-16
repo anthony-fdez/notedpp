@@ -20,9 +20,15 @@ import { BsColumns } from 'react-icons/bs';
 
 interface Props {
   folder: IFolder;
+  activeFolder: string | null;
+  setActiveFolder: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const FolderItem = ({ folder }: Props): JSX.Element | null => {
+const FolderItem = ({
+  folder,
+  activeFolder,
+  setActiveFolder,
+}: Props): JSX.Element | null => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const ref = useClickOutside(() => setIsMenuOpen(false));
 
@@ -164,6 +170,14 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
         label={folder.folder_name}
         childrenOffset={28}
         noWrap={true}
+        opened={activeFolder === folder.id}
+        onClick={() => {
+          if (activeFolder === folder.id) {
+            return setActiveFolder(null);
+          }
+
+          setActiveFolder(folder.id);
+        }}
       >
         {actionsButton()}
         {folder.notes.map((note: INote) => {

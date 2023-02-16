@@ -46,7 +46,7 @@ const NoteItem = ({ note }: Props) => {
         closeOnItemClick={false}
       >
         <NavLink
-          variant='light'
+          variant='filled'
           noWrap={true}
           onClick={() => {
             globalStore.setSelectedNote(note);
