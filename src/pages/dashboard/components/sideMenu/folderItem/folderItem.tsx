@@ -20,9 +20,15 @@ import { BsColumns } from 'react-icons/bs';
 
 interface Props {
   folder: IFolder;
+  activeFolder: string | null;
+  setActiveFolder: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const FolderItem = ({ folder }: Props): JSX.Element | null => {
+const FolderItem = ({
+  folder,
+  activeFolder,
+  setActiveFolder,
+}: Props): JSX.Element | null => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const ref = useClickOutside(() => setIsMenuOpen(false));
 
@@ -90,7 +96,7 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
           </Menu.Target>
 
           <Menu.Dropdown>
-            <Menu.Label>Application</Menu.Label>
+            <Menu.Label>Folder</Menu.Label>
             <Menu.Item onClick={handleCreateNote} icon={<AiOutlinePlus />}>
               Create Note
             </Menu.Item>
@@ -98,9 +104,26 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
               onClick={() => setIsRenameFolderModalOpen(true)}
               icon={<AiOutlineEdit />}
             >
-              Rename
+              Rename Folder
             </Menu.Item>
 
+            <Menu.Divider />
+            <Menu.Label>Layout</Menu.Label>
+            <Menu.Item
+              icon={<BsColumns />}
+              onClick={() => {
+                if (globalStore.isFolderDashboard) {
+                  globalStore.setIsFolderDashboard(null);
+                } else {
+                  globalStore.setIsFolderDashboard({
+                    isOpen: true,
+                    folder,
+                  });
+                }
+              }}
+            >
+              Dashboard View
+            </Menu.Item>
             <Menu.Divider />
             <Menu.Label>Danger zone</Menu.Label>
             <Menu.Item
@@ -108,7 +131,7 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
               color='red'
               onClick={() => setIsDeleteFolderModalOpen(true)}
             >
-              Delete
+              Delete Folder
             </Menu.Item>
           </Menu.Dropdown>
         </Menu>
@@ -147,25 +170,15 @@ const FolderItem = ({ folder }: Props): JSX.Element | null => {
         label={folder.folder_name}
         childrenOffset={28}
         noWrap={true}
+        opened={activeFolder === folder.id}
+        onClick={() => {
+          if (activeFolder === folder.id) {
+            return setActiveFolder(null);
+          }
+
+          setActiveFolder(folder.id);
+        }}
       >
-        <Button
-          mt={10}
-          leftIcon={<BsColumns />}
-          variant='light'
-          className={styles.dashboard_button}
-          onClick={() => {
-            if (globalStore.isFolderDashboard) {
-              globalStore.setIsFolderDashboard(null);
-            } else {
-              globalStore.setIsFolderDashboard({
-                isOpen: true,
-                folder,
-              });
-            }
-          }}
-        >
-          Dashboard
-        </Button>
         {actionsButton()}
         {folder.notes.map((note: INote) => {
           if (note.status !== 'done') {

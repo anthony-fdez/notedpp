@@ -167,15 +167,6 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
     if (!editor) return;
     if (!globalStore.selectedNote) return;
 
-    showNotification({
-      id: 'loading-note',
-      title: 'Loading updates...',
-      message: 'Please wait while the note is being loaded.',
-      autoClose: false,
-      color: 'blue',
-      loading: true,
-    });
-
     Axios.post(
       `${import.meta.env.VITE_BASE_URL}notes/get-note/`,
       {
@@ -189,21 +180,12 @@ const Note: React.JSXElementConstructor<unknown> = (): JSX.Element | null => {
     )
       .then((response) => {
         globalStore.setSelectedNote(response.data.note);
-        updateNotification({
-          id: 'loading-note',
-          color: 'blue',
-          title: 'Loaded',
-          message: 'Note contents loaded. Yay',
-          icon: <AiOutlineCheckCircle size={16} />,
-          autoClose: 1000,
-        });
 
         globalStore.updateFolders();
       })
       .catch((e) => {
         if (e.response.data.message) {
-          updateNotification({
-            id: 'loading-note',
+          showNotification({
             color: 'red',
             title: 'Error',
             message: e.response.data.message,

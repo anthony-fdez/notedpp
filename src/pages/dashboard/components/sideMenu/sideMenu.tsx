@@ -19,6 +19,7 @@ const SideMenu = (): JSX.Element | null => {
   const [isLoadingAddingQuickNote, setIsLoadingAddingQuickNote] =
     useState(false);
   const [showActions, setShowActions] = useState(false);
+  const [activeFolder, setActiveFolder] = useState<string | null>(null);
 
   const handleCreateNote = async () => {
     setIsLoadingAddingQuickNote(true);
@@ -103,7 +104,14 @@ const SideMenu = (): JSX.Element | null => {
     }
 
     return globalStore.folders.map((folder: IFolder) => {
-      return <FolderItem key={folder.id} folder={folder} />;
+      return (
+        <FolderItem
+          activeFolder={activeFolder}
+          setActiveFolder={setActiveFolder}
+          key={folder.id}
+          folder={folder}
+        />
+      );
     });
   };
 
